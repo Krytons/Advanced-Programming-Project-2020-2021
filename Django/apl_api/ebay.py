@@ -1,9 +1,15 @@
 # Create your views here.
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from django.http import JsonResponse
+from apl_api.models import *
+from apl_api.serializers import *
+from django.db.utils import DatabaseError
+from apl_api.middlewares.product_middlewares import product_mapping
+
 import json
 import requests
 
@@ -34,7 +40,9 @@ def ebay_search_products(request):
     # Step 2: Obtain a bunch of products from ebay: return those to the final user using ebay format
     if response.status_code == 200:
         json_data = json.loads(response.text)
-        return Response(json_data, status=status.HTTP_200_OK)
+        response_json = product_mapping(json_data)
+        return Response(response_json, status=status.HTTP_200_OK)
+        #return Response(json_data, status=status.HTTP_200_OK)
     else:
         return Response({'response': 'Failed to research'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -42,13 +50,48 @@ def ebay_search_products(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def ebay_select_product(request):
-    # Step 1: Search this product on ebay to check it's actual price and informations
+    # Step 1: Search this product on ebay to check it's actual price and information
     request_data = json.loads(request.body.decode('utf-8'))
-    search_id = request_data["search_id"]
+    search_id = request_data["product"]["search_id"]
+    threshold = request_data["threshold_price"]
+    user_email = request_data["email"]
 
-    # Step 2: If the product is already in our product DB then update actual price or add this price to the price list
-    # Step 3: Return full product information to the final user
-    return Response({'response': 'This API is under development'}, status=status.HTTP_204_NO_CONTENT)
+    try:
+        product = Product.objects.get(id = search_id)
+        #The product exists: update it's own info
+        serializer = ProductSerializer(instance=product, data=request_data["product"])
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except ObjectDoesNotExist:
+        #Insert product into the database
+        product_serializer = ProductSerializer(data=request_data["product"])
+        if product_serializer.is_valid():
+            product_serializer.save()
+        else:
+            return Response(product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    #At this point we can insert our ObservedProduct
+    observation = ObservedProduct()
+    observation.creator_id = user_email
+    observation.threshold_price = threshold
+    observation.product = search_id
+
+    observation_serializer = ObservedProductSerializer(observation)
+    if observation_serializer.is_valid():
+        if observation_serializer.validated_data['creator'] != request.user:
+            return Response({'response': 'You have no permissions to create an observed product for somebody '
+                                         'else!'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            try:
+                observation_serializer.save()
+                return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
+            except DatabaseError:
+                return Response({'response': 'This element is already observed'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(observation_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
