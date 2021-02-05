@@ -52,12 +52,12 @@ def ebay_search_products(request):
 def ebay_select_product(request):
     # Step 1: Search this product on ebay to check it's actual price and information
     request_data = json.loads(request.body.decode('utf-8'))
-    search_id = request_data["product"]["search_id"]
+    search_id = request_data["product"]["item_id"]
     threshold = request_data["threshold_price"]
     user_email = request_data["email"]
 
     try:
-        product = Product.objects.get(id = search_id)
+        product = Product.objects.get(item_id = search_id)
         #The product exists: update it's own info
         serializer = ProductSerializer(instance=product, data=request_data["product"])
         if serializer.is_valid():
@@ -73,12 +73,14 @@ def ebay_select_product(request):
             return Response(product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     #At this point we can insert our ObservedProduct
-    observation = ObservedProduct()
-    observation.creator_id = user_email
-    observation.threshold_price = threshold
-    observation.product = search_id
+    product = Product.objects.get(item_id=search_id)
+    observation = {
+        'creator': user_email,
+        'threshold_price' : threshold,
+        'product': product.id
+    }
 
-    observation_serializer = ObservedProductSerializer(observation)
+    observation_serializer = ObservedProductSerializer(data=observation)
     if observation_serializer.is_valid():
         if observation_serializer.validated_data['creator'] != request.user:
             return Response({'response': 'You have no permissions to create an observed product for somebody '

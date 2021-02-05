@@ -8,7 +8,10 @@ def product_mapping(ebay_json):
         new_product = Product()
         new_product.item_id = ebay_product["itemId"][0]
         new_product.title = ebay_product["title"][0]
-        #new_product.subtitle = ebay_product["subtitle"][0]
+        try:
+            new_product.subtitle = ebay_product["subtitle"][0]
+        except KeyError:
+            new_product.subtitle = ""
         new_product.category_id = ebay_product["primaryCategory"][0]["categoryId"][0]
         new_product.category_name = ebay_product["primaryCategory"][0]["categoryName"][0]
         new_product.gallery_url = ebay_product["galleryURL"][0]

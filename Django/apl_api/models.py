@@ -15,7 +15,7 @@ class Product(models.Model):
     id = models.AutoField(primary_key=True)
     item_id = models.CharField(max_length=20, null=False, unique=True)
     title = models.CharField(max_length=100, null=False)
-    subtitle = models.CharField(max_length=100, null=False)
+    subtitle = models.CharField(max_length=100, blank=True)
     category_id = models.CharField(max_length=20, null=False)
     category_name = models.CharField(max_length=100, null=False)
     gallery_url = models.CharField(max_length=200, null=False)
