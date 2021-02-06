@@ -1,11 +1,22 @@
 from rest_framework import serializers
+#from rest_meets_djongo import serializers as djongo_serializers
 from .models import *
 
+'''
+class ProductSerializer(djongo_serializers.DjongoModelSerializer):
+    class Meta:
+        model = Product
+        history = serializers.ListField()
+        fields = ['id','item_id','title','subtitle','category_id', 'category_name', 'gallery_url','view_url',
+                  'shipping_cost','price','condition_id','condition_name', 'history' ,'created_at','updated_at']
+        read_only_fields = ['id', 'created_at']
+'''
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id','item_id','title','subtitle','category_id', 'category_name', 'gallery_url','view_url','shipping_cost','price','condition_id','condition_name','created_at','updated_at']
+        fields = ['id','item_id','title','subtitle','category_id', 'category_name', 'gallery_url','view_url',
+                  'shipping_cost','price','condition_id','condition_name','created_at','updated_at']
         read_only_fields = ['id', 'created_at']
 
 
@@ -38,6 +49,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         app_user.save()
         return app_user
 
+
 class ObservedProductSerializer(serializers.ModelSerializer):
     creator = serializers.SlugRelatedField(
         many=False,
@@ -61,5 +73,21 @@ class ObservedProductSerializer(serializers.ModelSerializer):
         """Overriding method to disable unique together checks"""
         return []
 
+
+class PriceHistorySerializer(serializers.ModelSerializer):
+    product = serializers.PrimaryKeyRelatedField(
+        many=False,
+        read_only=False,
+        queryset=Product.objects.all()
+    )
+
+    class Meta:
+        model = PriceHistory
+        fields = ['product', 'old_price', 'price_time']
+        read_only_fields = ['id']
+
+    def get_unique_together_validators(self):
+        """Overriding method to disable unique together checks"""
+        return []
 
 

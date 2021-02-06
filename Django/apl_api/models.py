@@ -1,6 +1,7 @@
 from django.db import models
 # Imports used to generate a custom user
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django import forms
 from django.utils.translation import ugettext_lazy as _
 # Imports used to generate tokens
 from django.conf import settings
@@ -10,7 +11,44 @@ from rest_framework.authtoken.models import Token
 # Imports used to use mongoDB collections
 from djongo import models
 
-# Create your models here.
+# Create your models here
+'''
+class Price(models.Model):
+    old_price = models.DecimalField(max_digits=6, decimal_places=2)
+    price_time = models.DateTimeField()
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.old_price
+
+class Product(models.Model):
+    id = models.AutoField(primary_key=True)
+    item_id = models.CharField(max_length=20, null=False, unique=True)
+    title = models.CharField(max_length=100, null=False)
+    subtitle = models.CharField(max_length=100, blank=True)
+    category_id = models.CharField(max_length=20, null=False)
+    category_name = models.CharField(max_length=100, null=False)
+    gallery_url = models.CharField(max_length=200, null=False)
+    view_url = models.CharField(max_length=200, null=False)
+    shipping_cost =  models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    condition_id = models.CharField(max_length=20, null=False)
+    condition_name = models.CharField(max_length=100, null=False)
+    history = models.ArrayField(
+        model_container=Price,
+        null=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    objects = models.DjongoManager()
+
+    def __str__(self):
+        return "Name: " + self.title + "Description: " + self.subtitle
+'''
+
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     item_id = models.CharField(max_length=20, null=False, unique=True)
@@ -29,7 +67,6 @@ class Product(models.Model):
 
     def __str__(self):
         return "Name: " + self.title + "Description: " + self.subtitle
-
 
 class CustomAccountManager(BaseUserManager):
     def create_user(self, email, name, surname, nickname, password, **other_fields):
@@ -97,3 +134,11 @@ class ObservedProduct(models.Model):
     class Meta:
         unique_together = ['creator', 'product']
 
+class PriceHistory(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    old_price = models.DecimalField(max_digits=6, decimal_places=2)
+    price_time = models.DateTimeField()
+
+    class Meta:
+        unique_together = ['product', 'price_time']
+        ordering = ['price_time']
