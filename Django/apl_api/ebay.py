@@ -164,11 +164,56 @@ def ebay_select_product(request):
     else:
         return Response(observation_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def ebay_update_observed_product_price(request):
-    # INFO: This API will be periodically called by the client-app to check the observed_products price
-    # Step 1: For every observed product make a request to ebay to check the actual price
-    # Step 2: Update products price list in our DB
-    # Step 3: Notify the final user if the price drops under the threshold
+
+def ebay_update_observed_product_price():
+    # For all products in the database
+    products = Product.objects.all()
+    for product in products:
+        # Search on ebay for an update
+        headers = {
+            'Content-Type': 'application/json',
+            'X-EBAY-SOA-GLOBAL-ID': GLOBAL_ID,
+            'X-EBAY-SOA-SECURITY-APPNAME': APP_ID,
+            'X-EBAY-SOA-REQUEST-DATA-FORMAT': "JSON",
+            'X-EBAY-SOA-OPERATION-NAME': "findItemsByProduct"
+        }
+        url = "https://svcs.ebay.com/services/search/FindingService/v1"
+        data = {
+            'productID': {
+                '@type': 'ReferenceID',
+                '__value__': product.item_id
+            },
+            'paginationInput': {
+                'entriesPerPage': 1
+            }
+        }
+        response = requests.post(url, data=json.dumps(data), headers=headers)
+        #At this point the response is containing the updated product details in ebay format
+        if response.status_code == 200:
+            json_data = json.loads(response.text)
+            response_json = product_mapping(json_data)
+            #At this point we have a refined product: we can use this one to update our product
+            if product.price != response_json[0]["product"]["price"]:
+                # Different price: it's time to register old price
+                price = {
+                    "product": product.id,
+                    "old_price": product.price,
+                    "price_time": product.updated_at
+                }
+                price_serializer = PriceHistorySerializer(data=price)
+                if price_serializer.is_valid():
+                    price_serializer.save()
+                else:
+                    break
+                #Different price means that there may be an user with a proper observation: he must be signaled
+                '''
+                Signaling logic
+                '''
+            serializer = ProductSerializer(instance=product, data=response_json[0])
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                break
+        else:
+            break
     return Response({'response': 'This API is under development'}, status=status.HTTP_204_NO_CONTENT)

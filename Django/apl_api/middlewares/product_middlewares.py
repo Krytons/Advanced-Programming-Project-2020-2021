@@ -6,7 +6,7 @@ def product_mapping(ebay_json):
     product_array = []
     for ebay_product in ebay_json["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]:
         new_product = Product()
-        new_product.item_id = ebay_product["itemId"][0]
+        new_product.item_id = ebay_product["productId"][0]["__value__"]
         new_product.title = ebay_product["title"][0]
         try:
             new_product.subtitle = ebay_product["subtitle"][0]
