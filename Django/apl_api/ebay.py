@@ -19,6 +19,7 @@ env = environ.Env()
 environ.Env.read_env()
 APP_ID = env('EBAY_APP_ID')
 GLOBAL_ID = env('EBAY_GLOBAL_ID')
+STATE_CODE = env('EBAY_ITALY_CODE')
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -31,7 +32,7 @@ def ebay_search_products(request):
         'X-EBAY-SOA-GLOBAL-ID': GLOBAL_ID,
         'X-EBAY-SOA-SECURITY-APPNAME': APP_ID,
         'X-EBAY-SOA-REQUEST-DATA-FORMAT':"JSON",
-        'X-EBAY-SOA-OPERATION-NAME':"findItemsByKeywords"
+        'X-EBAY-SOA-OPERATION-NAME':"findItemsByKeywords",
     }
     url = "https://svcs.ebay.com/services/search/FindingService/v1"
     data = {
@@ -170,30 +171,20 @@ def ebay_update_observed_product_price():
     products = Product.objects.all()
     for product in products:
         # Search on ebay for an update
-        headers = {
-            'Content-Type': 'application/json',
-            'X-EBAY-SOA-GLOBAL-ID': GLOBAL_ID,
-            'X-EBAY-SOA-SECURITY-APPNAME': APP_ID,
-            'X-EBAY-SOA-REQUEST-DATA-FORMAT': "JSON",
-            'X-EBAY-SOA-OPERATION-NAME': "findItemsByProduct"
-        }
-        url = "https://svcs.ebay.com/services/search/FindingService/v1"
-        data = {
-            'productID': {
-                '@type': 'ReferenceID',
-                '__value__': product.item_id
-            },
-            'paginationInput': {
-                'entriesPerPage': 1
-            }
-        }
-        response = requests.post(url, data=json.dumps(data), headers=headers)
+        url = "https://open.api.ebay.com/shopping?callname=GetItemStatus&responseencoding=JSON&appid="+ APP_ID \
+              +"&siteid=" + STATE_CODE + "&version=967&ItemID=" + product.item_id
+        print(url)
+        response = requests.get(url)
         #At this point the response is containing the updated product details in ebay format
         if response.status_code == 200:
+            print("Chiamata Ok")
             json_data = json.loads(response.text)
-            response_json = product_mapping(json_data)
             #At this point we have a refined product: we can use this one to update our product
-            if product.price != response_json[0]["product"]["price"]:
+            ebay_price = format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f')
+            if product.price != ebay_price:
+                print("Prezzo diverso")
+                print(product.price)
+                print(ebay_price)
                 # Different price: it's time to register old price
                 price = {
                     "product": product.id,
@@ -203,17 +194,18 @@ def ebay_update_observed_product_price():
                 price_serializer = PriceHistorySerializer(data=price)
                 if price_serializer.is_valid():
                     price_serializer.save()
-                else:
-                    break
-                #Different price means that there may be an user with a proper observation: he must be signaled
+                product.price = ebay_price
+                product.save()
+                #Different price means that there may be an user with a proper observation: analysis needed
+                try:
+                    observations = ObservedProduct.objects.filter(product=product.id)
+                    for observation in observations:
+                        print("Osservazione trovata")
+                        if ebay_price < observation.threshold_price:
+                            #Notify the owner
+                            print("Notify")
+                except ObjectDoesNotExist:
+                    print("Succhino di cittadinanza")
                 '''
                 Signaling logic
                 '''
-            serializer = ProductSerializer(instance=product, data=response_json[0])
-            if serializer.is_valid():
-                serializer.save()
-            else:
-                break
-        else:
-            break
-    return Response({'response': 'This API is under development'}, status=status.HTTP_204_NO_CONTENT)

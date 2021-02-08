@@ -15,8 +15,8 @@ def start():
     scheduler = BackgroundScheduler(timezone=utc)
     scheduler.add_jobstore(DjangoJobStore(), "default")
     # run this job every PERIOD
-    scheduler.add_job(price_update, 'interval', replace_existing=True, seconds=120, name='price update',
-                      jobstore='default', id='price_update_job')
+    #scheduler.add_job(price_update, 'interval', replace_existing=True, seconds=120, name='price update',
+     #                 jobstore='default', id='price_update_job')
     #Now it's automatic
     #register_events(scheduler)
     scheduler.start()

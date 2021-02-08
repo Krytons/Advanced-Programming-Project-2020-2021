@@ -129,7 +129,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 class ObservedProduct(models.Model):
     creator = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    threshold_price = models.FloatField()
+    threshold_price = models.DecimalField(max_digits=6, decimal_places=2)
 
     class Meta:
         unique_together = ['creator', 'product']
