@@ -201,7 +201,7 @@ def ebay_update_observed_product_price():
                     observations = ObservedProduct.objects.filter(product=product.id)
                     for observation in observations:
                         print("Osservazione trovata")
-                        if ebay_price < observation.threshold_price:
+                        if ebay_price <= observation.threshold_price:
                             #Notify the owner
                             print("Notify")
                 except ObjectDoesNotExist:
