@@ -17,9 +17,9 @@ import environ
 
 env = environ.Env()
 environ.Env.read_env()
-APP_ID = env('EBAY_APP_ID')
-GLOBAL_ID = env('EBAY_GLOBAL_ID')
-STATE_CODE = env('EBAY_ITALY_CODE')
+APP_ID = env.str('EBAY_APP_ID')
+GLOBAL_ID = env.str('EBAY_GLOBAL_ID')
+STATE_CODE = env.str('EBAY_ITALY_CODE')
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
