@@ -142,3 +142,14 @@ class PriceHistory(models.Model):
     class Meta:
         unique_together = ['product', 'price_time']
         ordering = ['price_time']
+
+class Notification(models.Model):
+    observation = models.ForeignKey(ObservedProduct, on_delete=models.CASCADE)
+    notified_price = models.DecimalField(max_digits=6, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=40, null=False)
+
+    class Meta:
+        unique_together = ['observation', 'created_at']
+        ordering = ['created_at']
+

@@ -177,12 +177,12 @@ def ebay_update_observed_product_price():
         response = requests.get(url)
         #At this point the response is containing the updated product details in ebay format
         if response.status_code == 200:
-            print("Chiamata Ok")
+            print("Ebay call OK")
             json_data = json.loads(response.text)
             #At this point we have a refined product: we can use this one to update our product
             ebay_price = format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f')
             if product.price != ebay_price:
-                print("Prezzo diverso")
+                print("Different Price")
                 print(product.price)
                 print(ebay_price)
                 # Different price: it's time to register old price
@@ -200,12 +200,20 @@ def ebay_update_observed_product_price():
                 try:
                     observations = ObservedProduct.objects.filter(product=product.id)
                     for observation in observations:
-                        print("Osservazione trovata")
-                        if ebay_price <= observation.threshold_price:
-                            #Notify the owner
-                            print("Notify")
+                        print("An observation has been found")
+                        if (float(ebay_price)) <= (float(observation.threshold_price)):
+                            #Create a notification
+                            print("Notification time")
+                            notification = {
+                                "observation" : observation.id,
+                                "notified_price" : format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f'),
+                                "status" : "NOT-PULLED"
+                            }
+                            notification_serializer = NotificationSerializer(data=notification)
+                            if notification_serializer.is_valid():
+                                notification_serializer.save()
+                        print(float(ebay_price) <= float(observation.threshold_price))
+                        print(ebay_price)
+                        print(observation.threshold_price)
                 except ObjectDoesNotExist:
-                    print("Succhino di cittadinanza")
-                '''
-                Signaling logic
-                '''
+                    print("No observations")

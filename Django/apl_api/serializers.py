@@ -91,3 +91,19 @@ class PriceHistorySerializer(serializers.ModelSerializer):
         return []
 
 
+class NotificationSerializer(serializers.ModelSerializer):
+    observation = serializers.PrimaryKeyRelatedField(
+        many=False,
+        read_only=False,
+        queryset=ObservedProduct.objects.all()
+    )
+
+    class Meta:
+        model = Notification
+        fields = ['observation', 'notified_price', 'created_at', 'status']
+        read_only_fields = ['id']
+
+    def get_unique_together_validators(self):
+        """Overriding method to disable unique together checks"""
+        return []
+
