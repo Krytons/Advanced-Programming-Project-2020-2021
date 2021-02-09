@@ -66,7 +66,7 @@ class ObservedProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ObservedProduct
-        fields = ['creator', 'product', 'threshold_price']
+        fields = ['id','creator', 'product', 'threshold_price']
         read_only_fields = ['id']
 
     def get_unique_together_validators(self):
@@ -83,7 +83,7 @@ class PriceHistorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PriceHistory
-        fields = ['product', 'old_price', 'price_time']
+        fields = ['id', 'product', 'old_price', 'price_time']
         read_only_fields = ['id']
 
     def get_unique_together_validators(self):
@@ -100,7 +100,7 @@ class NotificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notification
-        fields = ['observation', 'notified_price', 'created_at', 'status']
+        fields = ['id', 'observation', 'notified_price', 'created_at', 'status']
         read_only_fields = ['id']
 
     def get_unique_together_validators(self):
