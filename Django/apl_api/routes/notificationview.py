@@ -43,6 +43,25 @@ def get_user_notifications(request):
                         status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_not_pulled_notifications(request):
+    try:
+        observations = ObservedProduct.objects.filter(creator=request.user.id)
+        return_notifications = []
+        for observation in observations:
+            notifications = Notification.objects.filter(observation=observation.id, status="NOT-PULLED")
+            notifications_serializer = NotificationSerializer(notifications, many=True)
+            return_notifications.append(notifications_serializer.data)
+            for notification in notifications:
+                    notification.status = "PULLED"
+                    notification.save()
+        return Response(return_notifications, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return Response({'response': 'There are no not pulled notifications for this user at the moment'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update_notification(request, pk):

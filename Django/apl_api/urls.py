@@ -29,6 +29,8 @@ urlpatterns = [
 
     path('notifications/get_all', get_all_notifications, name="notifications_get_all"),
     path('notifications/user', get_user_notifications, name="notifications_get_all_by_user"),
+    path('notifications/user/not_pulled', get_user_not_pulled_notifications,
+         name="notifications_get_all_not_pulled_by_user"),
     path('notifications/update/<int:pk>', update_notification, name="notifications_update"),
     path('notifications/delete/<int:pk>', delete_notification, name="notifications_delete")
 ]
