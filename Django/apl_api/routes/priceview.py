@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-from apl_api.models import PriceHistory
+from apl_api.models import PriceHistory, Product
 from apl_api.serializers import PriceHistorySerializer
 
 
@@ -45,8 +45,22 @@ def get_product_history(request,pk):
         serializer = PriceHistorySerializer(history, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except ObjectDoesNotExist:
-        return Response({'response': 'There are no histories for this product at the moment'},
+        return Response({'response': 'This product does not exists'},
                         status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_product_history_by_ebayID(request,pk):
+    try:
+        product = Product.objects.get(item_id=pk)
+        history = PriceHistory.objects.filter(product = product.id)
+        serializer = PriceHistorySerializer(history, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return Response({'response': 'This product does not exists'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])

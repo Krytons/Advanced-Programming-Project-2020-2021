@@ -23,6 +23,7 @@ urlpatterns = [
     path('price/create', create_price, name="price_create"),
     path('price/get_all', get_all_prices, name="price_get_all"),
     path('price/history/<int:pk>', get_product_history, name="price_history"),
+    path('price/history_by_ebay/<int:pk>', get_product_history_by_ebayID, name="price_history_by_ebayID"),
     path('price/update/<int:pk>', update_price, name="price_update"),
     path('price/delete/<int:pk>', delete_price, name="price_delete"),
 
