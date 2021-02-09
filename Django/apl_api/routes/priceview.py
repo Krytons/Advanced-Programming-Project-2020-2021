@@ -2,6 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import DatabaseError
 
 # Create your views here.
+from djongo.sql2mongo import SQLDecodeError
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -57,7 +58,7 @@ def update_price(request, pk):
             try:
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            except DatabaseError:
+            except SQLDecodeError:
                 return Response({'response':'Duplicate price-date combination'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
