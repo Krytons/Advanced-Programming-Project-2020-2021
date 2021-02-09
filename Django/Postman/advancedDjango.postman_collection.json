@@ -1,0 +1,907 @@
+{
+	"info": {
+		"_postman_id": "f5d642d4-2ba7-4976-8dbe-58eda43d8fd2",
+		"name": "advancedDjango",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Observed Product",
+			"item": [
+				{
+					"name": "Observed Product: create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creator\":\"caruso.bartolomeo@virgilio.it\",\r\n    \"product\":\"1\",\r\n    \"threshold_price\":\"10\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/create_observation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"create_observation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observed Product: get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/get_all_observation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get_all_observation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observed Product: get by user id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/get_user_observation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get_user_observation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observed Product: update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creator\":\"giuseppe.fallica@gmail.com\",\r\n    \"product\":\"1\",\r\n    \"threshold_price\":\"1000\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/update_observation/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"update_observation",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observed Product: delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 300bf775149b558e1ffa687fca81ade5d680191b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/delete_observation/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"delete_observation",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ebay",
+			"item": [
+				{
+					"name": "Ebay: Search",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"search\": \"iphone 11\",\r\n    \"n_items\": 100\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/ebay_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"ebay_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ebay: Ebay native search",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-GLOBAL-ID",
+								"value": "EBAY-IT",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-SECURITY-APPNAME",
+								"value": "Bartolom-Notifyap-PRD-373673643-dee179fb",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-OPERATION-NAME",
+								"value": "findItemsByKeywords",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-REQUEST-DATA-FORMAT",
+								"value": "JSON",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"keywords\":\"iphone 12\",\r\n    \"outputSelector\":{\r\n        \"@type\":\"AspectHistogram\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://svcs.ebay.com/services/search/FindingService/v1",
+							"protocol": "https",
+							"host": [
+								"svcs",
+								"ebay",
+								"com"
+							],
+							"path": [
+								"services",
+								"search",
+								"FindingService",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ebay: Observe product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"item_id\": \"223669087554\",\r\n        \"title\": \"APPLE IPHONE 11 64 128 256 BLACK WHITE RED YELLOW GREEN PURPLE NUOVO ORIGINALE\",\r\n        \"subtitle\": \"\",\r\n        \"category_id\": \"9355\",\r\n        \"category_name\": \"Cellulari e smartphone\",\r\n        \"gallery_url\": \"https://thumbs1.ebaystatic.com/pict/04040_0.jpg\",\r\n        \"view_url\": \"https://www.ebay.it/itm/APPLE-IPHONE-11-64-128-256-BLACK-WHITE-RED-YELLOW-GREEN-PURPLE-NUOVO-ORIGINALE-/223669087554?var=0\",\r\n        \"shipping_cost\": \"0.00\",\r\n        \"price\": \"200.99\",\r\n        \"condition_id\": \"1000\",\r\n        \"condition_name\": \"Nuovo\"\r\n    },\r\n    \"threshold_price\": \"600.00\",\r\n    \"email\": \"giuseppe.fallica@gmail.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/ebay_select",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"ebay_select"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ebay: Ebay native product search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-SECURITY-APPNAME",
+								"value": "Bartolom-Notifyap-PRD-373673643-dee179fb",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-GLOBAL-ID",
+								"value": "EBAY-IT",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-OPERATION-NAME",
+								"value": "findItemsByProduct",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-SOA-REQUEST-DATA-FORMAT",
+								"value": "JSON",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"productId\":{\r\n        \"@type\":\"ReferenceID\",\r\n        \"__value__\":\"3041056443\"\r\n    },\r\n    \"paginationInput\": { \r\n        \"entriesPerPage\": \"2\" \r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://svcs.ebay.com/services/search/FindingService/v1",
+							"protocol": "https",
+							"host": [
+								"svcs",
+								"ebay",
+								"com"
+							],
+							"path": [
+								"services",
+								"search",
+								"FindingService",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ebay: Ebay native product search Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-API-APP-ID",
+								"value": "Bartolom-Notifyap-PRD-373673643-dee179fb",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-API-SITE-ID",
+								"value": "0",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-API-CALL-NAME",
+								"value": "GetItemStatus",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-API-REQUEST-ENCODING",
+								"value": "JSON",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-API-VERSION",
+								"value": "1063",
+								"type": "text"
+							},
+							{
+								"key": "X-EBAY-API-RESPONSE-ENCODING",
+								"value": "XML",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ItemID\":\"154155769769\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://open.api.ebay.com/shopping",
+							"protocol": "https",
+							"host": [
+								"open",
+								"api",
+								"ebay",
+								"com"
+							],
+							"path": [
+								"shopping"
+							],
+							"query": [
+								{
+									"key": "ItemID",
+									"value": "154155769769",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Notification: get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d2b98106c409969556d32a0a562211c97fac1c14",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications/get_all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notification: get user notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notification: update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observation\": 1,\r\n    \"notified_price\": \"644.99\",\r\n    \"status\": \"NOT-PULLED\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/notifications/update/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"update",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notification: delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications/delete/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notification: get user not pulled notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Price",
+			"item": [
+				{
+					"name": "Price: create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d2b98106c409969556d32a0a562211c97fac1c14",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": 1,\r\n    \"old_price\": \"614.99\",\r\n    \"price_time\": \"2021-02-08T17:33:14.280000Z\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/price/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"price",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price: get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d2b98106c409969556d32a0a562211c97fac1c14",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/price/get_all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"price",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price: get history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/price/history/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"price",
+								"history",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price: update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token d2b98106c409969556d32a0a562211c97fac1c14",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": 1,\r\n    \"old_price\": \"6774.99\",\r\n    \"price_time\": \"2021-02-08T17:33:14.280000Z\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8000/price/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"price",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price: delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d2b98106c409969556d32a0a562211c97fac1c14",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/price/delete/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"price",
+								"delete",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price: get history by ebay product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/price/history_by_ebay/223669087554",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"price",
+								"history_by_ebay",
+								"223669087554"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "add Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token b8afa8bb6f9ad4c74482f6575b9c0a3e5e7a9f5e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Xiaomi Mi 10\",\r\n    \"barcode\" : \"412413510\",\r\n    \"description\" : \"Phone with 12Gb RAM and 248 Gb of storage\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"giuseppe.fallica@gmail.com\",\r\n    \"name\" : \"Giuseppe\",\r\n    \"surname\" : \"Fallica\",\r\n    \"nickname\" : \"Peppe\",\r\n    \"password\" : \"password\",\r\n    \"password_confirm\" : \"password\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"giuseppe.fallica@gmail.com\",\r\n    \"password\" : \"password\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Home",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producs: get all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
