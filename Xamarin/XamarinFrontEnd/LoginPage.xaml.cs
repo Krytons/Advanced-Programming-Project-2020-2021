@@ -16,30 +16,31 @@ namespace XamarinFrontEnd
 
         private async void GetToken(object sender, EventArgs e)
         {
+            Login log = new Login(Email.Text, Password.Text);
+            string json = JsonConvert.SerializeObject(log);
+            Token token = await LoginRequest.TryLogin(json);
 
-                Login log = new Login(Email.Text, Password.Text);
-                string json = JsonConvert.SerializeObject(log);
-                Token token = await LoginRequest.TryLogin(json);
-
-                if (token == null)
-                {
-                    Ltoken.Text = "Error";
-                }
-                else
-                {
-                    try
-                    {
-                        await SecureStorage.SetAsync("token", token.MyToken);
-                        // String token = await SecureStorage.GetAsync("token");  PER PRENDERE IL TOKEN
-                }
-                    catch (Exception ex)
-                    {
-                        // Possible that device doesn't support secure storage on device.
-                    }
-                }
-
-                await Navigation.PushAsync(new SearchPage());
+            if (token == null)
+            {
+                Ltoken.Text = "An error has occurred, please try again";
+                Password.Text = "";
+                Email.Text = "";
             }
+            else
+            {
+                try
+                {
+                    await SecureStorage.SetAsync("token", token.MyToken);
+                    await Navigation.PushAsync(new SearchPage());
+                }
+                catch (Exception ex)
+                {
+                    Ltoken.Text = "An error has occurred, please try again";
+                    Password.Text = "";
+                    Email.Text = "";
+                }
+            }
+        }
 
 
         private async void Register(object sender, EventArgs e)
