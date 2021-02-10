@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5rJE4KYzqYNyeaBQ7+Qx5QHb+br3nEGzmjtd5SuQmPdI/Awh2v5MHv0IY8BUirhquaERaf2cjaIh8jBLWgMEow==",
+  "dgSpecHash": "JnC+yeZg2CeaQR8URHnbetIDXTTJqzZ/N9jZVsdCt6tBf1qYAdoGLjFjAnXoHZhVfejmx6HyfWZDq448IgtB/Q==",
   "success": true,
-  "projectFilePath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
+  "projectFilePath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
   "expectedPackageFiles": [
     "/Users/peppe382/.nuget/packages/microsoft.extensions.primitives/2.2.0/microsoft.extensions.primitives.2.2.0.nupkg.sha512",
     "/Users/peppe382/.nuget/packages/microsoft.net.http.headers/2.2.8/microsoft.net.http.headers.2.2.8.nupkg.sha512",

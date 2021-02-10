@@ -1714,11 +1714,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
+      "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
       "projectName": "XamarinFrontEnd.Android",
-      "projectPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
+      "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
       "packagesPath": "/Users/peppe382/.nuget/packages/",
-      "outputPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.Android/obj/",
+      "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/obj/",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -1733,8 +1733,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj": {
-              "projectPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj"
+            "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj": {
+              "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj"
             }
           }
         }

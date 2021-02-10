@@ -1,0 +1,17 @@
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamarinFrontEnd.csprojAssemblyReference.cache
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/LoginPage.xaml.g.cs
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/MainShell.xaml.g.cs
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/SearchPage.xaml.g.cs
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamarinFrontEnd.AssemblyInfoInputs.cache
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamarinFrontEnd.AssemblyInfo.cs
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamarinFrontEnd.csproj.CoreCompileInputs.cache
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/bin/Debug/netstandard2.0/XamarinFrontEnd.deps.json
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/bin/Debug/netstandard2.0/XamarinFrontEnd.dll
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/bin/Debug/netstandard2.0/ref/XamarinFrontEnd.dll
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/bin/Debug/netstandard2.0/XamarinFrontEnd.pdb
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamarinFrontEnd.dll
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/ref/XamarinFrontEnd.dll
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/XamarinFrontEnd.pdb
+/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/Debug/netstandard2.0/RegisterPage.xaml.g.cs
