@@ -6,22 +6,22 @@ namespace XamarinFrontEnd.Classi
 {
     public class Login
     {
-        [JsonProperty("email")]
-        private string email;
+        [JsonProperty("username")]
+        private string username;
 
         [JsonProperty("password")]
         private string password;
 
-        public Login(string email, string password)
+        public Login(string username, string password)
         {
-            this.email = email;
+            this.username = username;
             this.password = password;
         }
 
-        public string Email
+        public string Username
         {
-            get { return email; }
-            set { email = value; }
+            get { return username; } 
+            set { username = value; }
         }
 
         public string Password

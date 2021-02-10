@@ -30,7 +30,8 @@ namespace XamarinFrontEnd
                     try
                     {
                         await SecureStorage.SetAsync("token", token.MyToken);
-                    }
+                        // String token = await SecureStorage.GetAsync("token");  PER PRENDERE IL TOKEN
+                }
                     catch (Exception ex)
                     {
                         // Possible that device doesn't support secure storage on device.
@@ -39,6 +40,11 @@ namespace XamarinFrontEnd
 
                 await Navigation.PushAsync(new SearchPage());
             }
+
+
+        private async void Register(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
         }
     }
 }

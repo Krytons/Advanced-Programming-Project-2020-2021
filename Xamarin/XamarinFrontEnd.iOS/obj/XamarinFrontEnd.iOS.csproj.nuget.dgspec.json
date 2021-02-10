@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj": {}
+    "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj": {}
   },
   "projects": {
-    "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj": {
+    "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
+        "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
         "projectName": "XamarinFrontEnd.iOS",
-        "projectPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
+        "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
         "packagesPath": "/Users/peppe382/.nuget/packages/",
-        "outputPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd.iOS/obj/",
+        "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/obj/",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -26,8 +26,8 @@
         "frameworks": {
           "xamarinios10": {
             "projectReferences": {
-              "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj": {
-                "projectPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj"
+              "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj": {
+                "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj"
               }
             }
           }
@@ -71,14 +71,14 @@
         }
       }
     },
-    "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj": {
+    "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj",
+        "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj",
         "projectName": "XamarinFrontEnd",
-        "projectPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/XamarinFrontEnd.csproj",
+        "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj",
         "packagesPath": "/Users/peppe382/.nuget/packages/",
-        "outputPath": "/Users/peppe382/Projects/XamarinFrontEnd/XamarinFrontEnd/obj/",
+        "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/peppe382/.config/NuGet/NuGet.Config"

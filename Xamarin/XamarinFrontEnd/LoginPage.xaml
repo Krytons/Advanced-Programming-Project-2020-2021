@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.LoginPage">
     <ContentPage.Content>
-        <StackLayout Margin="0,250,0,0" BackgroundColor="White" Orientation="Vertical" Padding="30" Spacing="40">
-            <Label Text="EBAY" HorizontalOptions="Center" FontFamily="Robo"/>
+        <StackLayout Margin="0,150,0,0" Orientation="Vertical" Padding="30" Spacing="40">
+            <Label Text="EBAY" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Large" TextColor="Black"/>
             <Frame VerticalOptions="End" BackgroundColor="LightBlue" HasShadow="False">  
                 <StackLayout Orientation="Vertical" Spacing="10">  
                     <Entry x:Name="Email" Placeholder="Email"   
@@ -16,16 +16,12 @@
                 </StackLayout>  
             </Frame>
                 <Label x:Name="Ltoken" Text=""/>
-            <Button Text="Login" TextColor="White"  
+            <Button Margin="0,0,0,-30" Text="Login" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="GetToken"/>
-            <Frame VerticalOptions="End" BackgroundColor="Gray" HasShadow="False">   
-                    <Entry x:Name="Url" Placeholder="URL"   
-                           PlaceholderColor="Black" HeightRequest="40"   
-                           Keyboard="Email"  
-                           TextColor="Black"/>  
-            </Frame> 
-            
+            <Button Text="Registrati" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="Gray" Clicked="Register"/>
         </StackLayout>  
     </ContentPage.Content>  
 </ContentPage> 
