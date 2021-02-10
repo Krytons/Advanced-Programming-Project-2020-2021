@@ -16,7 +16,7 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<List<Product>> GetProducts(string json)
         {
 
-            string url = "http://1763d8edf652.ngrok.io";
+            string url = "http://a1e47ca7d9e6.ngrok.io";
             string token = null;
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");

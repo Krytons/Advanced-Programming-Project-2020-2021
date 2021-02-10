@@ -28,17 +28,10 @@ namespace XamarinFrontEnd
 
             EbaySearch search = new EbaySearch(searchBar.Text);
             string json = JsonConvert.SerializeObject(search);
-
             List<Product> products = await GetProduct.GetProducts(json);
-            SearchResults = new ObservableCollection<string>
-            {
-            };
 
-            foreach (Product p in products)
-            {
-                SearchResults.Add(p.Title);
-            }
-            resultsList.ItemsSource = SearchResults;
+            MyCollectionView.ItemsSource = products;
+            
         }
 
     }
