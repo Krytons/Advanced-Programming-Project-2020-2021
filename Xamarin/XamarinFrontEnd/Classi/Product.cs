@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 
 namespace XamarinFrontEnd.Classi
 {
-    class Product
+    public class Product
     {
 
         [JsonProperty("id")]
-        private int id;
+        private string id;
 
         [JsonProperty("item_id")]
         private string item_id;
@@ -22,7 +22,7 @@ namespace XamarinFrontEnd.Classi
         [JsonProperty("category_id")]
         private string category_id;
 
-        [JsonProperty("category_id")]
+        [JsonProperty("category_name")]
         private string category_name;
 
         [JsonProperty("gallery_url")]
@@ -44,12 +44,12 @@ namespace XamarinFrontEnd.Classi
         private string condition_name;
 
         [JsonProperty("created_at")]
-        private DateTime created_at;
+        private string created_at;
 
         [JsonProperty("updated_at")]
-        private DateTime updated_at;
+        private string updated_at;
 
-        public Product(int id, string item_id, string title, string subtitle, string category_id, string category_name, string gallery_url, string view_url, double shipping_cost, double price, string condition_id, string condition_name, DateTime created_at, DateTime updated_at)
+        public Product(string id, string item_id, string title, string subtitle, string category_id, string category_name, string gallery_url, string view_url, double shipping_cost, double price, string condition_id, string condition_name, string created_at, string updated_at)
         {
             this.id = id;
             this.item_id = item_id;
@@ -68,7 +68,7 @@ namespace XamarinFrontEnd.Classi
         }
 
         // Getters and setters
-        public int Id
+        public string Id
         {
             get { return id; }
             set { id = value; }
@@ -140,18 +140,16 @@ namespace XamarinFrontEnd.Classi
             set { condition_name = value; }
         }
 
-        public DateTime Created_at
+        public string Created_at
         {
             get { return created_at; }
             set { created_at = value; }
         }
 
-        public DateTime Updated_at
+        public string Updated_at
         {
             get { return updated_at; }
             set { updated_at = value; }
         }
-
-        public DateTime Updated_At { get; }
     }
 }

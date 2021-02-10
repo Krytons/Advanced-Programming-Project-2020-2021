@@ -15,13 +15,13 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<Token> TryLogin(string json)
         {
 
-            string url = "http://a1e47ca7d9e6.ngrok.io/login";
+            string url = "http://1763d8edf652.ngrok.io";
 
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
 
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            HttpResponseMessage response = await client.PostAsync(url+"/login", content);
 
             if (response.IsSuccessStatusCode)
             {

@@ -6,6 +6,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFrontEnd.Classi;
+using XamarinFrontEnd.HttpRequest;
 
 namespace XamarinFrontEnd
 {
@@ -19,27 +20,26 @@ namespace XamarinFrontEnd
         public SearchPage()
         {
             InitializeComponent();
-            StartProvaToken();
         }
 
-        private async void StartProvaToken()
-        {
-            try
-            {
-                var oauthToken = await SecureStorage.GetAsync("token");
-                token.Text = oauthToken;
-            }
-            catch (Exception ex)
-            {
-                // Possible that device doesn't support secure storage on device.
-            }
-        }
-
-        //async 
-        void OnButtornPressed(object sender, EventArgs e)
+        private async void OnButtornPressed(object sender, EventArgs e)
         {
             SearchBar searchBar = (SearchBar)sender;
-            resultsList.ItemsSource = ""; //Function that calls for ebay products
+
+            EbaySearch search = new EbaySearch(searchBar.Text);
+            string json = JsonConvert.SerializeObject(search);
+
+            List<Product> products = await GetProduct.GetProducts(json);
+            SearchResults = new ObservableCollection<string>
+            {
+            };
+
+            foreach (Product p in products)
+            {
+                SearchResults.Add(p.Title);
+            }
+            resultsList.ItemsSource = SearchResults;
         }
+
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XamarinFrontEnd.Classi
 {
-    class RequestObservation
+    public class RequestObservation
     {
        
         public Product product { get; set; }

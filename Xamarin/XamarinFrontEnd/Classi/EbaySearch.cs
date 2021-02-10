@@ -11,10 +11,10 @@ namespace XamarinFrontEnd.Classi
         public string search { get; set; }
         public int n_items { get; set; }
 
-        public EbaySearch(string search, int n_items)
+        public EbaySearch(string search)
         {
             this.search = search;
-            this.n_items = n_items;
+            this.n_items = 20;
         }
     }
 
