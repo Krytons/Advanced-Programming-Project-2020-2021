@@ -1506,32 +1506,39 @@
     ]
   },
   "packageFolders": {
-    "/Users/peppe382/.nuget/packages/": {}
+    "C:\\Users\\carus\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.iOS\\XamarinFrontEnd.iOS.csproj",
       "projectName": "XamarinFrontEnd.iOS",
-      "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
-      "packagesPath": "/Users/peppe382/.nuget/packages/",
-      "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/obj/",
+      "projectPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.iOS\\XamarinFrontEnd.iOS.csproj",
+      "packagesPath": "C:\\Users\\carus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/Users/peppe382/.config/NuGet/NuGet.Config"
+        "C:\\Users\\carus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "xamarinios10"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj": {
-              "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj"
+            "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj": {
+              "projectPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj"
             }
           }
         }

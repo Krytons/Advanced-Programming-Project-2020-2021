@@ -15,7 +15,7 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<Token> TryLogin(string json)
         {
 
-            string url = "http://76d28f9825ca.ngrok.io/login";
+            string url = "http://a1e47ca7d9e6.ngrok.io";
 
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");

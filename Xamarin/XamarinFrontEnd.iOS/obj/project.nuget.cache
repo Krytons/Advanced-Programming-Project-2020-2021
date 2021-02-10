@@ -1,19 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "HvAMk1oK7gx/nibaBJg4QUErGG3V8Blh2yaUu3gsYaHSODHyH9G80dTjOll6U9WRXnNP6uZ8bLbDOH3keSq/lQ==",
+  "dgSpecHash": "c0WYe9qkPTio4nlZXAZ1Er1AAHlb2JSv0raNKPVUFy8T/m+YLxu8B4MG3D2fb9GwYDuJ5DXqKrEVfeWzUqsZrw==",
   "success": true,
-  "projectFilePath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.iOS/XamarinFrontEnd.iOS.csproj",
+  "projectFilePath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.iOS\\XamarinFrontEnd.iOS.csproj",
   "expectedPackageFiles": [
-    "/Users/peppe382/.nuget/packages/microsoft.extensions.primitives/2.2.0/microsoft.extensions.primitives.2.2.0.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/microsoft.net.http.headers/2.2.8/microsoft.net.http.headers.2.2.8.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/system.memory/4.5.1/system.memory.4.5.1.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/system.net.http/4.3.4/system.net.http.4.3.4.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/system.runtime.compilerservices.unsafe/4.5.1/system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/xamarin.essentials/1.6.1/xamarin.essentials.1.6.1.nupkg.sha512",
-    "/Users/peppe382/.nuget/packages/xamarin.forms/5.0.0.1931/xamarin.forms.5.0.0.1931.nupkg.sha512"
+    "C:\\Users\\carus\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\microsoft.net.http.headers\\2.2.8\\microsoft.net.http.headers.2.2.8.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\system.net.http\\4.3.4\\system.net.http.4.3.4.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.1\\system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
+    "C:\\Users\\carus\\.nuget\\packages\\xamarin.forms\\5.0.0.1931\\xamarin.forms.5.0.0.1931.nupkg.sha512"
   ],
   "logs": []
 }

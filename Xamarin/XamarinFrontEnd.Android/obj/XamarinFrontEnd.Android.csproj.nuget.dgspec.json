@@ -1,40 +1,46 @@
 {
   "format": 1,
   "restore": {
-    "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj": {}
+    "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.Android\\XamarinFrontEnd.Android.csproj": {}
   },
   "projects": {
-    "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj": {
+    "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.Android\\XamarinFrontEnd.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
+        "projectUniqueName": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.Android\\XamarinFrontEnd.Android.csproj",
         "projectName": "XamarinFrontEnd.Android",
-        "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/XamarinFrontEnd.Android.csproj",
-        "packagesPath": "/Users/peppe382/.nuget/packages/",
-        "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd.Android/obj/",
+        "projectPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.Android\\XamarinFrontEnd.Android.csproj",
+        "packagesPath": "C:\\Users\\carus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "/Users/peppe382/.config/NuGet/NuGet.Config"
+          "C:\\Users\\carus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "monoandroid90"
+          "monoandroid10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "monoandroid90": {
+          "monoandroid10.0": {
             "projectReferences": {
-              "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj": {
-                "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj"
+              "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj": {
+                "projectPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj"
               }
             }
           }
         }
       },
       "frameworks": {
-        "monoandroid90": {
+        "monoandroid10.0": {
           "dependencies": {
             "Microsoft.Net.Http.Headers": {
               "target": "Package",
@@ -60,27 +66,32 @@
         }
       }
     },
-    "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj": {
+    "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj",
+        "projectUniqueName": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj",
         "projectName": "XamarinFrontEnd",
-        "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj",
-        "packagesPath": "/Users/peppe382/.nuget/packages/",
-        "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/",
+        "projectPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj",
+        "packagesPath": "C:\\Users\\carus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "/Users/peppe382/.config/NuGet/NuGet.Config"
+          "C:\\Users\\carus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -92,7 +103,6 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
           "dependencies": {
             "Microsoft.Net.Http.Headers": {
               "target": "Package",
@@ -131,7 +141,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -3531,29 +3531,35 @@
     ]
   },
   "packageFolders": {
-    "/Users/peppe382/.nuget/packages/": {}
+    "C:\\Users\\carus\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj",
+      "projectUniqueName": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj",
       "projectName": "XamarinFrontEnd",
-      "projectPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/XamarinFrontEnd.csproj",
-      "packagesPath": "/Users/peppe382/.nuget/packages/",
-      "outputPath": "/Users/peppe382/Desktop/Advanced-Programming-Project-2020-2021/Xamarin/XamarinFrontEnd/obj/",
+      "projectPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\XamarinFrontEnd.csproj",
+      "packagesPath": "C:\\Users\\carus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\carus\\Documents\\GitHub\\Advanced-Programming-Project-2020-2021\\Xamarin\\XamarinFrontEnd\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/Users/peppe382/.config/NuGet/NuGet.Config"
+        "C:\\Users\\carus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
           "projectReferences": {}
         }
       },
@@ -3565,7 +3571,6 @@
     },
     "frameworks": {
       "netstandard2.0": {
-        "targetAlias": "netstandard2.0",
         "dependencies": {
           "Microsoft.Net.Http.Headers": {
             "target": "Package",
@@ -3604,7 +3609,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
