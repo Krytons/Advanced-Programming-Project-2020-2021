@@ -1,8 +1,47 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.RegisterPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.RegisterPage" BackgroundColor="#393e46">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Implementa Register" />
+        <StackLayout Margin="0,40,0,0" Orientation="Vertical" Padding="30" Spacing="30">
+            <Grid>
+                <Image Source="Logo.jpg" HeightRequest="250" WidthRequest="250"
+                       HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" BackgroundColor="#393e46"/>
+            </Grid>
+            <Frame VerticalOptions="End" BackgroundColor="LightBlue" HasShadow="False">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Entry x:Name="Email" Placeholder="Email"   
+                           PlaceholderColor="Black" HeightRequest="40"  
+                           TextTransform="Lowercase"
+                           Keyboard="Email"  
+                           TextColor="Black"/>
+                    <Entry x:Name="Name" Placeholder="Name"   
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           Keyboard="Plain"  
+                           TextColor="Black"/>
+                    <Entry x:Name="Surname" Placeholder="Surname"   
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           Keyboard="Plain"  
+                           TextColor="Black"/>
+                    <Entry x:Name="Nickname" Placeholder="Nickname"   
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           Keyboard="Plain"  
+                           TextColor="Black"/>
+                    <Entry x:Name="Password" Placeholder="Password"   
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           IsPassword="True"  
+                           TextColor="Black"/>
+                    <Entry x:Name="RepeatPassword" Placeholder="Repeat Password"   
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           IsPassword="True"  
+                           TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+            <Label x:Name="ErrorLabel" Text=""/>
+            <Button Margin="0,0,0,-20" Text="Sign in" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="Registration"/>
+            <Button Text="Login" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="Gray" Clicked="LoginRedirect"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

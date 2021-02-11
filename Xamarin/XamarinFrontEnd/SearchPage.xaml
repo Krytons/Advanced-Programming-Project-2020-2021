@@ -10,7 +10,7 @@
                HorizontalTextAlignment="Start"
                FontSize="Medium"
                FontAttributes="Italic" 
-               SearchButtonPressed="OnButtornPressed"/>
+               SearchButtonPressed="OnSearchPressed"/>
 
             <CollectionView x:Name="MyCollectionView" ItemsSource="{Binding Products}">
                 <CollectionView.ItemTemplate>
@@ -19,12 +19,13 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="2"
+                            <Image Grid.RowSpan="3"
                                Source="{Binding Gallery_url}"
                                Aspect="AspectFill"
                                HeightRequest="100"
@@ -34,9 +35,13 @@
                                FontAttributes="Bold" />
                             <Label Grid.Row="1"
                                Grid.Column="1"
-                               Text="{Binding Price}"
+                               Text="{Binding Price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
+                            <Button Grid.Row="2"  Grid.Column="1" Margin="0,0,0,0" Text="More info" TextColor="White"  
+                                FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
+                                CommandParameter="{Binding Id}"
+                                BackgroundColor="#088da5" Clicked="GetMoreInfo"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

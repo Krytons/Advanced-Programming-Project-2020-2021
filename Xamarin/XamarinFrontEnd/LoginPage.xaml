@@ -10,6 +10,7 @@
                     <Entry x:Name="Email" Placeholder="Email"   
                            PlaceholderColor="Black" HeightRequest="40"   
                            Keyboard="Email"  
+                           TextTransform="Lowercase"
                            TextColor="Black"/>  
                     <Entry x:Name="Password" Placeholder="Password"   
                            PlaceholderColor="Black" HeightRequest="40"   
@@ -17,7 +18,7 @@
                            TextColor="Black"/>
                 </StackLayout>  
             </Frame>
-                <Label x:Name="Ltoken" Text=""/>
+            <Label x:Name="Ltoken" Text=""/>
             <Button Margin="0,0,0,-30" Text="Login" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="GetToken"/>

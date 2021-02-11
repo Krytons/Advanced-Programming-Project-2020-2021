@@ -7,7 +7,7 @@ namespace XamarinFrontEnd.Classi
 
     public class EbaySearch
     {
-        
+
         public string search { get; set; }
         public int n_items { get; set; }
 

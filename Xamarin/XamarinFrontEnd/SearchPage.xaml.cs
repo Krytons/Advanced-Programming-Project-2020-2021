@@ -22,7 +22,7 @@ namespace XamarinFrontEnd
             InitializeComponent();
         }
 
-        private async void OnButtornPressed(object sender, EventArgs e)
+        private async void OnSearchPressed(object sender, EventArgs e)
         {
             SearchBar searchBar = (SearchBar)sender;
 
@@ -32,6 +32,16 @@ namespace XamarinFrontEnd
 
             MyCollectionView.ItemsSource = products;
             
+        }
+
+        private async void GetMoreInfo(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            Product product_to_search = (Product)button.CommandParameter;
+
+            List<Price> prices = await GetProduct.GetProductPriceHistory(product_to_search.Item_id);
+
+            //TODO: Navigate to product page to show product info and price history
         }
 
     }

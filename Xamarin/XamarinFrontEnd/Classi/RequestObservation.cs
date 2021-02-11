@@ -6,7 +6,7 @@ namespace XamarinFrontEnd.Classi
 {
     public class RequestObservation
     {
-       
+
         public Product product { get; set; }
         public string threshold_price { get; set; }
         public string email { get; set; }
