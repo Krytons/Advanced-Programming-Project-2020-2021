@@ -10,6 +10,7 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 # Imports used to use mongoDB collections
 from djongo import models
+from django.core.validators import MaxValueValidator
 
 # Create your models here
 '''
@@ -134,6 +135,7 @@ class ObservedProduct(models.Model):
     class Meta:
         unique_together = ['creator', 'product']
 
+
 class PriceHistory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     old_price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -153,3 +155,29 @@ class Notification(models.Model):
         unique_together = ['observation', 'created_at']
         ordering = ['created_at']
 
+class Recommendation(models.Model):
+    user_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['user_id', 'product_id']
+        ordering = ['created_at']
+
+class SequenceNumber(models.Model):
+    number = models.IntegerField(validators=[MaxValueValidator(999)])
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['number', 'created_at']
+
+
+class NewObservedProduct(models.Model):
+    creator = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    sequence_number = models.ForeignKey(SequenceNumber, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['creator', 'product']
+        ordering = ['created_at']

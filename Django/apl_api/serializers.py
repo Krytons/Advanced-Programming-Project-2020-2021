@@ -74,6 +74,38 @@ class ObservedProductSerializer(serializers.ModelSerializer):
         return []
 
 
+class NewObservedProductSerializer(serializers.ModelSerializer):
+    creator = serializers.SlugRelatedField(
+        many=False,
+        read_only=False,
+        slug_field='email',
+        queryset = AppUser.objects.all()
+    )
+
+    product = serializers.PrimaryKeyRelatedField(
+        many=False,
+        read_only=False,
+        queryset=Product.objects.all()
+    )
+
+
+    sequence_number = serializers.SlugRelatedField(
+        many=False,
+        read_only=False,
+        slug_field='number',
+        queryset=SequenceNumber.objects.all()
+    )
+
+    class Meta:
+        model = NewObservedProduct
+        fields = ['id','creator', 'product', 'sequence_number', 'created_at']
+        read_only_fields = ['id']
+
+    def get_unique_together_validators(self):
+        """Overriding method to disable unique together checks"""
+        return []
+
+
 class PriceHistorySerializer(serializers.ModelSerializer):
     product = serializers.PrimaryKeyRelatedField(
         many=False,
@@ -106,4 +138,35 @@ class NotificationSerializer(serializers.ModelSerializer):
     def get_unique_together_validators(self):
         """Overriding method to disable unique together checks"""
         return []
+
+
+class RecommendationSerializer(serializers.ModelSerializer):
+    user_id = serializers.SlugRelatedField(
+        many=False,
+        read_only=False,
+        slug_field='email',
+        queryset = AppUser.objects.all()
+    )
+
+    product_id = serializers.PrimaryKeyRelatedField(
+        many=False,
+        read_only=False,
+        queryset=Product.objects.all()
+    )
+
+    class Meta:
+        model = Recommendation
+        fields = ['id', 'user_id', 'product_id']
+        read_only_fields = ['id']
+
+    def get_unique_together_validators(self):
+        """Overriding method to disable unique together checks"""
+        return []
+
+
+class SequenceNumberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SequenceNumber
+        fields = ['id', 'number', 'created_at']
+        read_only_fields = ['id']
 
