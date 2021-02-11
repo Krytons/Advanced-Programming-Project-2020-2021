@@ -49,6 +49,10 @@ namespace XamarinFrontEnd.Classi
         [JsonProperty("updated_at")]
         private string updated_at;
 
+        public Product()
+        {
+        }
+
         public Product(string id, string item_id, string title, string subtitle, string category_id, string category_name, string gallery_url, string view_url, double shipping_cost, double price, string condition_id, string condition_name, string created_at, string updated_at)
         {
             this.id = id;

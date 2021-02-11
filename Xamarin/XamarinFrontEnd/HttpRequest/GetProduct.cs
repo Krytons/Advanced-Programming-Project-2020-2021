@@ -61,7 +61,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.GetAsync(url + "/ebay_search/" + product_ebay_id );
+            HttpResponseMessage response = await client.GetAsync(url + "/price/history_by_ebay/" + product_ebay_id );
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();

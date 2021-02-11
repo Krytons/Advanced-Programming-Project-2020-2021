@@ -40,7 +40,7 @@
                                VerticalOptions="End" />
                             <Button Grid.Row="2"  Grid.Column="1" Margin="0,0,0,0" Text="More info" TextColor="White"  
                                 FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
-                                CommandParameter="{Binding Id}"
+                                CommandParameter="{Binding Item_id}"
                                 BackgroundColor="#088da5" Clicked="GetMoreInfo"/>
                         </Grid>
                     </DataTemplate>

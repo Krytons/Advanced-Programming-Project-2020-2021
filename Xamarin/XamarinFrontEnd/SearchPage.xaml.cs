@@ -17,6 +17,8 @@ namespace XamarinFrontEnd
         public ObservableCollection<string> SearchResults { get; set; }
         public List<ObservableCollection<string>> ListItems { get; set; }
 
+        public List<Product> Products { get; set; }
+
         public SearchPage()
         {
             InitializeComponent();
@@ -28,18 +30,19 @@ namespace XamarinFrontEnd
 
             EbaySearch search = new EbaySearch(searchBar.Text);
             string json = JsonConvert.SerializeObject(search);
-            List<Product> products = await GetProduct.GetProducts(json);
+            Products = await GetProduct.GetProducts(json);
 
-            MyCollectionView.ItemsSource = products;
+            MyCollectionView.ItemsSource = Products;
             
         }
 
         private async void GetMoreInfo(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            Product product_to_search = (Product)button.CommandParameter;
+            string product_to_search = (string)button.CommandParameter;
+            Product button_product = Products.Find(Products => Products.Item_id == product_to_search);
 
-            List<Price> prices = await GetProduct.GetProductPriceHistory(product_to_search.Item_id);
+            List<Price> prices = await GetProduct.GetProductPriceHistory(button_product.Item_id);
 
             //TODO: Navigate to product page to show product info and price history
         }
