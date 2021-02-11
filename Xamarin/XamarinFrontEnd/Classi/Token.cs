@@ -6,7 +6,7 @@ namespace XamarinFrontEnd.Classi
 {
     public class Token
     {
-        [JsonProperty("accessToken")]
+        [JsonProperty("token")]
         private string myToken;
 
 
