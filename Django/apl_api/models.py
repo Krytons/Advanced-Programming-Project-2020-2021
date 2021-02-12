@@ -173,11 +173,11 @@ class SequenceNumber(models.Model):
 
 
 class NewObservedProduct(models.Model):
-    creator = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sequence_number = models.ForeignKey(SequenceNumber, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ['creator', 'product']
+        unique_together = ['user_id', 'product']
         ordering = ['created_at']

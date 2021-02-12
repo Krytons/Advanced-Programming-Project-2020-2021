@@ -75,10 +75,9 @@ class ObservedProductSerializer(serializers.ModelSerializer):
 
 
 class NewObservedProductSerializer(serializers.ModelSerializer):
-    creator = serializers.SlugRelatedField(
+    user_id = serializers.PrimaryKeyRelatedField(
         many=False,
         read_only=False,
-        slug_field='email',
         queryset = AppUser.objects.all()
     )
 
@@ -98,7 +97,7 @@ class NewObservedProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewObservedProduct
-        fields = ['id','creator', 'product', 'sequence_number', 'created_at']
+        fields = ['id','user_id', 'product', 'sequence_number', 'created_at']
         read_only_fields = ['id']
 
     def get_unique_together_validators(self):
@@ -141,10 +140,9 @@ class NotificationSerializer(serializers.ModelSerializer):
 
 
 class RecommendationSerializer(serializers.ModelSerializer):
-    user_id = serializers.SlugRelatedField(
+    user_id = serializers.PrimaryKeyRelatedField(
         many=False,
         read_only=False,
-        slug_field='email',
         queryset = AppUser.objects.all()
     )
 
