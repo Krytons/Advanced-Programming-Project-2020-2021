@@ -87,14 +87,6 @@ class NewObservedProductSerializer(serializers.ModelSerializer):
         queryset=Product.objects.all()
     )
 
-
-    sequence_number = serializers.SlugRelatedField(
-        many=False,
-        read_only=False,
-        slug_field='number',
-        queryset=SequenceNumber.objects.all()
-    )
-
     class Meta:
         model = NewObservedProduct
         fields = ['id','user_id', 'product', 'sequence_number', 'created_at']

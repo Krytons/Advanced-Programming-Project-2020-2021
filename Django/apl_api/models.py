@@ -145,6 +145,7 @@ class PriceHistory(models.Model):
         unique_together = ['product', 'price_time']
         ordering = ['price_time']
 
+
 class Notification(models.Model):
     observation = models.ForeignKey(ObservedProduct, on_delete=models.CASCADE)
     notified_price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -155,6 +156,7 @@ class Notification(models.Model):
         unique_together = ['observation', 'created_at']
         ordering = ['created_at']
 
+
 class Recommendation(models.Model):
     user_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -163,6 +165,7 @@ class Recommendation(models.Model):
     class Meta:
         unique_together = ['user_id', 'product_id']
         ordering = ['created_at']
+
 
 class SequenceNumber(models.Model):
     number = models.IntegerField(validators=[MaxValueValidator(999)])
@@ -175,7 +178,7 @@ class SequenceNumber(models.Model):
 class NewObservedProduct(models.Model):
     user_id = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    sequence_number = models.ForeignKey(SequenceNumber, on_delete=models.CASCADE)
+    sequence_number = models.IntegerField(validators=[MaxValueValidator(999)])
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

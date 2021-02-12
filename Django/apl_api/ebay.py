@@ -96,7 +96,6 @@ def ebay_select_product(request):
         'threshold_price' : threshold,
         'product': product.id
     }
-
     try:
         returned_sequence = SequenceNumber.objects.latest('created_at')
     except ObjectDoesNotExist:
