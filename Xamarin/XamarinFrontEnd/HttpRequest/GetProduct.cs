@@ -16,7 +16,7 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<List<Product>> GetProducts(string json)
         {
 
-            string url = "http://302b36db2691.ngrok.io";
+            string url = "http://8e0349b45fc8.ngrok.io";
             string token = null;
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -46,7 +46,7 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<List<Price>> GetProductPriceHistory(string product_ebay_id)
         {
-            string url = "http://302b36db2691.ngrok.io";
+            string url = "http://8e0349b45fc8.ngrok.io";
             string token = null;
             HttpClient client = new HttpClient();
 
@@ -68,7 +68,11 @@ namespace XamarinFrontEnd.HttpRequest
                 List<Price> receivedProduct = JsonConvert.DeserializeObject<List<Price>>(response_content);
                 return await Task.FromResult(receivedProduct);
             }
-            else return null;
+            else
+            {
+                List<Price> receivedProduct = new List<Price>() { };
+                return await Task.FromResult(receivedProduct);
+            }
         }
 
 

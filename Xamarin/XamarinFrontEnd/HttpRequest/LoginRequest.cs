@@ -15,7 +15,7 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<Token> TryLogin(string json)
         {
 
-            string url = "http://302b36db2691.ngrok.io";
+            string url = "http://8e0349b45fc8.ngrok.io";
 
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -34,7 +34,7 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<Token> SignIn(string json)
         {
-            string url = "http://302b36db2691.ngrok.io";
+            string url = "http://8e0349b45fc8.ngrok.io";
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
