@@ -1,6 +1,7 @@
 from django.urls import path
 from .routes.priceview import *
 from .routes.notificationview import *
+from .recommendation_system.communication import *
 from .views import *
 from .ebay import *
 from rest_framework.authtoken.views import obtain_auth_token
@@ -32,5 +33,9 @@ urlpatterns = [
     path('notifications/user/not_pulled', get_user_not_pulled_notifications,
          name="notifications_get_all_not_pulled_by_user"),
     path('notifications/update/<int:pk>', update_notification, name="notifications_update"),
-    path('notifications/delete/<int:pk>', delete_notification, name="notifications_delete")
+    path('notifications/delete/<int:pk>', delete_notification, name="notifications_delete"),
+
+    path('communication/send_all_observations', send_all_observations, name="send_all_observations"),
+    path('communication/send_all_new_observations', send_all_new_observations, name="send_all_new_observations")
+
 ]
