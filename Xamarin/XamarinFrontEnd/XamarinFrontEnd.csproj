@@ -35,9 +35,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HttpRequest\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="ProductInfoPage.xaml.cs">
       <DependentUpon>ProductInfoPage.xaml</DependentUpon>
     </Compile>

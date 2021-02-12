@@ -39,6 +39,7 @@ namespace XamarinFrontEnd
                     try
                     {
                         await SecureStorage.SetAsync("token", token.MyToken);
+                        await SecureStorage.SetAsync("email", Email.Text);
                         await Navigation.PushAsync(new SearchPage());
                     }
                     catch (Exception ex)

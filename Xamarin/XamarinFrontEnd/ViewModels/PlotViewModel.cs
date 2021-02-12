@@ -1,4 +1,5 @@
 ﻿using OxyPlot;
+using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
@@ -100,27 +101,39 @@ namespace XamarinFrontEnd.ViewModels
                 mod.Title = "Price History";
                 mod.ResetAllAxes();
 
+                mod.Axes.Add(new LinearAxis()
+                {
+                    Position = AxisPosition.Left,
+                    Title = "Price"
+                });
+
+                mod.Axes.Add(new DateTimeAxis()
+                {
+                    Position = AxisPosition.Bottom,
+                    StringFormat = "yyyy-MM-dd HH:mm:ss",
+                    Title = "Date"
+                });
+
+                //"yyyy-MM-ddTHH:mm:ss"
+                //2021-02-08T17:30:14.280
                 var Points = new List<DataPoint> { };
                 foreach (Price price in price_list)
-                {
+                {            
                     Points.Add(new DataPoint(price.price_time.ToOADate(), Double.Parse(price.old_price)));
                 };
 
-                var ls1 = new LineSeries();
-                ls1.ItemsSource = Points;
-
-                mod.Series.Add(ls1);
-
-                LineSeries s1 = new LineSeries()
+                var ls1 = new LineSeries()
                 {
                     Title = "Series 1",
                     Color = OxyColors.SkyBlue,
                     MarkerType = MarkerType.Circle,
-                    MarkerSize = 6,
+                    MarkerSize = 10,
                     MarkerStroke = OxyColors.White,
                     MarkerFill = OxyColors.SkyBlue,
                     MarkerStrokeThickness = 1.5
                 };
+                ls1.ItemsSource = Points;
+                mod.Series.Add(ls1);
 
                 return mod;
 

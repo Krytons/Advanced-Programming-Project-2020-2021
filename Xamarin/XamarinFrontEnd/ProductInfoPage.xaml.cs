@@ -1,14 +1,16 @@
-﻿using OxyPlot;
+﻿using Newtonsoft.Json;
+using OxyPlot;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFrontEnd.Classi;
+using XamarinFrontEnd.HttpRequest;
 using XamarinFrontEnd.ViewModels;
 
 namespace XamarinFrontEnd
@@ -89,6 +91,29 @@ namespace XamarinFrontEnd
             }
             */
 
+        }
+
+        async private void InsertObservation(object sender, EventArgs e)
+        {
+            string result = await DisplayPromptAsync("What's your desired price?", "Insert a threshold price", keyboard: Keyboard.Numeric);
+
+            string email;
+
+            if (result != null) {
+                try
+                {
+                    email = await SecureStorage.GetAsync("email");
+                    RequestObservation observation = new RequestObservation(page_product, result, email);
+                    string json = JsonConvert.SerializeObject(observation);
+                    string response = await ObservationRequest.InsertObservation(json);
+                    await DisplayAlert("Success!", response, "OK");
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error!", "Something went wrong", "OK");
+                }
+            }
+            
         }
 
     }

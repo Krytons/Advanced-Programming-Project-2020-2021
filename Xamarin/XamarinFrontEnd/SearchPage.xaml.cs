@@ -42,7 +42,6 @@ namespace XamarinFrontEnd
             List<Price> prices = await GetProduct.GetProductPriceHistory(button_product.Item_id);
 
             await Navigation.PushAsync(new ProductInfoPage(button_product, prices));
-            //TODO: Navigate to product page to show product info and price history
         }
 
     }
