@@ -13,7 +13,6 @@ namespace XamarinFrontEnd
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : FlyoutPage
     {
-        FlyoutMenuPage page;
         public MainPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);

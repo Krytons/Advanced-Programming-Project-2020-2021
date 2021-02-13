@@ -74,12 +74,14 @@ namespace XamarinFrontEnd
             {
                 try
                 {
-                    await DisplayAlert("Success!", "Observation removed", "OK");
-                    /*
                     RequestObservation obs_to_remove = CompleteObservations.Find(RequestObservation => RequestObservation.product.Id == observation_product);
                     CompleteObservations.Remove(obs_to_remove);
+                    Console.WriteLine(CompleteObservations);
+                    MyCollectionView.ItemsSource = null;
                     MyCollectionView.ItemsSource = CompleteObservations;
-                    */
+                    await DisplayAlert("Success!", "Observation removed", "OK");
+
+
                 }
                 catch (Exception ex)
                 {

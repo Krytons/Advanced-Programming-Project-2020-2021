@@ -27,7 +27,7 @@
                                FontAttributes="Bold" />
                             <Label Grid.Row="1"
                                Grid.Column="1"
-                               Text="{Binding product.Threshold_price, StringFormat='Price: €{0:F0}'}"
+                               Text="{Binding threshold_price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Button Grid.Row="2"  Grid.Column="1"
