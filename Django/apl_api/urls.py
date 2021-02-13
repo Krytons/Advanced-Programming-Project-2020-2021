@@ -17,6 +17,7 @@ urlpatterns = [
     path('get_user_observation', get_user_observation, name='get_user_observation'),
     path('update_observation/<int:pk>', update_observation, name='update_observation'),
     path('delete_observation/<int:pk>', delete_observation, name='delete_observation'),
+    path('get_complete_user_observation_data', get_complete_user_observation_data, name='get_complete_user_observation_data'),
 
     path('ebay_search', ebay_search_products, name='ebay_search'),
     path('ebay_select', ebay_select_product, name='ebay_select'),
