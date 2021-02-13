@@ -142,3 +142,20 @@ def delete_observation(request, pk):
             return Response({'You have no permissions to delete this observation'}, status=status.HTTP_401_UNAUTHORIZED)
     except ObjectDoesNotExist:
         return Response({'response':'This observation does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_observation_by_product_id(request, pk):
+    try:
+        print(pk)
+        product = Product.objects.get(id=pk)
+        print (product)
+        observation = ObservedProduct.objects.get(product=product)
+        if observation.creator.email == request.user.email:
+            observation.delete()
+            return Response({'response':'Observation successfully deleted'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'You have no permissions to delete this observation'}, status=status.HTTP_401_UNAUTHORIZED)
+    except ObjectDoesNotExist:
+        return Response({'response':'This observation does not exist'}, status=status.HTTP_400_BAD_REQUEST)
