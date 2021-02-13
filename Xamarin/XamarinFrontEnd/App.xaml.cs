@@ -10,7 +10,7 @@ namespace XamarinFrontEnd
         {
             InitializeComponent();
 
-            MainPage = new MainShell();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

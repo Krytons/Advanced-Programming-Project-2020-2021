@@ -32,10 +32,11 @@ namespace XamarinFrontEnd
                 {
                     await SecureStorage.SetAsync("token", token.MyToken);
                     await SecureStorage.SetAsync("email", Email.Text);
-                    await Navigation.PushAsync(new SearchPage());
+                    await Navigation.PushAsync(new XamarinFrontEnd.MainPage());
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     Ltoken.Text = "An error has occurred, please try again";
                     Password.Text = "";
                     Email.Text = "";
