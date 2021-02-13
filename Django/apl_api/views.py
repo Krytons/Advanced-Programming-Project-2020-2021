@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
-from apl_api.models import ObservedProduct, AppUser
-from apl_api.serializers import RegistrationSerializer, ObservedProductSerializer
+from apl_api.models import ObservedProduct, Product
+from apl_api.serializers import RegistrationSerializer, ObservedProductSerializer, ProductSerializer
 from rest_framework.authtoken.models import Token
 
 
@@ -82,6 +82,28 @@ def get_user_observation(request):
     except ObjectDoesNotExist:
         return Response({'response': 'There are no observations for this user at the moment'},
                         status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_complete_user_observation_data(request):
+    try:
+        observations = ObservedProduct.objects.filter(creator=request.user.id)
+        data = []
+        for observation in observations:
+            product = Product.objects.get(id = observation.product_id)
+            product_serializer =  ProductSerializer(product)
+            print(product_serializer)
+            data.append({
+                "product" : product_serializer.data,
+                "threshold_price" : observation.threshold_price,
+                "email" : observation.creator.email
+            })
+        return Response(data, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return Response({'response': 'There are no observations for this user at the moment'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])

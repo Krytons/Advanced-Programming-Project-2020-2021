@@ -12,6 +12,7 @@
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:FlyoutPageItem}">
                     <local:FlyoutPageItem Title="Search" IconSource="contacts.png" TargetType="{x:Type pages:SearchPage}" />
+                    <local:FlyoutPageItem Title="Observations" IconSource="contacts.png" TargetType="{x:Type pages:UserObservations}" />
                 </x:Array>
             </ListView.ItemsSource>
             <ListView.ItemTemplate>

@@ -13,10 +13,39 @@ namespace XamarinFrontEnd.HttpRequest
 {
     public class GetProduct
     {
+
+        public static async Task<Product> GetProductById(string id)
+        {
+            string url = "http://c135d0e6a5e8.ngrok.io";
+            string token = null;
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                token = await SecureStorage.GetAsync("token");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
+
+            HttpResponseMessage response = await client.GetAsync(url + "/api/products/");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string response_content = await response.Content.ReadAsStringAsync();
+                Product receivedProduct = JsonConvert.DeserializeObject<Product>(response_content);
+                return await Task.FromResult(receivedProduct);
+            }
+            else return null;
+        }
+
         public static async Task<List<Product>> GetProducts(string json)
         {
 
-            string url = "http://8e0349b45fc8.ngrok.io";
+            string url = "http://c135d0e6a5e8.ngrok.io";
             string token = null;
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -46,7 +75,7 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<List<Price>> GetProductPriceHistory(string product_ebay_id)
         {
-            string url = "http://8e0349b45fc8.ngrok.io";
+            string url = "http://c135d0e6a5e8.ngrok.io";
             string token = null;
             HttpClient client = new HttpClient();
 
