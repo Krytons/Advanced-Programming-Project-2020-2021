@@ -12,6 +12,7 @@ namespace XamarinFrontEnd
     {
         public RegisterPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
         }
 

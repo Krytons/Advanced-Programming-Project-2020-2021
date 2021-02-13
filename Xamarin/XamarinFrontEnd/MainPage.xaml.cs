@@ -16,6 +16,8 @@ namespace XamarinFrontEnd
         FlyoutMenuPage page;
         public MainPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
+
             InitializeComponent();
 
             flyoutPage.listView.ItemSelected += OnItemSelected;

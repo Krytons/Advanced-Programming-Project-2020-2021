@@ -11,6 +11,7 @@ namespace XamarinFrontEnd
     {
         public LoginPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
         }
 
@@ -32,7 +33,7 @@ namespace XamarinFrontEnd
                 {
                     await SecureStorage.SetAsync("token", token.MyToken);
                     await SecureStorage.SetAsync("email", Email.Text);
-                    await Navigation.PushAsync(new XamarinFrontEnd.MainPage());
+                    await Navigation.PushAsync(new MainPage());
                 }
                 catch (Exception ex)
                 {
