@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             x:Class="XamarinFrontEnd.ProductInfoPage">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+
+            <CollectionView x:Name="MyCollectionView" ItemsSource="{Binding Product}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnSpacing="30">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="5"
+                               Source="{Binding Gallery_url}"
+                               Aspect="AspectFill"
+                               HeightRequest="130"
+                               WidthRequest="130"/>
+                            <Label Grid.Column="1"
+                               Text="{Binding Title}"
+                               FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{Binding Price, StringFormat='Price: €{0:F0}'}"
+                               FontAttributes="Italic"
+                               VerticalOptions="End" />
+                            <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="{Binding Shipping_cost, StringFormat='Shipping cost: €{0:F0}'}"
+                               FontAttributes="Italic"
+                               VerticalOptions="End" />
+                            <Label Grid.Row="3"
+                               Grid.Column="1"
+                               Text="{Binding Category_name, StringFormat='Category: {0}'}"
+                               FontAttributes="Italic"
+                               VerticalOptions="End" />
+                            <Label Grid.Row="4"
+                               Grid.Column="1"
+                               Text="{Binding Condition_name, StringFormat='Conditions: {0}'}"
+                               FontAttributes="Italic"
+                               VerticalOptions="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <StackLayout HeightRequest="500" Margin="0,0,0,-30">
+                <oxy:PlotView WidthRequest="400" HeightRequest="300" Model="{Binding Model}"
+                    VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label x:Name="chartErrors" Text=""/>
+                <Button Text="Observe product" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="InsertObservation"/>
+            </StackLayout>
+
+        
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
