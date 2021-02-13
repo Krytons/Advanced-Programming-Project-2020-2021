@@ -65,5 +65,30 @@ namespace XamarinFrontEnd.HttpRequest
             }
             else return null;
         }
+
+        public static async Task<string> DeleteObservation(string product_id)
+        {
+            string url = "http://c135d0e6a5e8.ngrok.io";
+            string token = null;
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                token = await SecureStorage.GetAsync("token");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
+            HttpResponseMessage response = await client.DeleteAsync(url + "/delete_observation_by_product_id/"+product_id);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await Task.FromResult("Observation deleted!");
+            }
+            else return null;
+        }
     }
 }

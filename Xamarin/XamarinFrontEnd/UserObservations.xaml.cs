@@ -59,16 +59,36 @@ namespace XamarinFrontEnd
             */
         }
 
-        private void  OnFavoriteSwipeItemInvoked(object sender, EventArgs e)
+        private void OnFavoriteSwipeItemInvoked(object sender, EventArgs e)
         {
 
         }
 
-        private void Delete(object sender, EventArgs e)
+        private async void Delete(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
+            string observation_product = (string)button.CommandParameter;
+            string response = await ObservationRequest.DeleteObservation(observation_product);
 
+            if (response != null)
+            {
+                try
+                {
+                    await DisplayAlert("Success!", "Observation removed", "OK");
+                    /*
+                    RequestObservation obs_to_remove = CompleteObservations.Find(RequestObservation => RequestObservation.product.Id == observation_product);
+                    CompleteObservations.Remove(obs_to_remove);
+                    MyCollectionView.ItemsSource = CompleteObservations;
+                    */
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error!", "Something went wrong", "OK");
+                }
+            }
         }
 
 
     }
+
 }
