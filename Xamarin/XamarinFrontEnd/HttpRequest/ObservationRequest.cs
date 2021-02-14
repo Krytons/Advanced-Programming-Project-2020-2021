@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -15,7 +17,10 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<String> InsertObservation(string json)
         {
 
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -29,7 +34,7 @@ namespace XamarinFrontEnd.HttpRequest
                 return null;
             }
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-            HttpResponseMessage response = await client.PostAsync(url + "/ebay_select", content);
+            HttpResponseMessage response = await client.PostAsync(json_des + "/ebay_select", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -41,7 +46,10 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<List<RequestObservation>> GetAllUserObservation()
         {
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
 
@@ -55,7 +63,7 @@ namespace XamarinFrontEnd.HttpRequest
             }
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-            HttpResponseMessage response = await client.GetAsync(url + "/get_complete_user_observation_data");
+            HttpResponseMessage response = await client.GetAsync(json_des + "/get_complete_user_observation_data");
 
             if (response.IsSuccessStatusCode)
             {
@@ -68,7 +76,10 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<string> DeleteObservation(string product_id)
         {
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
 
@@ -82,7 +93,7 @@ namespace XamarinFrontEnd.HttpRequest
             }
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-            HttpResponseMessage response = await client.DeleteAsync(url + "/delete_observation_by_product_id/"+product_id);
+            HttpResponseMessage response = await client.DeleteAsync(json_des + "/delete_observation_by_product_id/"+product_id);
 
             if (response.IsSuccessStatusCode)
             {

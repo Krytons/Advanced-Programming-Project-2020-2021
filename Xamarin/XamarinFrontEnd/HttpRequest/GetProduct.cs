@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -16,7 +18,10 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<Product> GetProductById(string id)
         {
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
 
@@ -31,7 +36,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.GetAsync(url + "/api/products/");
+            HttpResponseMessage response = await client.GetAsync(json_des + "/api/products/");
 
             if (response.IsSuccessStatusCode)
             {
@@ -45,7 +50,10 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<List<Product>> GetProducts(string json)
         {
 
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -61,7 +69,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.PostAsync(url + "/ebay_search", content);
+            HttpResponseMessage response = await client.PostAsync(json_des + "/ebay_search", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -75,7 +83,10 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<List<Price>> GetProductPriceHistory(string product_ebay_id)
         {
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
 
@@ -90,7 +101,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.GetAsync(url + "/price/history_by_ebay/" + product_ebay_id );
+            HttpResponseMessage response = await client.GetAsync(json_des + "/price/history_by_ebay/" + product_ebay_id );
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();

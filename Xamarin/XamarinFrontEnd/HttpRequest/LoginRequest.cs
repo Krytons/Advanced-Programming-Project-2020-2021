@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -15,13 +17,16 @@ namespace XamarinFrontEnd.HttpRequest
         public static async Task<Token> TryLogin(string json)
         {
 
-            string url = "http://c135d0e6a5e8.ngrok.io";
-
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
+         
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
 
-            HttpResponseMessage response = await client.PostAsync(url+"/login", content);
+            HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/login", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -34,11 +39,14 @@ namespace XamarinFrontEnd.HttpRequest
 
         public static async Task<Token> SignIn(string json)
         {
-            string url = "http://c135d0e6a5e8.ngrok.io";
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync(url + "/register", content);
+            HttpResponseMessage response = await client.PostAsync(json_des + "/register", content);
 
             if (response.IsSuccessStatusCode)
             {
