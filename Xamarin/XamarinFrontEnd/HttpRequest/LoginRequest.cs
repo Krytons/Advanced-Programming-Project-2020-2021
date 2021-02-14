@@ -46,7 +46,7 @@ namespace XamarinFrontEnd.HttpRequest
             HttpClient client = new HttpClient();
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync(json_des + "/register", content);
+            HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/register", content);
 
             if (response.IsSuccessStatusCode)
             {
