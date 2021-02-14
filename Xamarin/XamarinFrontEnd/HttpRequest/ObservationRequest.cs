@@ -34,7 +34,7 @@ namespace XamarinFrontEnd.HttpRequest
                 return null;
             }
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-            HttpResponseMessage response = await client.PostAsync(json_des + "/ebay_select", content);
+            HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/ebay_select", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -63,7 +63,7 @@ namespace XamarinFrontEnd.HttpRequest
             }
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-            HttpResponseMessage response = await client.GetAsync(json_des + "/get_complete_user_observation_data");
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/get_complete_user_observation_data");
 
             if (response.IsSuccessStatusCode)
             {
@@ -93,7 +93,7 @@ namespace XamarinFrontEnd.HttpRequest
             }
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-            HttpResponseMessage response = await client.DeleteAsync(json_des + "/delete_observation_by_product_id/"+product_id);
+            HttpResponseMessage response = await client.DeleteAsync(json_des.Ngrok + "/delete_observation_by_product_id/"+product_id);
 
             if (response.IsSuccessStatusCode)
             {

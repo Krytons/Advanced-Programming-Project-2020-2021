@@ -36,7 +36,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.GetAsync(json_des + "/api/products/");
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/api/products/");
 
             if (response.IsSuccessStatusCode)
             {
@@ -69,7 +69,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.PostAsync(json_des + "/ebay_search", content);
+            HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/ebay_search", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -87,6 +87,7 @@ namespace XamarinFrontEnd.HttpRequest
             var stream = new StreamReader(app);
             var jsonString = stream.ReadToEnd();
             SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
+
             string token = null;
             HttpClient client = new HttpClient();
 
@@ -101,7 +102,7 @@ namespace XamarinFrontEnd.HttpRequest
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
-            HttpResponseMessage response = await client.GetAsync(json_des + "/price/history_by_ebay/" + product_ebay_id );
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/price/history_by_ebay/" + product_ebay_id );
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
