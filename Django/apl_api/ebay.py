@@ -63,8 +63,9 @@ def ebay_select_product(request):
 
     try:
         product = Product.objects.get(item_id = search_id)
-        #The product exists: update it's own info
-        if product.price != request_data["product"]["price"]:
+        #The product exists: update it's own info '{0:.2f}'.format(pi)
+        if product.price != '{0:.2f}'.format(request_data["product"]["price"]):
+            print("DIFFERENT PRICE")
             #Different price: it's time to register old price
             price = {
                 "product" : product.id,
@@ -100,7 +101,6 @@ def ebay_select_product(request):
         returned_sequence = SequenceNumber.objects.latest('created_at')
     except ObjectDoesNotExist:
         return Response('Observation generation error', status=status.HTTP_400_BAD_REQUEST)
-    print(request.user.id)
     new_observation = {
         'user_id' : request.user.id,
         'product' : product.id,
@@ -119,7 +119,6 @@ def ebay_select_product(request):
                     new_observation_serializer.save()
                     return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
                 else:
-                    print(new_observation_serializer.errors)
                     return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
             except SQLDecodeError:
                 return Response({'response': 'This element is already observed'}, status=status.HTTP_400_BAD_REQUEST)
@@ -173,8 +172,5 @@ def ebay_update_observed_product_price():
                             notification_serializer = NotificationSerializer(data=notification)
                             if notification_serializer.is_valid():
                                 notification_serializer.save()
-                        print(float(ebay_price) <= float(observation.threshold_price))
-                        print(ebay_price)
-                        print(observation.threshold_price)
                 except ObjectDoesNotExist:
                     print("No observations")
