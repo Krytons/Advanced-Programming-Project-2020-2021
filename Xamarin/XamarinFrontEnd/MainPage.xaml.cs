@@ -15,8 +15,10 @@ namespace XamarinFrontEnd
     public partial class MainPage : FlyoutPage
     {
 
+        /*
         INotificationManager notificationManager;
         int notificationNumber = 0;
+        */
 
         public MainPage()
         {
@@ -31,6 +33,7 @@ namespace XamarinFrontEnd
                 FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
             }
 
+            /*
             notificationManager = DependencyService.Get<INotificationManager>();
             notificationManager.NotificationReceived += (sender, eventArgs) =>
             {
@@ -39,6 +42,7 @@ namespace XamarinFrontEnd
             };
 
             SendNotification();
+            */
         }
 
         void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -52,6 +56,7 @@ namespace XamarinFrontEnd
             }
         }
 
+        /*
         void SendNotification()
         {
             notificationNumber++;
@@ -71,5 +76,6 @@ namespace XamarinFrontEnd
 
             });
         }
+        */
     }
 }
