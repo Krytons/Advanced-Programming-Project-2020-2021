@@ -12,14 +12,20 @@
     
   <PropertyGroup>
    <LangVersion>latest</LangVersion>
+   <UserSecretsId>06af265c-eb74-45fd-8b8e-88337b9ea33f</UserSecretsId>
   </PropertyGroup>
     
   <ItemGroup>
     <None Remove="AppLogo.jpg" />
+    <None Remove="Configuration\secrets.json" />
   </ItemGroup>
     
   <ItemGroup>
     <ApplicationDefinition Include="AppLogo.jpg" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\secrets.json" />
   </ItemGroup>
     
   <ItemGroup>
@@ -62,4 +68,5 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>
