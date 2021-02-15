@@ -32,7 +32,7 @@ namespace XamarinFrontEnd
 
             foreach (AppUserNotification notification in notifications_list)
             {
-                RequestObservation observation = await ObservationRequest.GetObservationById(notification.observation);
+                RequestObservation observation = await ObservationRequest.GetObservationById(notification.Observation);
                 if (observation != null)
                 {
                     OutputNotification output_value = new OutputNotification(observation, notification);

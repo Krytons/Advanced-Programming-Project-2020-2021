@@ -7,21 +7,21 @@ namespace XamarinFrontEnd.Classi
     public class RegistrationResponse
     {
 
-        public string response { get; set; }
-        public string email { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string nickname { get; set; }
-        public string token { get; set; }
+        public string Response { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Nickname { get; set; }
+        public string Token { get; set; }
 
         public RegistrationResponse(string response, string email, string name, string surname, string nickname, string token)
         {
-            this.response = response;
-            this.email = email;
-            this.name = name;
-            this.surname = surname;
-            this.nickname = nickname;
-            this.token = token;
+            Response = response;
+            Email = email;
+            Name = name;
+            Surname = surname;
+            Nickname = nickname;
+            Token = token;
         }
     }
 }

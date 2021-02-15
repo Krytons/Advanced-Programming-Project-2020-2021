@@ -49,7 +49,7 @@ namespace XamarinFrontEnd.ViewModels
                 var Points = new List<DataPoint> { };
                 foreach (Price price in price_list)
                 {            
-                    Points.Add(new DataPoint(price.price_time.ToOADate(), Double.Parse(price.old_price)));
+                    Points.Add(new DataPoint(price.Price_time.ToOADate(), Double.Parse(price.Old_price)));
                 };
 
                 var ls1 = new LineSeries()

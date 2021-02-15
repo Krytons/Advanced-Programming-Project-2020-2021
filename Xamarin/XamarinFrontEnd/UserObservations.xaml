@@ -18,22 +18,22 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Image Grid.RowSpan="3"
-                               Source="{Binding product.Gallery_url}"
+                               Source="{Binding Product.Gallery_url}"
                                Aspect="AspectFill"
                                HeightRequest="100"
                                WidthRequest="100" />
                             <Label Grid.Column="1"
-                               Text="{Binding product.Title}"
+                               Text="{Binding Product.Title}"
                                FontAttributes="Bold" />
                             <Label Grid.Row="1"
                                Grid.Column="1"
-                               Text="{Binding threshold_price, StringFormat='Price: €{0:F0}'}"
+                               Text="{Binding Threshold_price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Button Grid.Row="2"  Grid.Column="1"
                                 Margin="0,0,0,0" Text="Delete" TextColor="White"  
                                 FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
-                                CommandParameter="{Binding product.Id}"
+                                CommandParameter="{Binding Product.Id}"
                                 BackgroundColor="#088da5" Clicked="Delete"/>
                         </Grid>
                     </DataTemplate>

@@ -18,16 +18,16 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
-                               Text="{Binding Observation.product.Title}"
+                               Text="{Binding Observation.Product.Title}"
                                FontAttributes="Bold" />
                             <Label Grid.Row="1"
                                Grid.Column="0"
-                               Text="{Binding Notification.notified_price, StringFormat='Price: €{0:F0}'}"
+                               Text="{Binding Notification.Notified_price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Label Grid.Row="2"
                                Grid.Column="0"
-                               Text="{Binding Notification.created_at, StringFormat='Notification time: {0}'}"
+                               Text="{Binding Notification.Created_at, StringFormat='Notification time: {0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Button Grid.Row="3"  Grid.Column="0"

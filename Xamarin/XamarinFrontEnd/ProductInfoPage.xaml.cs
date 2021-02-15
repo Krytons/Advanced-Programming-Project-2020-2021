@@ -19,25 +19,25 @@ namespace XamarinFrontEnd
     public partial class ProductInfoPage : ContentPage
     {
 
-        public Product page_product { get; set; }
-        public List<Price> price_list { get; set; }
+        public Product Page_product { get; set; }
+        public List<Price> Price_list { get; set; }
 
         public PlotViewModel vm;
 
         public ProductInfoPage(Product page_product, List<Price> price_list)
         {
-            this.page_product = page_product;
+            this.Page_product = page_product;
             if (price_list.Any())
             {
-                this.price_list = price_list;
+                Price_list = price_list;
             }
             else
             {
-                this.price_list = new List<Price>() { };
+                Price_list = new List<Price>() { };
             }
             InitializeComponent();
 
-            vm = new PlotViewModel(this.price_list);
+            vm = new PlotViewModel(this.Price_list);
             BindingContext = vm;
 
             FillPage();
@@ -46,7 +46,7 @@ namespace XamarinFrontEnd
         private void FillPage()
         {
             List<Product> products = new List<Product> { };
-            products.Add(page_product);
+            products.Add(Page_product);
             MyCollectionView.ItemsSource = products;
 
         }
@@ -61,7 +61,7 @@ namespace XamarinFrontEnd
                 try
                 {
                     email = await SecureStorage.GetAsync("email");
-                    RequestObservation observation = new RequestObservation(page_product, result, email);
+                    RequestObservation observation = new RequestObservation(Page_product, result, email);
                     string json = JsonConvert.SerializeObject(observation);
                     string response = await ObservationRequest.InsertObservation(json);
                     await DisplayAlert("Success!", response, "OK");

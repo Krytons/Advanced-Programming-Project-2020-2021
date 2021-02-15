@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,19 +7,28 @@ namespace XamarinFrontEnd.Classi
 {
     public class AppUserNotification
     {
-        public int id { get; set; }
-        public int observation { get; set; }
-        public string notified_price { get; set; }
-        public DateTime created_at { get; set; }
-        public string status { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("observation")]
+        public int Observation { get; set; }
+
+        [JsonProperty("notified_price")]
+        public string Notified_price { get; set; }
+
+        [JsonProperty("created_at")]
+        public DateTime Created_at { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
 
         public AppUserNotification(int id, int observation, string notified_price, DateTime created_at, string status)
         {
-            this.id = id;
-            this.observation = observation;
-            this.notified_price = notified_price;
-            this.created_at = created_at;
-            this.status = status;
+            Id = id;
+            Observation = observation;
+            Notified_price = notified_price;
+            Created_at = created_at;
+            Status = status;
         }
     }
 }
