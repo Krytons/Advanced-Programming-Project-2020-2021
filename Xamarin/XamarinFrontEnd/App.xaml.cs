@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFrontEnd.Classi;
+using XamarinFrontEnd.HttpRequest;
 using XamarinFrontEnd.Interfaces;
 
 namespace XamarinFrontEnd
@@ -44,10 +47,7 @@ namespace XamarinFrontEnd
                 //Logic for logging out if the device is inactive for a period of time
                 if (stopWatch.IsRunning && stopWatch.Elapsed.Minutes >= defaultTimespan)
                 {
-                    //prepare to perform your data pull here as we have hit the 1 minute mark   
-
-                    // Perform your long running operations here.
-
+                    //Try to call the server to obtain all not-pulled notifications 
                     SendNotification();
 
                     stopWatch.Restart();
@@ -82,12 +82,19 @@ namespace XamarinFrontEnd
             });
         }
 
-        void SendNotification()
+        async void SendNotification()
         {
-            notificationNumber++;
-            string title = $"Local Notification #{notificationNumber}";
-            string message = $"You have now received {notificationNumber} notifications!";
-            notificationManager.SendNotification(title, message);
+            List<AppUserNotification> user_notifications = await NotificationRequest.GetNotPulledNotifications();
+            if (user_notifications.Any())
+            {
+                foreach (AppUserNotification user_notification in user_notifications)
+                {
+                    RequestObservation observation = await ObservationRequest.GetObservationById(user_notification.id);
+                    string title = "Good news! for your observed product: " + observation.product.Title;
+                    string message = "Your observed product: " + observation.product.Title + "is now available for: €" + observation.product.Price;
+                    notificationManager.SendNotification(title, message);
+                }
+            }
         }
     }
 }
