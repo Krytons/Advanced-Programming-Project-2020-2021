@@ -24,11 +24,6 @@ namespace XamarinFrontEnd
 
         public PlotViewModel vm;
 
-        /*
-        public PlotModel Model { get; set; }
-        */
-
-
         public ProductInfoPage(Product page_product, List<Price> price_list)
         {
             this.page_product = page_product;
@@ -53,43 +48,6 @@ namespace XamarinFrontEnd
             List<Product> products = new List<Product> { };
             products.Add(page_product);
             MyCollectionView.ItemsSource = products;
-
-            /*
-            List<ChartEntry> entryList = new List<ChartEntry> { };
-
-            if (price_list.Any()) 
-            { 
-            
-                foreach (Price price in price_list) {
-                    decimal value;
-                    if (Decimal.TryParse(price.old_price, out value))
-                    {
-                        ChartEntry entry = new ChartEntry((float)value)
-                        {
-                            Label = price.price_time.ToString(),
-                            ValueLabel = price.old_price,
-                            Color = SKColor.Parse("#3498db")
-                        };
-                        entryList.Add(entry);
-                    }
-                }
-
-                LineChart chart = new LineChart()
-                {
-                    Entries = entryList,
-                    LineMode = LineMode.Straight,
-                    LineSize = 8,
-                    PointMode = PointMode.Square,
-                    PointSize = 18,
-                };
-
-                chartView.Chart = chart;
-            }
-            else
-            {
-                chartErrors.Text = "No price data for this item";
-            }
-            */
 
         }
 
