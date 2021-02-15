@@ -86,6 +86,19 @@ def get_user_observation(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def get_user_observation_by_id(request, pk):
+    try:
+        observation = ObservedProduct.objects.get(id=pk)
+        serializer = ObservedProductSerializer(observation, many=False)
+        if observation.creator.email == request.user.email:
+         return Response(serializer.data, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return Response({'response': 'There are no observations for this user at the moment'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_complete_user_observation_data(request):
     try:
         observations = ObservedProduct.objects.filter(creator=request.user.id)
