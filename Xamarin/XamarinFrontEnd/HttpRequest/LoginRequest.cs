@@ -52,7 +52,7 @@ namespace XamarinFrontEnd.HttpRequest
             {
                 string response_content = await response.Content.ReadAsStringAsync();
                 RegistrationResponse receivedRegistration = JsonConvert.DeserializeObject<RegistrationResponse>(response_content);
-                Token receivedToken = new Token(receivedRegistration.token);
+                Token receivedToken = new Token(receivedRegistration.Token);
                 return await Task.FromResult(receivedToken);
             }
             else return null;
