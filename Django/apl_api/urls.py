@@ -15,6 +15,8 @@ urlpatterns = [
     path('create_observation', create_observation, name='create_observation'),
     path('get_all_observation', get_all_observation, name='get_all_observation'),
     path('get_user_observation', get_user_observation, name='get_user_observation'),
+    path('get_user_observation_data_by_id/<int:pk>', get_user_observation_data_by_id,
+         name='get_user_observation_by_id'),
     path('update_observation/<int:pk>', update_observation, name='update_observation'),
     path('delete_observation/<int:pk>', delete_observation, name='delete_observation'),
     path('delete_observation_by_product_id/<int:pk>', delete_observation_by_product_id, name='delete_observation_by_product_id'),

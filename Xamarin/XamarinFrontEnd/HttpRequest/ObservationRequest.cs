@@ -44,6 +44,38 @@ namespace XamarinFrontEnd.HttpRequest
             else return null;
         }
 
+
+        public static async Task<RequestObservation> GetObservationById(int observation_id)
+        {
+
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
+            string token = null;
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                token = await SecureStorage.GetAsync("token");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/get_user_observation_data_by_id/" + observation_id);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string response_content = await response.Content.ReadAsStringAsync();
+                RequestObservation info = JsonConvert.DeserializeObject<RequestObservation>(response_content);
+                return await Task.FromResult(info);
+            }
+            else return null;
+        }
+
+
         public static async Task<List<RequestObservation>> GetAllUserObservation()
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
