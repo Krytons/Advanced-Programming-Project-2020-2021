@@ -44,9 +44,27 @@ namespace XamarinFrontEnd
             MyCollectionView.ItemsSource = Notifications;
         }
 
-        private void Delete(object sender, EventArgs e)
+        private async void Delete(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
+            int notification_to_delete = (int)button.CommandParameter;
 
+            string response = await NotificationRequest.DeleteNotification(notification_to_delete);
+            if (response != null)
+            {
+                try
+                {
+                    OutputNotification obs_to_remove = Notifications.Find(OutputNotification => OutputNotification.Notification.Id == notification_to_delete);
+                    Notifications.Remove(obs_to_remove);
+                    MyCollectionView.ItemsSource = null;
+                    MyCollectionView.ItemsSource = Notifications;
+                    await DisplayAlert("Success!", "Notification removed", "OK");
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error!", "Something went wrong", "OK");
+                }
+            }
         }
     }
 

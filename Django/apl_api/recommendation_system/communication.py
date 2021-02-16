@@ -1,9 +1,10 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
-from apl_api.models import SequenceNumber, ObservedProduct, NewObservedProduct
-from apl_api.serializers import SequenceNumberSerializer, ObservedProductSerializer, NewObservedProductSerializer
+from apl_api.models import SequenceNumber, ObservedProduct, NewObservedProduct, Recommendation
+from apl_api.serializers import SequenceNumberSerializer, ObservedProductSerializer, NewObservedProductSerializer, RecommendationSerializer
 from rest_framework.permissions import IsAdminUser
 
 import json
@@ -51,3 +52,53 @@ def send_all_new_observations(request):
     else:
         return Response({'response': 'Wrong sequence number', 'expected_seq_number': last_sequence_number.number},
                   status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["POST"])
+@permission_classes([IsAdminUser])
+def add_recommendations(request):
+    request_body = json.loads(request.body)
+    for recommendation_received in request_body["recommendations"]:
+        try:
+            user_recommendations = Recommendation.objects.filter(user_id=recommendation_received["user_id"], many=True)
+            user_product_list = []
+            for recommendation in user_recommendations:
+                user_product_list.append(recommendation.product_id)
+            actual_set = set(user_product_list)
+            received_set = set(recommendation_received["products"])
+            new_products_set = received_set.difference(actual_set)
+            old_products_set = actual_set.difference(received_set)
+            new_products_list = list(new_products_set)
+            old_products_list = list(old_products_set)
+            for new_product in new_products_list:
+                add_recommendation(new_product)
+            for old_product in old_products_list:
+                remove_recommendation(old_product)
+        except ObjectDoesNotExist:
+            for new_product in recommendation_received["products"]:
+                add_recommendations(new_product)
+
+
+def add_recommendation(new_product):
+    new_recommendation = {
+        "user_id": 2,
+        "product_id": new_product,
+    }
+    recommendation_serializer = RecommendationSerializer(data=new_recommendation)
+    if recommendation_serializer.is_valid():
+        recommendation_serializer.save()
+
+
+def remove_recommendation(old_product):
+    recommendation = Recommendation.objects.get(product_id=old_product)
+    recommendation.delete()
+
+'''
+recommendations:
+    [
+        {  
+            "user_id" : 1,
+            "products" : [1,2,3,4]
+        }
+    ]
+'''

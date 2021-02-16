@@ -71,5 +71,32 @@ namespace XamarinFrontEnd.HttpRequest
             }
             else return null;
         }
+
+        public static async Task<string> DeleteNotification(int number)
+        {
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
+            string token = null;
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                token = await SecureStorage.GetAsync("token");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
+            HttpResponseMessage response = await client.DeleteAsync(json_des.Ngrok + "/notifications/delete/" + number);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await Task.FromResult("Notification deleted!");
+            }
+            else return null;
+        }
     }
 }
