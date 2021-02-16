@@ -74,7 +74,7 @@ namespace XamarinFrontEnd
             {
                 try
                 {
-                    RequestObservation obs_to_remove = CompleteObservations.Find(RequestObservation => RequestObservation.product.Id == observation_product);
+                    RequestObservation obs_to_remove = CompleteObservations.Find(RequestObservation => RequestObservation.Product.Id == observation_product);
                     CompleteObservations.Remove(obs_to_remove);
                     Console.WriteLine(CompleteObservations);
                     MyCollectionView.ItemsSource = null;

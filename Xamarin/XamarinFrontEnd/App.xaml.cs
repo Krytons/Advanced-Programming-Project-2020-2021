@@ -89,9 +89,9 @@ namespace XamarinFrontEnd
             {
                 foreach (AppUserNotification user_notification in user_notifications)
                 {
-                    RequestObservation observation = await ObservationRequest.GetObservationById(user_notification.id);
-                    string title = "Good news! for your observed product: " + observation.product.Title;
-                    string message = "Your observed product: " + observation.product.Title + "is now available for: €" + observation.product.Price;
+                    RequestObservation observation = await ObservationRequest.GetObservationById(user_notification.Observation);
+                    string title = "🚨Good news!🚨";
+                    string message = "💰Your observed product: " + observation.Product.Title + " is now available for: €" + observation.Product.Price + " 💰";
                     notificationManager.SendNotification(title, message);
                 }
             }
