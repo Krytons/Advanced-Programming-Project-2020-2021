@@ -3,7 +3,7 @@
     <ContentPage.Content>
         <StackLayout Margin="0,40,0,0" Orientation="Vertical" Padding="30" Spacing="30">
             <Grid>
-                <Image Source="Logo.jpg" HeightRequest="250" WidthRequest="250"
+                <Image Source="ImageLogo" HeightRequest="250" WidthRequest="250"
                        HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" BackgroundColor="#393e46"/>
             </Grid>
             <Frame VerticalOptions="End" BackgroundColor="LightBlue" HasShadow="False">

@@ -19,14 +19,17 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
                                Text="{Binding Observation.Product.Title}"
+                               FontSize="Medium"
                                FontAttributes="Bold" />
                             <Label Grid.Row="1"
                                Grid.Column="0"
+                               FontSize="Medium"
                                Text="{Binding Notification.Notified_price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Label Grid.Row="2"
                                Grid.Column="0"
+                               FontSize="Medium"
                                Text="{Binding Notification.Created_at, StringFormat='Notification time: {0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />

@@ -10,9 +10,8 @@
     <StackLayout>
         <ListView x:Name="listView" x:FieldModifier="public" SeparatorVisibility="None">
                 <ListView.ItemsSource>
-                    <x:Array Type="{x:Type local:FlyoutPageItem}">
-                        <local:FlyoutPageItem Title="EBAYFRONTEND"/>
-                        <local:FlyoutPageItem Title="🔎 Search 🔎" TargetType="{x:Type pages:SearchPage}" />
+                <x:Array Type="{x:Type local:FlyoutPageItem}">
+                    <local:FlyoutPageItem Title="🔎 Search 🔎" TargetType="{x:Type pages:SearchPage}" />
                         <local:FlyoutPageItem Title="📜 Observations 📜" TargetType="{x:Type pages:UserObservations}" />
                         <local:FlyoutPageItem Title="🚨 Notifications 🚨" TargetType="{x:Type pages:ReceivedNotificationsPage}" />
                         <local:FlyoutPageItem Title="✨ For you ✨" TargetType="{x:Type pages:RecommendationPage}" />

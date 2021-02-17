@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using UIKit;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XamarinFrontEnd.Classi;

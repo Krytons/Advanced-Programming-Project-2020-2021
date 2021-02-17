@@ -28,13 +28,15 @@
                             <Image Grid.RowSpan="3"
                                Source="{Binding Gallery_url}"
                                Aspect="AspectFill"
-                               HeightRequest="100"
-                               WidthRequest="100" />
+                               HeightRequest="125"
+                               WidthRequest="125" />
                             <Label Grid.Column="1"
                                Text="{Binding Title}"
+                               FontSize="Medium"
                                FontAttributes="Bold" />
                             <Label Grid.Row="1"
                                Grid.Column="1"
+                               FontSize="Medium"
                                Text="{Binding Price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />

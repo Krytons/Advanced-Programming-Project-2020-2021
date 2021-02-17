@@ -30,6 +30,7 @@ namespace XamarinFrontEnd.ViewModels
                 mod.InvalidatePlot(true);
                 mod.Title = "Price History";
                 mod.ResetAllAxes();
+                mod.LegendItemSpacing = 7;
 
                 mod.Axes.Add(new LinearAxis()
                 {
@@ -41,7 +42,8 @@ namespace XamarinFrontEnd.ViewModels
                 {
                     Position = AxisPosition.Bottom,
                     StringFormat = "yyyy-MM-dd HH:mm:ss",
-                    Title = "Date"
+                    Title = "Date",
+                    Angle = 45
                 });
 
                 //"yyyy-MM-ddTHH:mm:ss"

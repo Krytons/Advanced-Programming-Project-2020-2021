@@ -119,10 +119,18 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo.png" />
-    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo-1.png" />
-    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo-2.png" />
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
