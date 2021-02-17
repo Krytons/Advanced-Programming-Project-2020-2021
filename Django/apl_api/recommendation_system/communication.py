@@ -5,9 +5,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 
-from apl_api.models import SequenceNumber, ObservedProduct, NewObservedProduct, Recommendation
-from apl_api.serializers import SequenceNumberSerializer, ObservedProductSerializer, NewObservedProductSerializer, RecommendationSerializer
-from rest_framework.permissions import IsAdminUser
+from apl_api.models import SequenceNumber, ObservedProduct, NewObservedProduct, Recommendation, Product
+from apl_api.serializers import SequenceNumberSerializer, ObservedProductSerializer, NewObservedProductSerializer, \
+    RecommendationSerializer, ProductSerializer
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 import json
 
@@ -98,6 +99,23 @@ def add_recommendation(new_product):
 def remove_recommendation(old_product):
     recommendation = Recommendation.objects.get(product_id=old_product)
     recommendation.delete()
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def return_complete_recommendations_info(request):
+    recommended_products = []
+    try:
+        recommendations = Recommendation.objects.filter(user_id=request.user.id)
+        for recommendation in recommendations:
+            product = Product.objects.get(id=recommendation.product_id.id)
+            product_serializer = ProductSerializer(product)
+            recommended_products.append(product_serializer.data)
+        return Response(recommended_products, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return Response({'response': 'There are no recommendations for this user at the moment'},
+                        status=status.HTTP_400_BAD_REQUEST)
 
 '''
 recommendations:
