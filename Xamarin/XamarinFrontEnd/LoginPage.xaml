@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.LoginPage" BackgroundColor="#393e46">
     <ContentPage.Content >
         <StackLayout Margin="0,100,0,0" Orientation="Vertical" Padding="30" Spacing="40">
-            <Grid >
-                <Image Source="ImageLogo" HeightRequest="{OnPlatform iOS=100, Android=100}" WidthRequest="{OnPlatform iOS=280, Android=100}" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" BackgroundColor="#393e46"/>
+            <Grid>
+                <Image Source="ImageLogo" HeightRequest="{OnPlatform iOS=100, Android=100}" WidthRequest="{OnPlatform iOS=280, Android=280}" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" BackgroundColor="#393e46"/>
             </Grid>
-            <Frame VerticalOptions="End" BackgroundColor="LightBlue" HasShadow="False">  
+            <Frame VerticalOptions="End" BackgroundColor="#088da5" HasShadow="False">  
                 <StackLayout Orientation="Vertical" Spacing="10">  
                     <Entry x:Name="Email" Placeholder="Email"   
                            PlaceholderColor="Black" HeightRequest="40"   
