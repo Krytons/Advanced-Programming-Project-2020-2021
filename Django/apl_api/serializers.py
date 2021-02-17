@@ -1,16 +1,5 @@
 from rest_framework import serializers
-#from rest_meets_djongo import serializers as djongo_serializers
 from .models import *
-
-'''
-class ProductSerializer(djongo_serializers.DjongoModelSerializer):
-    class Meta:
-        model = Product
-        history = serializers.ListField()
-        fields = ['id','item_id','title','subtitle','category_id', 'category_name', 'gallery_url','view_url',
-                  'shipping_cost','price','condition_id','condition_name', 'history' ,'created_at','updated_at']
-        read_only_fields = ['id', 'created_at']
-'''
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:

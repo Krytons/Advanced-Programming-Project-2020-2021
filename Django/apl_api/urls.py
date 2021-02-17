@@ -2,6 +2,7 @@ from django.urls import path
 from .routes.priceview import *
 from .routes.notificationview import *
 from .recommendation_system.communication import *
+from .routes.observationview import *
 from .views import *
 from .ebay import *
 from rest_framework.authtoken.views import obtain_auth_token
@@ -41,6 +42,7 @@ urlpatterns = [
 
     path('communication/send_all_observations', send_all_observations, name="send_all_observations"),
     path('communication/send_all_new_observations', send_all_new_observations, name="send_all_new_observations"),
-    path('communication/add_recommendation', add_recommendations, name="add_recommendations")
+    path('communication/add_recommendation', add_recommendations, name="add_recommendations"),
+    path('communication/complete_recommendations_info', return_complete_recommendations_info, name="return_complete_recommendations_info")
 
 ]
