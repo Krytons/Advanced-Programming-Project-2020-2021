@@ -18,7 +18,7 @@ def send_all_observations(request):
     """
     This route must use numpy to return a product-user matrix, generated using all the observations
     """
-    observations = ObservedProduct.objects.all();
+    observations = ObservedProduct.objects.all()
     serializer = ObservedProductSerializer(observations, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
