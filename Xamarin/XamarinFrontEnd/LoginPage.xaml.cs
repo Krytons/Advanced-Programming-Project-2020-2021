@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using UIKit;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XamarinFrontEnd.Classi;
@@ -13,6 +14,7 @@ namespace XamarinFrontEnd
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+
         }
 
         private async void GetToken(object sender, EventArgs e)

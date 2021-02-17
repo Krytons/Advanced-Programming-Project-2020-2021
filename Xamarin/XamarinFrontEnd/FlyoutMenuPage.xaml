@@ -4,19 +4,20 @@
              xmlns:local="clr-namespace:XamarinFrontEnd.Classi"
              xmlns:pages="using:XamarinFrontEnd"
              Padding="0,40,0,0"
-             IconImageSource="hamburger.png"
+             IconImageSource="Hamburgericon.png"
              x:Class="XamarinFrontEnd.FlyoutMenuPage"
              Title="Personal Organiser">
     <StackLayout>
         <ListView x:Name="listView" x:FieldModifier="public">
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type local:FlyoutPageItem}">
-                    <local:FlyoutPageItem Title="🔎 Search 🔎" IconSource="contacts.png" TargetType="{x:Type pages:SearchPage}" />
-                    <local:FlyoutPageItem Title="📜 Observations 📜" IconSource="contacts.png" TargetType="{x:Type pages:UserObservations}" />
-                    <local:FlyoutPageItem Title="🚨 Notifications 🚨" IconSource="contacts.png" TargetType="{x:Type pages:ReceivedNotificationsPage}" />
-                    <local:FlyoutPageItem Title="✨ For you ✨" IconSource="contacts.png" TargetType="{x:Type pages:RecommendationPage}" />
-                </x:Array>
-            </ListView.ItemsSource>
+                <ListView.ItemsSource>
+                    <x:Array Type="{x:Type local:FlyoutPageItem}">
+                        <local:FlyoutPageItem Title="EBAYFRONTEND"/>
+                        <local:FlyoutPageItem Title="🔎 Search 🔎" TargetType="{x:Type pages:SearchPage}" />
+                        <local:FlyoutPageItem Title="📜 Observations 📜" TargetType="{x:Type pages:UserObservations}" />
+                        <local:FlyoutPageItem Title="🚨 Notifications 🚨" TargetType="{x:Type pages:ReceivedNotificationsPage}" />
+                        <local:FlyoutPageItem Title="✨ For you ✨" TargetType="{x:Type pages:RecommendationPage}" />
+                    </x:Array>
+                </ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
