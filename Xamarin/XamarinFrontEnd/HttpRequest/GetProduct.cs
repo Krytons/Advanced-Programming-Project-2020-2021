@@ -80,6 +80,38 @@ namespace XamarinFrontEnd.HttpRequest
             else return null;
         }
 
+        public static async Task<List<Product>> GetProductsByRecommendations()
+        {
+
+            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
+            var stream = new StreamReader(app);
+            var jsonString = stream.ReadToEnd();
+            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
+            string token = null;
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                token = await SecureStorage.GetAsync("token");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
+
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/communication/complete_recommendations_info");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string response_content = await response.Content.ReadAsStringAsync();
+                List<Product> receivedProduct = JsonConvert.DeserializeObject<List<Product>>(response_content);
+                return await Task.FromResult(receivedProduct);
+            }
+            else return null;
+        }
+
 
         public static async Task<List<Price>> GetProductPriceHistory(string product_ebay_id)
         {

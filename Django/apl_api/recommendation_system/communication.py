@@ -102,7 +102,7 @@ def remove_recommendation(old_product):
 
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def return_complete_recommendations_info(request):
     recommended_products = []
