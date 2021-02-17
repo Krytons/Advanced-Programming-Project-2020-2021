@@ -65,7 +65,9 @@ def get_user_observation_data_by_id(request, pk):
                 "threshold_price": observation.threshold_price,
                 "email": observation.creator.email
             }
-        return Response(data, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response({'response': 'You are not authorized'}, status=status.HTTP_400_BAD_REQUEST)
     except ObjectDoesNotExist:
         return Response({'response': 'There are no observations for this user at the moment'},
                         status=status.HTTP_400_BAD_REQUEST)
