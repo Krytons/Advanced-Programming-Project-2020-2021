@@ -163,4 +163,7 @@
   <ItemGroup>
     <Folder Include="Assets.xcassets\ImageLogo.imageset\" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hamburgericon.png" />
+  </ItemGroup>
 </Project>
