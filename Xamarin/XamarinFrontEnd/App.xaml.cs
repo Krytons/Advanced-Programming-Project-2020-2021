@@ -33,6 +33,7 @@ namespace XamarinFrontEnd
 
         protected override void OnStart()
         {
+            SendNotification();
             // On start runs when your application launches from a closed state
             if (!stopWatch.IsRunning)
             {

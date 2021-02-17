@@ -72,6 +72,8 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="INotificationManager.cs" />
+    <Compile Include="iOSNotificationReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -117,6 +119,10 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo.png" />
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo-1.png" />
+    <ImageAsset Include="Assets.xcassets\ImageLogo.imageset\Logo-2.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -153,5 +159,8 @@
       <Project>{C7C5EB13-0C80-4515-BB18-B698A130B79E}</Project>
       <Name>XamarinFrontEnd</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\ImageLogo.imageset\" />
   </ItemGroup>
 </Project>
