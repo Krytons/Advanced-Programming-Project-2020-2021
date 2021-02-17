@@ -32,7 +32,9 @@ def get_user_notifications(request):
         for observation in observations:
             notifications = Notification.objects.filter(observation=observation.id)
             notifications_serializer = NotificationSerializer(notifications, many=True)
-            return_notifications.append(notifications_serializer.data)
+            if notifications_serializer.data:
+                for element in notifications_serializer.data:
+                    return_notifications.append(element)
             for notification in notifications:
                 if notification.status == "NOT-PULLED":
                     notification.status = "PULLED"
@@ -52,7 +54,9 @@ def get_user_not_pulled_notifications(request):
         for observation in observations:
             notifications = Notification.objects.filter(observation=observation.id, status="NOT-PULLED")
             notifications_serializer = NotificationSerializer(notifications, many=True)
-            return_notifications.append(notifications_serializer.data)
+            if notifications_serializer.data:
+                for element in notifications_serializer.data:
+                    return_notifications.append(element)
             for notification in notifications:
                     notification.status = "PULLED"
                     notification.save()

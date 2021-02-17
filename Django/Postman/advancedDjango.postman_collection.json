@@ -84,7 +84,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
 								"type": "text"
 							}
 						],
@@ -101,6 +101,71 @@
 							"port": "8000",
 							"path": [
 								"get_user_observation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observed Product: get by observation id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/get_user_observation_data_by_id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get_user_observation_data_by_id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observed Product: get cmplete informations by user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/get_complete_user_observation_data",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"get_complete_user_observation_data"
 							]
 						}
 					},
@@ -170,6 +235,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Observed Product: delete by product id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/delete_observation_by_product_id/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"delete_observation_by_product_id",
+								"6"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -191,13 +286,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"search\": \"iphone 11\",\r\n    \"n_items\": 100\r\n}"
+							"raw": "{\r\n    \"search\": \"iphone 12\",\r\n    \"n_items\": 100\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8000/ebay_search",
@@ -282,12 +377,12 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b"
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product\": {\r\n        \"item_id\": \"223669087554\",\r\n        \"title\": \"APPLE IPHONE 11 64 128 256 BLACK WHITE RED YELLOW GREEN PURPLE NUOVO ORIGINALE\",\r\n        \"subtitle\": \"\",\r\n        \"category_id\": \"9355\",\r\n        \"category_name\": \"Cellulari e smartphone\",\r\n        \"gallery_url\": \"https://thumbs1.ebaystatic.com/pict/04040_0.jpg\",\r\n        \"view_url\": \"https://www.ebay.it/itm/APPLE-IPHONE-11-64-128-256-BLACK-WHITE-RED-YELLOW-GREEN-PURPLE-NUOVO-ORIGINALE-/223669087554?var=0\",\r\n        \"shipping_cost\": \"0.00\",\r\n        \"price\": \"200.99\",\r\n        \"condition_id\": \"1000\",\r\n        \"condition_name\": \"Nuovo\"\r\n    },\r\n    \"threshold_price\": \"600.00\",\r\n    \"email\": \"giuseppe.fallica@gmail.com\"\r\n}"
+							"raw": "{\r\n    \"product\": {\r\n        \"item_id\": \"133571359505\",\r\n        \"title\": \"Apple iPhone 12 5G 64GB NUOVO Originale Smartphone iOS Black \",\r\n        \"subtitle\": \"PROMO-DISPONIBILITA' LIMITATA-PAGA ANCHE ALLA CONSEGNA\",\r\n        \"category_id\": \"9355\",\r\n        \"category_name\": \"Cellulari e smartphone\",\r\n        \"gallery_url\": \"https://thumbs2.ebaystatic.com/m/mdHO0w-IinTVtloOXrtOFNg/140.jpg\",\r\n        \"view_url\": \"https://www.ebay.it/itm/Apple-iPhone-12-5G-64GB-NUOVO-Originale-Smartphone-iOS-Black-/133571359505\",\r\n        \"shipping_cost\": \"0.00\",\r\n        \"price\": 789.90,\r\n        \"condition_id\": \"1000\",\r\n        \"condition_name\": \"Nuovo\"\r\n    },\r\n    \"threshold_price\": \"2000.00\",\r\n    \"email\": \"giuseppe.fallica@gmail.com\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8000/ebay_select",
@@ -472,7 +567,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
 								"type": "text"
 							}
 						],
@@ -558,8 +653,26 @@
 					"name": "Notification: get user not pulled notifications",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": null
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications/user/not_pulled",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"user",
+								"not_pulled"
+							]
+						}
 					},
 					"response": []
 				}
@@ -756,6 +869,81 @@
 			]
 		},
 		{
+			"name": "Communication",
+			"item": [
+				{
+					"name": "Communication: send all new observations",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eeb54785c32eded2a8369a04227d31bb46a92141",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sequence_number\" : 0\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/communication/send_all_new_observations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"communication",
+								"send_all_new_observations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Communications: send recommendations",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token eeb54785c32eded2a8369a04227d31bb46a92141",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recommendations\":\r\n    [\r\n        {  \r\n            \"user_id\" : 2,\r\n            \"products\" : [1,2,3]\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/communication/add_recommendation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"communication",
+								"add_recommendation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "add Product",
 			"request": {
 				"method": "POST",
@@ -838,7 +1026,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"giuseppe.fallica@gmail.com\",\r\n    \"password\" : \"password\"\r\n}"
+					"raw": "{\r\n    \"username\" : \"caruso.bartolomeo@virgilio.it\",\r\n    \"password\" : \"banana\"\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8000/login",

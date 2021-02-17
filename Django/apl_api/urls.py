@@ -2,6 +2,7 @@ from django.urls import path
 from .routes.priceview import *
 from .routes.notificationview import *
 from .recommendation_system.communication import *
+from .routes.observationview import *
 from .views import *
 from .ebay import *
 from rest_framework.authtoken.views import obtain_auth_token
@@ -15,6 +16,8 @@ urlpatterns = [
     path('create_observation', create_observation, name='create_observation'),
     path('get_all_observation', get_all_observation, name='get_all_observation'),
     path('get_user_observation', get_user_observation, name='get_user_observation'),
+    path('get_user_observation_data_by_id/<int:pk>', get_user_observation_data_by_id,
+         name='get_user_observation_by_id'),
     path('update_observation/<int:pk>', update_observation, name='update_observation'),
     path('delete_observation/<int:pk>', delete_observation, name='delete_observation'),
     path('delete_observation_by_product_id/<int:pk>', delete_observation_by_product_id, name='delete_observation_by_product_id'),
@@ -38,6 +41,8 @@ urlpatterns = [
     path('notifications/delete/<int:pk>', delete_notification, name="notifications_delete"),
 
     path('communication/send_all_observations', send_all_observations, name="send_all_observations"),
-    path('communication/send_all_new_observations', send_all_new_observations, name="send_all_new_observations")
+    path('communication/send_all_new_observations', send_all_new_observations, name="send_all_new_observations"),
+    path('communication/add_recommendation', add_recommendations, name="add_recommendations"),
+    path('communication/complete_recommendations_info', return_complete_recommendations_info, name="return_complete_recommendations_info")
 
 ]

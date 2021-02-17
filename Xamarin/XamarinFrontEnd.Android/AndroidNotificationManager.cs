@@ -91,11 +91,15 @@ namespace XamarinFrontEnd.Droid
 
             PendingIntent pendingIntent = PendingIntent.GetActivity(AndroidApp.Context, pendingIntentId++, intent, PendingIntentFlags.UpdateCurrent);
 
+            NotificationCompat.BigTextStyle textStyle = new NotificationCompat.BigTextStyle();
+            textStyle.BigText(message);
+
             NotificationCompat.Builder builder = new NotificationCompat.Builder(AndroidApp.Context, channelId)
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
                 .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.ImageLogo))
+                .SetStyle(textStyle)
                 .SetSmallIcon(Resource.Drawable.ImageLogo)
                 .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
 

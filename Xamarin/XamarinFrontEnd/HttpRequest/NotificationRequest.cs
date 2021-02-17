@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -6,17 +7,14 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using XamarinFrontEnd.Classi;
 
 namespace XamarinFrontEnd.HttpRequest
 {
-    public class GetProduct
+    public class NotificationRequest
     {
-
-        public static async Task<Product> GetProductById(string id)
+        public static async Task<List<AppUserNotification>> GetNotPulledNotifications()
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -33,30 +31,26 @@ namespace XamarinFrontEnd.HttpRequest
             {
                 return null;
             }
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-
-            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/api/products/");
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/notifications/user/not_pulled");
 
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
-                Product receivedProduct = JsonConvert.DeserializeObject<Product>(response_content);
-                return await Task.FromResult(receivedProduct);
+                List<AppUserNotification> receivedList = JsonConvert.DeserializeObject<List<AppUserNotification>>(response_content);
+                return await Task.FromResult(receivedList);
             }
             else return null;
         }
 
-        public static async Task<List<Product>> GetProducts(string json)
+        public static async Task<List<AppUserNotification>> GetAllNotifications()
         {
-
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
             var jsonString = stream.ReadToEnd();
             SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
             string token = null;
             HttpClient client = new HttpClient();
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
             try
             {
@@ -66,23 +60,20 @@ namespace XamarinFrontEnd.HttpRequest
             {
                 return null;
             }
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-
-            HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/ebay_search", content);
+            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/notifications/user");
 
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
-                List<Product> receivedProduct = JsonConvert.DeserializeObject<List<Product>>(response_content);
-                return await Task.FromResult(receivedProduct);
+                List<AppUserNotification> receivedList = JsonConvert.DeserializeObject<List<AppUserNotification>>(response_content);
+                return await Task.FromResult(receivedList);
             }
             else return null;
         }
 
-        public static async Task<List<Product>> GetProductsByRecommendations()
+        public static async Task<string> DeleteNotification(int number)
         {
-
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
             var jsonString = stream.ReadToEnd();
@@ -98,57 +89,14 @@ namespace XamarinFrontEnd.HttpRequest
             {
                 return null;
             }
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-
-            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/communication/complete_recommendations_info");
+            HttpResponseMessage response = await client.DeleteAsync(json_des.Ngrok + "/notifications/delete/" + number);
 
             if (response.IsSuccessStatusCode)
             {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<Product> receivedProduct = JsonConvert.DeserializeObject<List<Product>>(response_content);
-                return await Task.FromResult(receivedProduct);
+                return await Task.FromResult("Notification deleted!");
             }
             else return null;
         }
-
-
-        public static async Task<List<Price>> GetProductPriceHistory(string product_ebay_id)
-        {
-            var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
-            var stream = new StreamReader(app);
-            var jsonString = stream.ReadToEnd();
-            SecretClass json_des = JsonConvert.DeserializeObject<SecretClass>(jsonString.ToString());
-
-            string token = null;
-            HttpClient client = new HttpClient();
-
-            try
-            {
-                token = await SecureStorage.GetAsync("token");
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
-
-            HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/price/history_by_ebay/" + product_ebay_id );
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<Price> receivedProduct = JsonConvert.DeserializeObject<List<Price>>(response_content);
-                return await Task.FromResult(receivedProduct);
-            }
-            else
-            {
-                List<Price> receivedProduct = new List<Price>() { };
-                return await Task.FromResult(receivedProduct);
-            }
-        }
-
-
     }
 }
-
