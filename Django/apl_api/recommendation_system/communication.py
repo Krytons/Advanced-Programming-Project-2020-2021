@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -54,29 +56,33 @@ def send_all_new_observations(request):
                   status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["POST"])
+@api_view(['POST'])
 @permission_classes([IsAdminUser])
 def add_recommendations(request):
-    request_body = json.loads(request.body)
-    for recommendation_received in request_body["recommendations"]:
-        try:
-            user_recommendations = Recommendation.objects.filter(user_id=recommendation_received["user_id"], many=True)
-            user_product_list = []
-            for recommendation in user_recommendations:
-                user_product_list.append(recommendation.product_id)
-            actual_set = set(user_product_list)
-            received_set = set(recommendation_received["products"])
-            new_products_set = received_set.difference(actual_set)
-            old_products_set = actual_set.difference(received_set)
-            new_products_list = list(new_products_set)
-            old_products_list = list(old_products_set)
-            for new_product in new_products_list:
-                add_recommendation(new_product)
-            for old_product in old_products_list:
-                remove_recommendation(old_product)
-        except ObjectDoesNotExist:
-            for new_product in recommendation_received["products"]:
-                add_recommendations(new_product)
+    try:
+        request_body = json.loads(request.body)
+        for recommendation_received in request_body["recommendations"]:
+            try:
+                user_recommendations = Recommendation.objects.filter(user_id=recommendation_received["user_id"])
+                user_product_list = []
+                for recommendation in user_recommendations:
+                    user_product_list.append(recommendation.product_id)
+                actual_set = set(user_product_list)
+                received_set = set(recommendation_received["products"])
+                new_products_set = received_set.difference(actual_set)
+                old_products_set = actual_set.difference(received_set)
+                new_products_list = list(new_products_set)
+                old_products_list = list(old_products_set)
+                for new_product in new_products_list:
+                    add_recommendation(new_product)
+                for old_product in old_products_list:
+                    remove_recommendation(old_product)
+            except ObjectDoesNotExist:
+                for new_product in recommendation_received["products"]:
+                    add_recommendations(new_product)
+        return Response({'response': 'procedure successfully completed'}, status=status.HTTP_200_OK)
+    except JSONDecodeError:
+        return Response({'response': 'received nothing'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def add_recommendation(new_product):
