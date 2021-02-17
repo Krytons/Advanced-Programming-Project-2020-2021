@@ -4,10 +4,7 @@ if(length(noninst.packages)) install.packages(noninst.packages)
 
 lapply(list.of.packages, require, character.only = TRUE)
 
-script.dir <- dirname(sys.frame(1)$ofile)
-
 #################################################
-
 # classe: "RecDB"
 RecDB <- setClass(
   "RecDB", 
@@ -71,7 +68,7 @@ setMethod("update", "RecDB",
 setGeneric("increaseCounter", function(rdb) standardGeneric("increaseCounter"))
 setMethod("increaseCounter", "RecDB",
   function(rdb){
-    rdb@seqNum <- (rdb@seqNum + 1)%%900
+    rdb@seqNum <- (rdb@seqNum + 1)%%1000
     return(rdb)
   }
 )
