@@ -8,7 +8,7 @@
              x:Class="XamarinFrontEnd.FlyoutMenuPage"
              Title="Personal Organiser">
     <StackLayout>
-        <ListView x:Name="listView" x:FieldModifier="public">
+        <ListView x:Name="listView" x:FieldModifier="public" SeparatorVisibility="None">
                 <ListView.ItemsSource>
                     <x:Array Type="{x:Type local:FlyoutPageItem}">
                         <local:FlyoutPageItem Title="EBAYFRONTEND"/>
