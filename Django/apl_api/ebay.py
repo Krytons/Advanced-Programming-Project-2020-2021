@@ -1,14 +1,11 @@
 # Create your views here.
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import JsonResponse
 from djongo.sql2mongo import SQLDecodeError
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from apl_api.models import *
 from apl_api.serializers import *
-from django.db.utils import DatabaseError
 from apl_api.middlewares.product_middlewares import product_mapping
 
 import json
@@ -16,7 +13,8 @@ import requests
 import environ
 
 env = environ.Env()
-environ.Env.read_env()
+base = environ.Path(__file__) - 2
+environ.Env.read_env(env_file=base('.env'))
 APP_ID = env.str('EBAY_APP_ID')
 GLOBAL_ID = env.str('EBAY_GLOBAL_ID')
 STATE_CODE = env.str('EBAY_ITALY_CODE')

@@ -1,7 +1,8 @@
 import environ
 
 env = environ.Env()
-environ.Env.read_env()
+base = environ.Path(__file__) - 2
+environ.Env.read_env(env_file=base('.env'))
 HOST = env.str('MONGO_HOST')
 PORT = env.int('MONGO_PORT')
 DATABASE = env.str('MONGO_DB_NAME')
