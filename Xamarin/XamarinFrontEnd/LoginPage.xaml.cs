@@ -24,6 +24,7 @@ namespace XamarinFrontEnd
 
             if (token == null)
             {
+                Ltoken.TextColor = Color.Red;
                 Ltoken.Text = "An error has occurred, please try again";
                 Password.Text = "";
                 Email.Text = "";

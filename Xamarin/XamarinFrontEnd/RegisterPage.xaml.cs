@@ -45,6 +45,7 @@ namespace XamarinFrontEnd
                     }
                     catch (Exception ex)
                     {
+                        ErrorLabel.TextColor = Color.Red;
                         ErrorLabel.Text = "An error has occurred, please try again";
                         Email.Text = "";
                         Name.Text = "";
@@ -57,6 +58,7 @@ namespace XamarinFrontEnd
             }
             else
             {
+                ErrorLabel.TextColor = Color.Red;
                 ErrorLabel.Text = "Passwords fields must be the same: try again";
                 RepeatPassword.Text = "";
             }

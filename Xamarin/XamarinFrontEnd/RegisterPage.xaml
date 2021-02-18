@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.RegisterPage" BackgroundColor="#393e46">
     <ContentPage.Content>
-        <StackLayout Margin="0,40,0,0" Orientation="Vertical" Padding="30" Spacing="30">
+        <StackLayout Margin="0,90,0,0" Orientation="Vertical" Padding="30" Spacing="30">
             <Grid>
-                <Image Source="ImageLogo" HeightRequest="250" WidthRequest="250"
+                <Image Source="ImageLogo" HeightRequest="{OnPlatform iOS=100, Android=100}" WidthRequest="{OnPlatform iOS=280, Android=280}"
                        HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" BackgroundColor="#393e46"/>
             </Grid>
-            <Frame VerticalOptions="End" BackgroundColor="LightBlue" HasShadow="False">
+            <Frame VerticalOptions="End" BackgroundColor="#088da5" HasShadow="False">
                 <StackLayout Orientation="Vertical" Spacing="10">
-                    <Entry x:Name="Email" Placeholder="Email"   
+                    <Entry x:Name="Name" Placeholder="Name" FontAttributes="Bold"  
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           Keyboard="Plain"  
+                           TextColor="Black"/>
+                    <Entry x:Name="Surname" Placeholder="Surname" FontAttributes="Bold"  
+                           PlaceholderColor="Black" HeightRequest="40"   
+                           Keyboard="Plain"  
+                           TextColor="Black"/>
+                    <Entry x:Name="Email" Placeholder="Email" FontAttributes="Bold"  
                            PlaceholderColor="Black" HeightRequest="40"  
                            TextTransform="Lowercase"
                            Keyboard="Email"  
                            TextColor="Black"/>
-                    <Entry x:Name="Name" Placeholder="Name"   
+                    <Entry x:Name="Nickname" Placeholder="Nickname" FontAttributes="Bold"  
                            PlaceholderColor="Black" HeightRequest="40"   
                            Keyboard="Plain"  
                            TextColor="Black"/>
-                    <Entry x:Name="Surname" Placeholder="Surname"   
-                           PlaceholderColor="Black" HeightRequest="40"   
-                           Keyboard="Plain"  
-                           TextColor="Black"/>
-                    <Entry x:Name="Nickname" Placeholder="Nickname"   
-                           PlaceholderColor="Black" HeightRequest="40"   
-                           Keyboard="Plain"  
-                           TextColor="Black"/>
-                    <Entry x:Name="Password" Placeholder="Password"   
+                    <Entry x:Name="Password" Placeholder="Password" FontAttributes="Bold"  
                            PlaceholderColor="Black" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="Black"/>
-                    <Entry x:Name="RepeatPassword" Placeholder="Repeat Password"   
+                    <Entry x:Name="RepeatPassword" Placeholder="Repeat Password" FontAttributes="Bold"  
                            PlaceholderColor="Black" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="Black"/>
