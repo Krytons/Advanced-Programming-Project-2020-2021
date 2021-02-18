@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinFrontEnd.Classi"
              xmlns:pages="using:XamarinFrontEnd"
@@ -7,26 +7,39 @@
              IconImageSource="Hamburgericon.png"
              x:Class="XamarinFrontEnd.FlyoutMenuPage"
              Title="Personal Organiser">
-    <StackLayout>
-        <ListView x:Name="listView" x:FieldModifier="public" SeparatorVisibility="None">
+    <StackLayout >
+    <Frame CornerRadius="30"
+           Margin="0,30,0,10"
+           HeightRequest="180"
+           WidthRequest="300"
+           HorizontalOptions="Center"
+           Padding="0"
+           IsClippedToBounds="True">
+        <Image Source="ImageLogo"
+               HeightRequest="{OnPlatform iOS=150, Android=180}"
+               WidthRequest="{OnPlatform iOS=300, Android=280}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Aspect="AspectFill"/>
+    </Frame>
+        <ListView HorizontalOptions="Center" HasUnevenRows="True" RowHeight="80" x:Name="listView" x:FieldModifier="public" SeparatorVisibility="None">
                 <ListView.ItemsSource>
-                <x:Array Type="{x:Type local:FlyoutPageItem}">
-                    <local:FlyoutPageItem Title="🔎 Search 🔎" TargetType="{x:Type pages:SearchPage}" />
-                        <local:FlyoutPageItem Title="📜 Observations 📜" TargetType="{x:Type pages:UserObservations}" />
-                        <local:FlyoutPageItem Title="🚨 Notifications 🚨" TargetType="{x:Type pages:ReceivedNotificationsPage}" />
-                        <local:FlyoutPageItem Title="✨ For you ✨" TargetType="{x:Type pages:RecommendationPage}" />
+                    <x:Array Type="{x:Type local:FlyoutPageItem}">
+                        <local:FlyoutPageItem Title="🔎 Search " TargetType="{x:Type pages:SearchPage}" />
+                        <local:FlyoutPageItem Title="📜 Observations " TargetType="{x:Type pages:UserObservations}" />
+                        <local:FlyoutPageItem Title="🚨 Notifications " TargetType="{x:Type pages:ReceivedNotificationsPage}" />
+                        <local:FlyoutPageItem Title="✨ For you " TargetType="{x:Type pages:RecommendationPage}" />
                     </x:Array>
                 </ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="5,10">
+                        <Grid Padding="5,10" HorizontalOptions="Center" VerticalOptions="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding IconSource}" />
-                            <Label Grid.Column="1" Text="{Binding Title}" />
+                            <Label Grid.Column="1" FontSize="Title" FontAttributes="Bold" Text="{Binding Title}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
