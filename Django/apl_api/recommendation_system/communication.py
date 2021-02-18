@@ -11,16 +11,31 @@ from apl_api.serializers import SequenceNumberSerializer, ObservedProductSeriali
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 import json
+import pandas as pd
 
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def send_all_observations(request):
     """
-    This route must use numpy to return a product-user matrix, generated using all the observations
+    This route must use pandas to return a product-user matrix, generated using all the observations
     """
     observations = ObservedProduct.objects.all()
     serializer = ObservedProductSerializer(observations, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+
+    og_dict = serializer.data
+    new_dict = {}
+
+    for obs in og_dict:
+        if not (str(obs["product"]) in new_dict.keys()):
+            new_dict[str(obs["product"])] = {}
+        new_dict[str(obs["product"])][str(obs["id"])] = True
+
+    df = pd.DataFrame(new_dict)
+    df = df.fillna(False)
+    print(df)
+    res = df.to_json(orient="split")
+
+    return Response(json.loads(res), status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
