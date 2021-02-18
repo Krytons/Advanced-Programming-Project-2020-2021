@@ -16,12 +16,7 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <None Remove="AppLogo.jpg" />
     <None Remove="Configuration\secrets.json" />
-  </ItemGroup>
-    
-  <ItemGroup>
-    <ApplicationDefinition Include="AppLogo.jpg" />
   </ItemGroup>
     
   <ItemGroup>
@@ -73,6 +68,11 @@
     <EmbeddedResource Update="UserObservations.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\14.10.0.4\lib\mono\Xamarin.iOS\Xamarin.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

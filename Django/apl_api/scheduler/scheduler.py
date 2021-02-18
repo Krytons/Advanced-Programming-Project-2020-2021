@@ -6,7 +6,7 @@ from pytz import utc
 import environ
 
 env = environ.Env()
-base = environ.Path(__file__) - 2
+base = environ.Path(__file__) - 3
 environ.Env.read_env(env_file=base('.env'))
 PERIOD = env.int('PERIODIC_UPDATE')
 

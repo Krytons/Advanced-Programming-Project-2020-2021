@@ -13,6 +13,7 @@ namespace XamarinFrontEnd
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+
         }
 
         private async void GetToken(object sender, EventArgs e)
