@@ -1,0 +1,3 @@
+{
+    "products" : ["Gameboy advance", "Apple watch", "Lyso form"]
+}
