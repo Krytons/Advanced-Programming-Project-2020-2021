@@ -10,7 +10,7 @@
     <StackLayout >
     <Frame CornerRadius="30"
            Margin="0,30,0,10"
-           HeightRequest="180"
+           HeightRequest="200"
            WidthRequest="300"
            HorizontalOptions="Center"
            Padding="0"
@@ -34,12 +34,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="5,10" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Grid Padding="5,10" VerticalOptions="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding IconSource}" />
-                            <Label Grid.Column="1" FontSize="Title" FontAttributes="Bold" Text="{Binding Title}" />
+                            <Label Margin="20,0,0,0" Grid.Column="1" FontSize="Title" FontAttributes="Bold" Text="{Binding Title}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
