@@ -209,7 +209,17 @@ For our backend we defined two kind of AppUser:
     - **Manage it's own observation**
     - **Manage it's own notification**
     - **Use ebay search services**
-    
+
+When an AppUser successfully logins, a Django Rest Framework token will be generated using the AppUser id.
+In order to use our backend services, all the http requests must contain an **Authorization header** as shown
+ down below:
+```JSON
+  {
+    "authorization" : "Token 1ab7376f60dcae04d2dfb0cea04ba15ab921d473"
+  }
+```
+
+Only login and sign in endpoints don't require an Authorization header.
     
 ---
 
@@ -225,8 +235,8 @@ Our backend exposes different types of endpoints:
             "n_items": 10
           }
         ```
-    - `POST /ebay_select`: this endpoint is used to generate an observation by selecting a product previously
-     returned by "/ebay_search" endpoint.
+    - `POST /ebay_select`: this endpoint is used to generate an ObservedProduct and a NewObservedProduct by selecting a
+     product previously returned by "/ebay_search" endpoint.
      
         An example of the required body for this endpoint is shown down below:
         ```JSON
@@ -250,12 +260,32 @@ Our backend exposes different types of endpoints:
         ```
    
 - **Notifications endpoints:**
-    - `GET /notifications/get_all`: this endpoint is used by an admin to obtain all users notifications 
+    - `GET /notifications/get_all`: this endpoint is used by an admin to obtain all users notifications.
+    
+        A response example for this endpoint is shown down below:
+        ```JSON
+          {
+            "id": 1,
+            "observation": 2,
+            "notified_price": "336.99",
+            "status": "PULLED"
+          }
+        ```
     - `GET /notifications/user`: this endpoint is used to get all notifications of the user that makes the request.
     App user token is used to retrieve the user id required to understand which user's notification must be
-     returned   
+     returned.
+     If a notification has a "NOT-PULLED" status, it will be modified to "PULLED" after the use of this endpoint.   
     - `PUT /notifications/update/{notification_id}`: this endpoint is used to modify a notification. An App User can
      modify only it's own notifications.
+     
+        An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "observation": 1,
+            "notified_price": "644.99",
+            "status": "NOT-PULLED"
+          }
+        ```
     - `DEL /notifications/delete/{notification_id}`: this endpoint is used to delete a notification. An App User can
      delete only it's own notifications.
     - `GET /notifications/user/not_pulled`: this endpoint is used to retrieve all "NOT-PULLED" notifications of the
@@ -264,7 +294,7 @@ Our backend exposes different types of endpoints:
       logged user.
 
 - **Observations endpoints:**
-    - `POST /create_observation`: this endpoint is used to generate an observation for a certain app user.
+    - `POST /create_observation`: this endpoint is used to generate an ObservedProduct for a certain app user.
       
        An example of the required body for this endpoint is shown down below:
         ```JSON
@@ -274,10 +304,10 @@ Our backend exposes different types of endpoints:
             "threshold_price":"10"
           }
         ```
-    - `GET /get_all_observation`: this endpoint is used by an admin to obtain all users observations.      
-    - `GET /get_user_observation`: this endpoint is used by an AppUser to obtain all its observations. 
+    - `GET /get_all_observation`: this endpoint is used by an admin to obtain all users ObservedProduct.      
+    - `GET /get_user_observation`: this endpoint is used by an AppUser to obtain all its ObservedProduct. 
     - `GET /get_user_observation_data_by_id/{observation_id}`: this endpoint is used by an AppUser to obtain complete
-     information about a certain own observation.
+     information about a certain own ObservedProduct.
      
         A response example for this endpoint is shown down below:
         ```JSON
@@ -302,35 +332,165 @@ Our backend exposes different types of endpoints:
             "email": "giuseppe.fallica@gmail.com"
           }
         ```
-    - `GET /get_complete_user_observation_data`:
-    - `PUT /update_observation/{observation_id}`:
-    - `DEL /delete_observation/{observation_id}`:
-    - `DEL /delete_observation_by_product_id/{observation_id}`:
+    - `GET /get_complete_user_observation_data`: this endpoint is used by an AppUser to obtain complete information
+     about all it's own ObservedProduct.
+    - `PUT /update_observation/{observation_id}`: this endpoint is used to update an ObservedProduct of certain id.
+        
+        A example of the required body for this endpoint is shown down below:
+         ```JSON
+            {
+                "creator":"caruso.bartolomeo@virgilio.it",
+                "product":"1",
+                "threshold_price":"179.00"
+            }
+         ```
+        
+        If an AppUser tries to update an ObservedProduct that belongs to another AppUser, an error message will be returned.
+    - `DEL /delete_observation/{observation_id}`: this endpoint is used to delete an ObservedProduct of certain id. If an
+     AppUser tries to delete an ObservedProduct that belongs to another AppUser, an error message will be returned.
+    - `DEL /delete_observation_by_product_id/{product_id}`: this endpoint acts like the previous one, but it
+     requires a product id. If an ObservedProduct that contains the product id and that belongs to the AppUser who makes the
+      request is found, it will be deleted. 
 
 - **Price history endpoints:**
-    - `POST /price/create`:
-    - `GET /price/get_all`:
-    - `GET /price/history/{price_history_id}`:
-    - `GET /price/history_by_ebay/{ebay_product_id}`:
-    - `PUT /price/update/{price_history_id}`:
-    - `DEL /price/delete/{price_history_id}`:
+    - `POST /price/create`: this endpoint is used to insert a price history inside the database.
     
-- **Communication with recommendation system endpoints:**
-    - `POST /communication/send_all_new_observations`:
-    - `POST /communication/add_recommendation`:
-    - `GET /communication/complete_recommendations_info`:
+        An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "product": 1,
+            "old_price": "614.99",
+            "price_time": "2021-02-08T17:33:14.280000Z"
+          } 
+        ```
+    - `GET /price/get_all`: this endpoint is used to obtain all the price histories inside the database.
+    - `GET /price/history/{price_history_id}`: this endpoint is used to obtain all price histories of a certain product.
+    
+        A response example for this endpoint is shown down below:
+        ```JSON
+        [{
+            "id": 1,
+            "product": 1,
+            "old_price": "5.20",
+            "price_time": "2021-02-14T23:43:14.635000Z"
+        },
+        {
+            "id": 2,
+            "product": 1,
+            "old_price": "2.00",
+            "price_time": "2021-02-14T23:44:06.269000Z"
+        }]
+        ```
+    - `GET /price/history_by_ebay/{ebay_product_id}`: this endpoint acts like the previous one, but it requires an
+     ebay product id.
+    - `PUT /price/update/{price_history_id}`: this endpoint is used to update a price history of given id.
+    
+        An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "product": 1,
+            "old_price": "6774.99",
+            "price_time": "2021-02-08T17:33:14.280000Z"
+          }      
+        ```
+    - `DEL /price/delete/{price_history_id}`: this endpoint is used to delete a price history of given id.
 
 - **App users endpoints:**
-    - `POST /register`:
-    - `POST /login`:
-
+    - `POST /register`: this endpoint is used to register a new AppUser.
+    
+        An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "email" : "gastani.frinzi@gmail.com",
+            "name" : "Gastani",
+            "surname" : "Frinzi",
+            "nickname" : "Frigobar",
+            "password" : "spaccoivasi",
+            "password_confirm" : "spaccoivasi"
+          }     
+        ```
+      
+        If the registration is successful, a token will be returned:
+        ```JSON
+          {
+            "token": "1ab7376f60dcae04d2dfb0cea04ba15ab921d473"
+          }
+        ```
+    - `POST /login`: this endpoint is used to login an existing AppUser, and it will return a token like the previous
+     endpoint.
 
 ---
 
 ## 6. Periodic price update
+One of the aims of our project is to notify an user when the price of it's desired product drops below a threshold
+ price.
+In order to archive we have to check periodically the price of each product inside our database, using ebay API.
+
+At first we looked for Celery, a flexible and reliable distributed system to process vast amounts of messages and
+ supporting task scheduling.
+ This approach required a broker (like RabbitMQ) to be used efficiently, and that would be an "overkill" solution for
+  our project, so we decided to use `Django APScheduler`.
+  
+When our Django backend is started, a `price_update` job will be scheduled if it has not been scheduled before.
+  
+Inside the .env file the value `PERIODIC_UPDATE` is used to set the period to call price_update job: this one
+ will call an "Ebay Shopping API" for each product inside the database to look for a price change.
+ If the price of a product has been changed, the following actions will be executed:
+  - The previous price value of the product will stored
+  - The actual product price will be updated 
+  - All the observations of this product will be retrieved, to check if the new price is below to one of the
+   thresholds: if that happens a notification will be generated.
 
 ---
 
 ## 7. Recommendation system communication
 
-
+- **Communication with recommendation system endpoints:**
+- `POST /communication/send_all_new_observations`: this endpoint is used by our recommendation system to obtain
+     all the NewObservedProduct.
+     To correctly use this endpoint an admin AppUser token and a sequence number are required.
+     
+     An example of the required body for this endpoint is shown down below:
+    ```JSON
+        {
+          "sequence_number" : 0
+        }
+    ```
+  
+    If Django backend is not waiting for the sequence number used by our recommendation system, an error that
+     contains the expected sequence number will be returned:
+     ```JSON
+        {
+            "response": "Wrong sequence number",
+            "expected_seq_number": 1
+        }
+    ```
+  
+    If our backend reads the correct sequence number, all the NewObservedProduct with a previous value of
+    sequence number will be deleted, and all the NewObservedProduct with the actual sequence number will be returned
+     as shown below:
+    ```JSON
+        [{
+            "id": 4,
+            "user_id": 4,
+            "product": 4,
+            "sequence_number": 1,
+            "created_at": "2021-02-17T23:38:02.942000Z"
+        },
+        {
+            "id": 5,
+            "user_id": 4,
+            "product": 5,
+            "sequence_number": 1,
+            "created_at": "2021-02-17T23:38:30.874000Z"
+        },
+        {
+            "id": 6,
+            "user_id": 4,
+            "product": 6,
+            "sequence_number": 1,
+            "created_at": "2021-02-17T23:44:08.162000Z"
+        }]
+    ``` 
+- `POST /communication/add_recommendation`:
+- `GET /communication/complete_recommendations_info`:
