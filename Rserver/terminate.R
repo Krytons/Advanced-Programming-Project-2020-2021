@@ -9,16 +9,14 @@ script.dir <- here("Rserver")
 source(paste(script.dir, "/WebClient.R", sep=""))
 source(paste(script.dir, "/RecommendationSystem.R", sep=""))
 source(paste(script.dir, "/RecDB.R", sep=""))
-
-#################################################
-# INIZIALIZATION
+#####################################################################################
 
 wc <- new("WebClient", username="gabriele.costanzo@alice.it", password="banana")
 seq_num <- 0
 rs <- new("RecSys", wc, seq_num)
 rdb <- new("RecDB", rs=rs, seq=seq_num)
 ts <- NULL
-  
+
 if(Sys.info()["sysname"]=="Windows"){
   source(paste(script.dir, "/WindowsTaskScheduler.R", sep=""))
   ts <- new("WindowsTaskScheduler", seconds=10, wc=wc, rs=rs, rdb=rdb)
@@ -26,11 +24,5 @@ if(Sys.info()["sysname"]=="Windows"){
   source(paste(script.dir, "/UnixTaskScheduler.R", sep=""))
   ts <- new("UnixTaskScheduler", seconds=10, wc=wc, rs=rs, rdb=rdb)
 }
-  
-schedule_tasks(ts)
 
-
-
-
-
-
+terminate_tasks(ts)
