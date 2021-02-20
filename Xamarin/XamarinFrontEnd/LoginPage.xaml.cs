@@ -18,7 +18,7 @@ namespace XamarinFrontEnd
 
         private async void GetToken(object sender, EventArgs e)
         {
-            if (Email.Text == null && Password.Text == null)
+            if (Email.Text == null || Password.Text == null)
             {
                 await DisplayAlert("Try Again!", "Password or Email entered incorrectly", "OK");
             }
