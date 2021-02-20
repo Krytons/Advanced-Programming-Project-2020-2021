@@ -18,36 +18,35 @@ namespace XamarinFrontEnd
 
         private async void GetToken(object sender, EventArgs e)
         {
-            Login log = new Login(Email.Text, Password.Text);
-            string json = JsonConvert.SerializeObject(log);
-            Token token = await LoginRequest.TryLogin(json);
-
-            if (token == null)
+            if (Email.Text == null && Password.Text == null)
             {
-                Ltoken.TextColor = Color.Red;
-                Ltoken.Text = "An error has occurred, please try again";
-                Password.Text = "";
-                Email.Text = "";
+                await DisplayAlert("Try Again!", "Password or Email entered incorrectly", "OK");
             }
             else
             {
-                try
+                Login log = new Login(Email.Text, Password.Text);
+                string json = JsonConvert.SerializeObject(log);
+                Token token = await LoginRequest.TryLogin(json);
+
+                if (token == null)
                 {
-                    await SecureStorage.SetAsync("token", token.MyToken);
-                    await SecureStorage.SetAsync("email", Email.Text);
-                    await Navigation.PushAsync(new MainPage());
+                    await DisplayAlert("Try Again!", "Something went wrong", "OK");
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
-                    Ltoken.Text = "An error has occurred, please try again";
-                    Password.Text = "";
-                    Email.Text = "";
+                    try
+                    {
+                        await SecureStorage.SetAsync("token", token.MyToken);
+                        await SecureStorage.SetAsync("email", Email.Text);
+                        await Navigation.PushAsync(new MainPage());
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Try Again!", "Something went wrong", "OK");
+                    }
                 }
             }
         }
-
-
         private async void Register(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegisterPage());
