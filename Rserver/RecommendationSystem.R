@@ -26,15 +26,26 @@ RecSys <- setClass(
 setMethod(
   "initialize",
   "RecSys",
-  function(.Object, json){
-    if(length(json)>0){
-      df = as.data.frame(json$data)
-      row.names(df) <- json$index
-      colnames(df)<- json$columns
+  function(.Object, wc, seq_num){
+    if(FALSE && file.exists(paste(script.dir,"/rs.rds", sep=""))){
+      .Object <- readRDS(paste(script.dir,"/rs.rds", sep=""))
+      print("RecSys caricato da file.")
+    }else{
+      print("Richiedo il dataframe dal backend...")
+      res_body <- getDataframe(wc)
+      json <- res_body$dataframe
+      seq_num <- res_body$sequence_number
       
-      .Object@m <- df
+      if(length(json)>0){
+        df = as.data.frame(json$data)
+        row.names(df) <- as.character(json$index)
+        colnames(df)<- as.character(json$columns)
+        
+        .Object@m <- df
+      }
+      if(length(.Object@m)>0) .Object <- train(removeEmptyEntries(.Object))
     }
-    if(length(.Object@m)>0) .Object <- train(removeEmptyEntries(.Object))
+
     return(.Object)
   }
 )
@@ -74,13 +85,8 @@ setMethod("removeEmptyEntries", "RecSys",
 )
 
 
-hasGeneric=getGeneric("update")
-if(is.null(hasGeneric)){
-  setGeneric("update", function(r, l) standardGeneric("update"))
-}else{ 
-  setGeneric("update", hasGeneric)
-}
-setMethod("update", "RecSys",
+setGeneric("updateRS", function(r, l) standardGeneric("updateRS"))
+setMethod("updateRS", "RecSys",
   function(r, l){
     df <- r@m
     for(x in l){
