@@ -30,7 +30,7 @@ To correctly setup and use this backend you must create a new virtual environmen
   ```bash
     $ sudo systemctl start mongod
   ```
-- **Inside "Django/apl_api" create a .env file with the following arguments:**
+- **Inside "Django" create a .env file with the following arguments:**
   ```dotenv
     EBAY_APP_ID=#Your ebay app id
     EBAY_GLOBAL_ID=#Ebay store id such as "EBAY-IT"
@@ -49,11 +49,117 @@ To correctly setup and use this backend you must create a new virtual environmen
   ```bash
     $ python3 manage.py createsuperuser
   ```
-
+  
+If your database is empty you can use "Django/utilities/insertscript" to insert all the products contained inside
+ "Django/utilities/products.txt".
+In order to use correctly our insert script, open a terminal inside "Django/utilities" and write the following command: 
+```bash
+    $ python3 insertscript.py
+```
 
 ---
 
 ## 3. Models
+
+To store and manage all the useful information inside our MongoDB database we created some custom models
+extending Django Model class.
+By extending Django Model class, MongoDB tables will be generated using the commands "makemigration" and "migrate" as
+described in "Django Setup" chapter.
+
+For each model we have generated a proper serializer class, by extending Django Rest Framework ModelSerializer.
+Serializers are used to provide a way of serializing and deserializing the model instances into representations such
+as json.
+
+We've declared the following models:
+- **Products:** this model is used to store ebay's products info, such us title and price.
+
+    Using ProductSerializer we are able to serialize a Product instance as shown down below: 
+    ```JSON
+      {
+        "id": 1,
+        "item_id": "402697978785",
+        "title": "Nintendo DS Lite Nero con R4 + 40 Giochi Preinstallati ",
+        "subtitle": "Leggero e portabile",
+        "category_id": "139971",
+        "category_name": "Console",
+        "gallery_url": "https://thumbs2.ebaystatic.com/m/mQSTsb3LhaQHqyNC3jBuLJg/140.jpg",
+        "view_url": "https://www.ebay.it/itm/Nintendo-DS-Lite-Nero-con-R4-40-Giochi-Preinstallati-/402697978785",
+        "shipping_cost": "8.00",
+        "price": "38.90",
+        "condition_id": "3000",
+        "condition_name": "Usato",
+        "created_at": "2021-02-20T00:24:50.765+00:00",
+        "updated_at": "2021-02-20T00:24:50.765+00:00"
+      }
+    ```
+  
+- **ObservedProduct:**
+    Using ObservedProductSerializer we are able to serialize a ObservedProduct instance as shown down below: 
+    ```JSON
+      {
+        "id": 1,
+        "creator": 2,
+        "product": 1,
+        "threshold_price": 2.50
+      }
+    ```
+
+- **PriceHistory:**
+    Using PriceHistorySerializer we are able to serialize a PriceHistory instance as shown down below: 
+    ```JSON
+      {
+        "id": 1,
+        "product": 1,
+        "old_price": "5.20",
+        "price_time": "2021-02-14T23:43:14.635000Z"
+      }
+    ```
+
+- **Notification:**
+    Using NotificationSerializer we are able to serialize a Notification instance as shown down below: 
+    ```JSON
+      {
+        "observation": 1,
+        "notified_price": 4.35,
+        "created_at": "2021-02-14T21:13:16.625000Z",
+        "status": "NOT-PULLED"
+      } 
+    ```
+
+- **Recommendation:**
+    Using RecommendationSerializer we are able to serialize a Recommendation instance as shown down below: 
+    ```JSON
+      {
+        "id": 1,
+        "user_id_id": 2,
+        "product_id": 1,
+        "created_at": "2021-02-17T15:29:07.521+00:00"
+      } 
+    ```
+
+- **SequenceNumber:**
+    Using SequenceNumberSerializer we are able to serialize a SequenceNumber instance as shown down below: 
+    ```JSON
+      {
+        "id": 2,
+        "number": 1,
+        "created_at": "2021-02-16T15:46:22.092+00:00"
+      } 
+    ```
+
+- **NewObservedProduct:**
+    Using NewObservedProductSerializer we are able to serialize a NewObservedProduct instance as shown down below: 
+    ```JSON
+      {
+        "id": 1,
+        "user_id_id": 2,
+        "product_id": 1,
+        "sequence_number": 0,
+        "created_at": "2021-02-14T23:43:14.746+00:00"
+      }
+    ```
+
+
 
 ---
 
