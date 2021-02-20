@@ -26,22 +26,28 @@ RecDB <- setClass(
 setMethod(
   "initialize",
   "RecDB",
-  function(.Object, l, seq){
-    .Object@seqNum <- seq
-    .Object <- update(.Object, l)
+  function(.Object, rs, seq){
+    if(FALSE && file.exists(paste(script.dir,"/rdb.rds", sep=""))){
+      .Object <- readRDS(paste(script.dir,"/rs.rds", sep=""))
+      print("ResDB caricato da file.")
+    }else{
+      print("Genero RDB da zero...")
+      .Object@seqNum <- seq
+      if(!is.null(rs@recs)){
+        l <- getList(rs@recs)
+        .Object <- updateRDB(.Object, l)
+      }
+    }
+    
     return(.Object)
   }
 )
 
 
 # metodi
-hasGeneric=getGeneric("update")
-if(is.null(hasGeneric)){
-  setGeneric("update", function(r, l) standardGeneric("update"))
-}else{ 
-  setGeneric("update", hasGeneric)
-}
-setMethod("update", "RecDB",
+
+setGeneric("updateRDB", function(r, l) standardGeneric("updateRDB"))
+setMethod("updateRDB", "RecDB",
   function(r, l){
     filtList <- Filter(function(x){return(length(x)>0)}, l)
     

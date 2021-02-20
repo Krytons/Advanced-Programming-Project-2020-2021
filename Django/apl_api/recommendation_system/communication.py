@@ -19,6 +19,8 @@ def send_all_observations(request):
     """
     This route must use pandas to return a product-user matrix, generated using all the observations
     """
+    last_sequence_number = SequenceNumber.objects.latest('created_at')
+
     observations = ObservedProduct.objects.all()
     serializer = ObservedProductSerializer(observations, many=True)
 
@@ -28,14 +30,14 @@ def send_all_observations(request):
     for obs in og_dict:
         if not (str(obs["product"]) in new_dict.keys()):
             new_dict[str(obs["product"])] = {}
-        new_dict[str(obs["product"])][str(obs["id"])] = True
+        new_dict[str(obs["product"])][str(obs["id"])] = 1
 
     df = pd.DataFrame(new_dict)
-    df = df.fillna(False)
-    print(df)
+    df = df.fillna(0)
+    
     res = df.to_json(orient="split")
 
-    return Response(json.loads(res), status=status.HTTP_200_OK)
+    return Response({"sequence_number":last_sequence_number.number, "dataframe":json.loads(res)}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
