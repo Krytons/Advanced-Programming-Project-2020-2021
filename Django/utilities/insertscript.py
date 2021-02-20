@@ -13,7 +13,7 @@ response = requests.post('http://localhost:'+port+'/login', data=json.dumps(logi
 if response.status_code == 200:
     print("Login: success")
     token = response.json()["token"]
-    with open('products.txt') as json_file:
+    with open('products.txt', encoding="utf8") as json_file:
         data = json.load(json_file)
         for product in data["products"]:
             print("Searching for: " + product)
@@ -42,6 +42,10 @@ if response.status_code == 200:
                     "condition_name": ebay_product[0]['condition_name']
                 }
                 ebay_second_response = requests.post('http://localhost:' + port + '/api/products/', data=json.dumps(product_to_insert), headers=ebay_headers)
+                if ebay_second_response.status_code == 201:
+                    print("Inserted")
+                else:
+                    print("Insert failed")
         json_file.close()
         print("Product insert is over")
 else:
