@@ -172,17 +172,165 @@ We've declared the following models:
       }
     ```
 
+- **AppUser:** this model is used to store all user's information, such us email and password. For this particular
+ model we have extended AbstractBaseUser class (Read "Permission" chapter for more info). 
 
+    Using RegistrationSerializer we are able to serialize an AppUser instance (without showing password field) as shown
+     down below: 
+    ```JSON
+      {
+        "response": "Registration was successful",
+        "email": "caruso.bartolomeo@virgilio.it",
+        "name": "Bartolomeo",
+        "surname": "Caruso",
+        "nickname": "Krytons",
+        "token": "1ab7376f60dcae04d2dfb0cea04ba15ab921d473"
+      }
+    ```
 
 ---
 
-## 4. Permissions
+## 4. Auth and permissions
+For our backend we defined two kind of AppUser:
+- **Admin AppUser:** this AppUser has "is_staff = True". He can be created by using the command `$ python3 manage.py
+ createsuperuser` inside Django backend terminal: this command will use `create_superuser` function defined inside
+  CustomAccountManager class (extension of BaseUserManager class).
+  
+    An admin AppUser has `[IsAdminUser]` permission level, so he is able to do the following actions:
+    - **Manage products** 
+    - **Use Django admin panel**
+    - **Manage Django jobs**
+    - **Use insert script**
 
+- **Normal AppUser:** this AppUser has "is_staff = False". He can be created by using the standard sign in procedure.
+    
+    A normal AppUser has `[IsAuthenticated]` permission level, so he is not able to use `[IsAdminUser]` views, but he
+     is still able to do the following actions:
+    - **Manage it's own observation**
+    - **Manage it's own notification**
+    - **Use ebay search services**
+    
+    
 ---
 
 ## 5. Views
+Our backend exposes different types of endpoints:
+- **Ebay services endpoints:**
+    - `POST /ebay_search`: this endpoint is used to do a search using ebay API, and return a list of products.
+    
+        An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "search": "Gameboy advance",
+            "n_items": 10
+          }
+        ```
+    - `POST /ebay_select`: this endpoint is used to generate an observation by selecting a product previously
+     returned by "/ebay_search" endpoint.
+     
+        An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "product": {
+                "item_id": "133571359505",
+                "title": "Apple iPhone 12 5G 64GB NUOVO Originale Smartphone iOS Black ",
+                "subtitle": "PROMO-DISPONIBILITA' LIMITATA-PAGA ANCHE ALLA CONSEGNA",
+                "category_id": "9355",
+                "category_name": "Cellulari e smartphone",
+                "gallery_url": "https://thumbs2.ebaystatic.com/m/mdHO0w-IinTVtloOXrtOFNg/140.jpg",
+                "view_url": "https://www.ebay.it/itm/Apple-iPhone-12-5G-64GB-NUOVO-Originale-Smartphone-iOS-Black-/133571359505",
+                "shipping_cost": "0.00",
+                "price": 799.90,
+                "condition_id": "1000",
+                "condition_name": "Nuovo"
+            },
+            "threshold_price": "600.00",
+            "email": "caruso.bartolomeo@virgilio.it"
+        }
+        ```
+   
+- **Notifications endpoints:**
+    - `GET /notifications/get_all`: this endpoint is used by an admin to obtain all users notifications 
+    - `GET /notifications/user`: this endpoint is used to get all notifications of the user that makes the request.
+    App user token is used to retrieve the user id required to understand which user's notification must be
+     returned   
+    - `PUT /notifications/update/{notification_id}`: this endpoint is used to modify a notification. An App User can
+     modify only it's own notifications.
+    - `DEL /notifications/delete/{notification_id}`: this endpoint is used to delete a notification. An App User can
+     delete only it's own notifications.
+    - `GET /notifications/user/not_pulled`: this endpoint is used to retrieve all "NOT-PULLED" notifications of the
+     user that makes the request.
+     This endpoint is periodically used by our client application in order to obtain all the new notification for the
+      logged user.
+
+- **Observations endpoints:**
+    - `POST /create_observation`: this endpoint is used to generate an observation for a certain app user.
+      
+       An example of the required body for this endpoint is shown down below:
+        ```JSON
+          {
+            "creator":"caruso.bartolomeo@virgilio.it",
+            "product":"1",
+            "threshold_price":"10"
+          }
+        ```
+    - `GET /get_all_observation`: this endpoint is used by an admin to obtain all users observations.      
+    - `GET /get_user_observation`: this endpoint is used by an AppUser to obtain all its observations. 
+    - `GET /get_user_observation_data_by_id/{observation_id}`: this endpoint is used by an AppUser to obtain complete
+     information about a certain own observation.
+     
+        A response example for this endpoint is shown down below:
+        ```JSON
+          {
+            "product": {
+                "id": 2,
+                "item_id": "133571359505",
+                "title": "Apple iPhone 12 5G 64GB NUOVO Originale Smartphone iOS Black",
+                "subtitle": "PROMO-DISPONIBILITA' LIMITATA-PAGA ANCHE ALLA CONSEGNA",
+                "category_id": "9355",
+                "category_name": "Cellulari e smartphone",
+                "gallery_url": "https://thumbs2.ebaystatic.com/m/mdHO0w-IinTVtloOXrtOFNg/140.jpg",
+                "view_url": "https://www.ebay.it/itm/Apple-iPhone-12-5G-64GB-NUOVO-Originale-Smartphone-iOS-Black-/133571359505",
+                "shipping_cost": "0.00",
+                "price": "789.90",
+                "condition_id": "1000",
+                "condition_name": "Nuovo",
+                "created_at": "2021-02-14T23:52:20.895000Z",
+                "updated_at": "2021-02-14T23:56:40.091000Z"
+            },
+            "threshold_price": "2000.00",
+            "email": "giuseppe.fallica@gmail.com"
+          }
+        ```
+    - `GET /get_complete_user_observation_data`:
+    - `PUT /update_observation/{observation_id}`:
+    - `DEL /delete_observation/{observation_id}`:
+    - `DEL /delete_observation_by_product_id/{observation_id}`:
+
+- **Price history endpoints:**
+    - `POST /price/create`:
+    - `GET /price/get_all`:
+    - `GET /price/history/{price_history_id}`:
+    - `GET /price/history_by_ebay/{ebay_product_id}`:
+    - `PUT /price/update/{price_history_id}`:
+    - `DEL /price/delete/{price_history_id}`:
+    
+- **Communication with recommendation system endpoints:**
+    - `POST /communication/send_all_new_observations`:
+    - `POST /communication/add_recommendation`:
+    - `GET /communication/complete_recommendations_info`:
+
+- **App users endpoints:**
+    - `POST /register`:
+    - `POST /login`:
+
 
 ---
 
-## 6. Recommendation system communication
+## 6. Periodic price update
+
+---
+
+## 7. Recommendation system communication
+
 
