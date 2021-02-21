@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFrontEnd.Classi;
@@ -84,17 +87,67 @@ namespace XamarinFrontEnd
 
         async void SendNotification()
         {
-            List<AppUserNotification> user_notifications = await NotificationRequest.GetNotPulledNotifications();
-            if (user_notifications.Any())
+            try
             {
-                foreach (AppUserNotification user_notification in user_notifications)
+                HttpResponseMessage response = await NotificationRequest.GetNotPulledNotifications();
+
+                if (response.IsSuccessStatusCode)
                 {
-                    RequestObservation observation = await ObservationRequest.GetObservationById(user_notification.Observation);
-                    string title = "🚨 Good news! 🚨";
-                    string message = "💰 Your observed product: " + observation.Product.Title + " is now available for: €" + observation.Product.Price + " 💰";
-                    notificationManager.SendNotification(title, message);
+                    string response_content = await response.Content.ReadAsStringAsync();
+                    List<AppUserNotification> user_notifications = JsonConvert.DeserializeObject<List<AppUserNotification>>(response_content);
+
+                    if (user_notifications.Any())
+                    {
+                        foreach (AppUserNotification user_notification in user_notifications)
+                        {
+                            HttpResponseMessage responseOb = await ObservationRequest.GetObservationById(user_notification.Observation);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string response_contentOb = await response.Content.ReadAsStringAsync();
+                                RequestObservation observation = JsonConvert.DeserializeObject<RequestObservation>(response_contentOb);
+                                string title = "🚨 Good news! 🚨";
+                                string message = "💰 Your observed product: " + observation.Product.Title + " is now available for: €" + observation.Product.Price + " 💰";
+                                notificationManager.SendNotification(title, message);
+                            }
+                            else
+                            {
+                                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                                {
+                                    await DisplayAlert("Try Again!", "No connection with the server", "OK");
+
+                                }
+                                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                                {
+                                    await DisplayAlert("Try Again!", "Invalid request", "OK");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                    {
+                        await DisplayAlert("Try Again!", "No connection with the server", "OK");
+
+                    }
+                    if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    {
+                        await DisplayAlert("Try Again!", "Invalid request", "OK");
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine("No notification");
+            }
+
+        }
+
+        private Task DisplayAlert(string v1, string v2, string v3)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace XamarinFrontEnd.ViewModels
                 Title = "📅 Date 📅",
                 FontSize = 14,
                 AxisTitleDistance = 10,
-                //Angle = 45
+                Angle = 45
             });
 
             //"yyyy-MM-ddTHH:mm:ss"

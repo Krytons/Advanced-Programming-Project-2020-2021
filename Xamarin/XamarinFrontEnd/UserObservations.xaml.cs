@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFrontEnd.Classi;
@@ -25,8 +26,26 @@ namespace XamarinFrontEnd
 
         private async void FillPage()
         {
-            CompleteObservations = await ObservationRequest.GetAllUserObservation();
-            MyCollectionView.ItemsSource = CompleteObservations;
+            HttpResponseMessage response = await ObservationRequest.GetAllUserObservation();
+
+            if (response.IsSuccessStatusCode)
+            {
+                string response_content = await response.Content.ReadAsStringAsync();
+                CompleteObservations = JsonConvert.DeserializeObject<List<RequestObservation>>(response_content);
+                MyCollectionView.ItemsSource = CompleteObservations;
+            }
+            else
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                {
+                    await DisplayAlert("Attention!!!", "No connection with the server", "OK");
+
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    await DisplayAlert("Try Again!", "Invalid request", "OK");
+                }
+            }
         }
 
         private void OnFavoriteSwipeItemInvoked(object sender, EventArgs e)
@@ -38,9 +57,9 @@ namespace XamarinFrontEnd
         {
             Button button = (Button)sender;
             string observation_product = (string)button.CommandParameter;
-            string response = await ObservationRequest.DeleteObservation(observation_product);
+            HttpResponseMessage response = await ObservationRequest.DeleteObservation(observation_product);
 
-            if (response != null)
+            if (response.IsSuccessStatusCode)
             {
                 try
                 {
@@ -50,12 +69,22 @@ namespace XamarinFrontEnd
                     MyCollectionView.ItemsSource = null;
                     MyCollectionView.ItemsSource = CompleteObservations;
                     await DisplayAlert("Success!", "Observation removed", "OK");
-
-
                 }
                 catch (Exception ex)
                 {
                     await DisplayAlert("Error!", "Something went wrong", "OK");
+                }
+            }
+            else
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                {
+                    await DisplayAlert("Attention!!!", "No connection with the server", "OK");
+
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    await DisplayAlert("Try Again!", "Invalid request", "OK");
                 }
             }
         }

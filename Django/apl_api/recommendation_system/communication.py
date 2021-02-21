@@ -47,16 +47,10 @@ def send_all_new_observations(request):
     request_body = json.loads(request.body)
     if request_body["sequence_number"] == last_sequence_number.number:
         #Step 1: delete old observations from NewObservedProduct table
-        if last_sequence_number.number != 0:
-            old_value = last_sequence_number.number - 1
-        else:
-            old_value = 999
+        old_value = (last_sequence_number.number - 1)%1000
         NewObservedProduct.objects.filter(sequence_number=old_value).delete()
         #Step 2: generate a new sequence number
-        if last_sequence_number.number != 999:
-            new_value = last_sequence_number.number + 1
-        else:
-            new_value = 0
+        new_value = (last_sequence_number.number + 1)%1000
         new_sequence_number = {
             'number' : new_value
         }
@@ -66,6 +60,10 @@ def send_all_new_observations(request):
         else:
             return Response(sequence_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         # Step 3: obtain all new observed product
+        new_observations = NewObservedProduct.objects.filter(sequence_number=request_body["sequence_number"])
+        serializer = NewObservedProductSerializer(new_observations, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request_body["sequence_number"] == ((last_sequence_number.number -1)%1000):
         new_observations = NewObservedProduct.objects.filter(sequence_number=request_body["sequence_number"])
         serializer = NewObservedProductSerializer(new_observations, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

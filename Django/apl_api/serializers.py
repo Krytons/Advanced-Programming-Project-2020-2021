@@ -78,7 +78,7 @@ class NewObservedProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewObservedProduct
-        fields = ['id','user_id', 'product', 'sequence_number', 'created_at']
+        fields = ['id','user_id', 'product', 'sequence_number', 'created_at', 'operation']
         read_only_fields = ['id']
 
     def get_unique_together_validators(self):

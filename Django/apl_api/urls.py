@@ -33,6 +33,7 @@ urlpatterns = [
     path('price/update/<int:pk>', update_price, name="price_update"),
     path('price/delete/<int:pk>', delete_price, name="price_delete"),
 
+    path('notifications/add', add_notification, name="add_notifications"),
     path('notifications/get_all', get_all_notifications, name="notifications_get_all"),
     path('notifications/user', get_user_notifications, name="notifications_get_all_by_user"),
     path('notifications/user/not_pulled', get_user_not_pulled_notifications,
