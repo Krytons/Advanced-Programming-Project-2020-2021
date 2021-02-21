@@ -510,7 +510,7 @@ To do that, we exposed a bunch of "communication" endpoints:
         }
     ```
   
-- `GET /communication/complete_recommendations_info`: this endpoint is used to initialize our recommendation system
+- `GET /communication/send_all_observations`: this endpoint is used to initialize our recommendation system
  by returning all the ObservedProducts inside our database.
  Our ObservedProducts will be processed following the steps down below, using Pandas library:
     - All ObservedProducts are retrieved, serialized and added to a dictionary (D1).
