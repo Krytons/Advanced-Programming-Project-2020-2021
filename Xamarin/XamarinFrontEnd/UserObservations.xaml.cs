@@ -31,7 +31,7 @@ namespace XamarinFrontEnd
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
-                List<RequestObservation> CompleteObservations = JsonConvert.DeserializeObject<List<RequestObservation>>(response_content);
+                CompleteObservations = JsonConvert.DeserializeObject<List<RequestObservation>>(response_content);
                 MyCollectionView.ItemsSource = CompleteObservations;
             }
             else

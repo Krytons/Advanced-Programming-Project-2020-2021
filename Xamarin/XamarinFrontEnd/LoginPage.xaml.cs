@@ -12,14 +12,6 @@ namespace XamarinFrontEnd
     public partial class LoginPage : ContentPage
     {
 
-        public delegate void Del(string control);
-        public static string control;
-
-        public static void DelegateMethod(string message)
-        {
-            control = message;
-        }
-
         public LoginPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -29,7 +21,6 @@ namespace XamarinFrontEnd
 
         private async void GetToken(object sender, EventArgs e)
         {
-            Del control = DelegateMethod;
 
             if (Email.Text == null || Password.Text == null)
             {
