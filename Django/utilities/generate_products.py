@@ -13,7 +13,7 @@ response = requests.post('http://localhost:'+port+'/login', data=json.dumps(logi
 if response.status_code == 200:
     print("Login: success")
     token = response.json()["token"]
-    with open('products.txt', encoding="utf8") as json_file:
+    with open('products.json', encoding="utf8") as json_file:
         data = json.load(json_file)
         for product in data["products"]:
             print("Searching for: " + product)
