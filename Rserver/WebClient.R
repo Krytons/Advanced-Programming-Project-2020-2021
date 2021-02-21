@@ -21,8 +21,9 @@ WebClient <- setClass(
     credentials = c("gabriele.costanzo@alice.it", "banana"),
     endpoints = list(
       "login" = "login",
-      "init" = "communication/send_all_new_observations",
-      "update" = "communication/add_recommendation"
+      "init" = "communication/send_all_observations",
+      "send_rec" = "communication/add_recommendation",
+      "retrieve_obs" = "communication/send_all_new_observations"
     ),
     token = character(0)
   )
@@ -32,7 +33,7 @@ WebClient <- setClass(
 setMethod(
   "initialize",
   "WebClient",
-  function(.Object, username, password){
+  function(.Object, username="gabriele.costanzo@alice.it", password="banana"){
     .Object@credentials <- c(username, password)
     .Object <- login(.Object)
     return(.Object)
@@ -52,46 +53,61 @@ setMethod(
     )
     full_url <- paste(wc@url,"/",wc@endpoints["login"], sep="")
     
-    r <- POST(
-      full_url,
-      content_type_json(),
-      body = body,
-      encode = "json"
+    tryCatch(
+      {
+        r <- POST(
+          full_url,
+          content_type_json(),
+          body = body,
+          encode = "json"
+        )
+        
+        res_body <- content(r, "parsed")
+        
+        if(!is.null(res_body$token)) wc@token <- res_body$token
+      },
+      error=function(cond){
+        print(cond)
+      },
+      warning=function(cond){
+        print(cond)
+      }
     )
-    
-    res_body <- content(r, "parsed")
-    
-    if(!is.null(res_body$token)) wc@token <- res_body$token
     
     return(wc)
   }
 )
 
 
-setGeneric("getDataframe", function(wc, seqNum) standardGeneric("getDataframe"))
+setGeneric("getDataframe", function(wc) standardGeneric("getDataframe"))
 setMethod(
   "getDataframe",
   "WebClient",
-  function(wc, seqNum){
-    body <- list(
-      "sequence_number" = seqNum
-    )
+  function(wc){
+    body <- list()
     full_url <- paste(wc@url,"/",wc@endpoints["init"], sep="")
     
-    r <- POST(
-      full_url,
-      content_type_json(),
-      add_headers(Authorization=paste("Token", wc@token, seq = " ")),
-      body = body,
-      encode = "json"
+    res_body <- NULL
+    tryCatch(
+      {
+        r <- POST(
+          full_url,
+          content_type_json(),
+          add_headers(Authorization=paste("Token", wc@token, seq = " ")),
+          body = body,
+          encode = "json"
+        )
+        
+        res_body <- fromJSON(content(r, "text"))
+      },
+      error=function(cond){
+        print(cond)
+      },
+      warning=function(cond){
+        print(cond)
+      }
     )
-    
-    res_body <- content(r, "text")
     
     return(res_body)
   }
 )
-
-
-#wc <- new("WebClient", username="gabriele.costanzo@alice.it", password="banana")
-#df <- getDataframe(wc, 2)

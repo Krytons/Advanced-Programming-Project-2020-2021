@@ -1,3 +1,4 @@
 *.rds
 *.json
+*.log
 test.R
