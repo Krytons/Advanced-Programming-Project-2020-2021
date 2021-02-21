@@ -10,6 +10,18 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from apl_api.models import Notification, ObservedProduct
 from apl_api.serializers import NotificationSerializer, ObservedProductSerializer
 
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def add_notification (request):
+    serializer = NotificationSerializer(data=request.data)
+    if serializer.is_valid():
+        try:
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except DatabaseError:
+            return Response({'response': 'This notification already exists'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

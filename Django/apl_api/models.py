@@ -180,7 +180,8 @@ class NewObservedProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sequence_number = models.IntegerField(validators=[MaxValueValidator(999)])
     created_at = models.DateTimeField(auto_now_add=True)
+    operation = models.BooleanField()
 
     class Meta:
-        unique_together = ['user_id', 'product']
+        unique_together = ['user_id', 'product', 'sequence_number']
         ordering = ['created_at']

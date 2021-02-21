@@ -102,7 +102,8 @@ def ebay_select_product(request):
     new_observation = {
         'user_id' : request.user.id,
         'product' : product.id,
-        'sequence_number' : returned_sequence.number
+        'sequence_number' : returned_sequence.number,
+        'operation' : True
     }
     observation_serializer = ObservedProductSerializer(data=observation)
     if observation_serializer.is_valid():
