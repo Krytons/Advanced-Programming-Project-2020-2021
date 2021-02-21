@@ -8,13 +8,14 @@ using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XamarinFrontEnd.Classi;
+using static XamarinFrontEnd.LoginPage;
 
 namespace XamarinFrontEnd.HttpRequest
 {
     public class LoginRequest
     {
 
-        public static async Task<Token> TryLogin(string json)
+        public static async Task<HttpResponseMessage> TryLogin(string json)
         {
 
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
@@ -27,17 +28,10 @@ namespace XamarinFrontEnd.HttpRequest
 
 
             HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/login", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                Token receivedToken = JsonConvert.DeserializeObject<Token>(response_content);
-                return await Task.FromResult(receivedToken);
-            }
-            else return null;
+            return await Task.FromResult(response);
         }
 
-        public static async Task<Token> SignIn(string json)
+        public static async Task<HttpResponseMessage> SignIn(string json)
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -48,6 +42,9 @@ namespace XamarinFrontEnd.HttpRequest
 
             HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/register", content);
 
+            return await Task.FromResult(response);
+
+            /*
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
@@ -56,7 +53,7 @@ namespace XamarinFrontEnd.HttpRequest
                 return await Task.FromResult(receivedToken);
             }
             else return null;
-
+            */
         }
     }
 }

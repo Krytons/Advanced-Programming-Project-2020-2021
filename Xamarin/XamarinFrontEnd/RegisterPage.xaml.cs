@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XamarinFrontEnd.Classi;
@@ -22,38 +23,42 @@ namespace XamarinFrontEnd
             {
                 await DisplayAlert("Try Again!", "Insert all fields", "OK");
             }
-
             else
             {
                 if (Password.Text == RepeatPassword.Text)
                 {
                     Registration log = new Registration(Email.Text, Name.Text, Surname.Text, Nickname.Text, Password.Text, RepeatPassword.Text);
                     string json = JsonConvert.SerializeObject(log);
-                    Token token = await LoginRequest.SignIn(json);
+                    HttpResponseMessage response = await LoginRequest.SignIn(json);
 
-                    if (token == null)
+                    if (response.IsSuccessStatusCode)
                     {
-                        await DisplayAlert("Try Again!", "Something went wrong", "OK");
-                    }
-                    else
-                    {
+                        string response_content = await response.Content.ReadAsStringAsync();
+                        Token token = JsonConvert.DeserializeObject<Token>(response_content);
+
                         try
                         {
                             await SecureStorage.SetAsync("token", token.MyToken);
                             await SecureStorage.SetAsync("email", Email.Text);
-                            await Navigation.PushAsync(new SearchPage());
+                            await Navigation.PushAsync(new MainPage());
                         }
                         catch (Exception ex)
                         {
                             await DisplayAlert("Try Again!", "Something went wrong", "OK");
                         }
                     }
-                }
-                else
-                {
-                    ErrorLabel.TextColor = Color.Red;
-                    ErrorLabel.Text = "Passwords fields must be the same: try again";
-                    RepeatPassword.Text = "";
+                    else
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                        {
+                            await DisplayAlert("Attention!!!", "No connection with the server", "OK");
+
+                        }
+                        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                        {
+                            await DisplayAlert("Try Again!", "Invalid request", "OK");
+                        }
+                    }
                 }
             }
         }
