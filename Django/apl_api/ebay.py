@@ -99,12 +99,6 @@ def ebay_select_product(request):
         returned_sequence = SequenceNumber.objects.latest('created_at')
     except ObjectDoesNotExist:
         return Response('Observation generation error', status=status.HTTP_400_BAD_REQUEST)
-    new_observation = {
-        'user_id' : request.user.id,
-        'product' : product.id,
-        'sequence_number' : returned_sequence.number,
-        'operation' : True
-    }
     observation_serializer = ObservedProductSerializer(data=observation)
     if observation_serializer.is_valid():
         if observation_serializer.validated_data['creator'] != request.user:
@@ -113,12 +107,26 @@ def ebay_select_product(request):
         else:
             try:
                 observation_serializer.save()
-                new_observation_serializer = NewObservedProductSerializer(data=new_observation)
-                if new_observation_serializer.is_valid():
-                    new_observation_serializer.save()
+                try:
+                    new_observation = NewObservedProduct.objects.get(user_id=request.user.id,
+                                                                     product=observation['product'],
+                                                                     sequence_number=returned_sequence.number)
+                    new_observation.operation = True
+                    new_observation.save()
                     return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
-                else:
-                    return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
+                except ObjectDoesNotExist:
+                    new_observation = {
+                        'user_id': request.user.id,
+                        'product': product.id,
+                        'sequence_number': returned_sequence.number,
+                        'operation': True
+                    }
+                    new_observation_serializer = NewObservedProductSerializer(data=new_observation)
+                    if new_observation_serializer.is_valid():
+                        new_observation_serializer.save()
+                        return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
+                    else:
+                        return Response(observation_serializer.data, status=status.HTTP_201_CREATED)
             except SQLDecodeError:
                 return Response({'response': 'This element is already observed'}, status=status.HTTP_400_BAD_REQUEST)
     else:

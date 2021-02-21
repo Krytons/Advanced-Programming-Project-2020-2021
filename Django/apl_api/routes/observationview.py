@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-from apl_api.models import ObservedProduct, Product, NewObservedProduct
-from apl_api.serializers import ObservedProductSerializer, ProductSerializer
+from apl_api.models import ObservedProduct, Product, NewObservedProduct, SequenceNumber
+from apl_api.serializers import ObservedProductSerializer, ProductSerializer, NewObservedProductSerializer
 
 
 @api_view(['POST'])
@@ -142,9 +142,21 @@ def delete_observation_by_product_id(request, pk):
         print (product)
         observation = ObservedProduct.objects.get(product=product)
         if observation.creator.email == request.user.email:
-            new_observation = NewObservedProduct.objects.get(user_id=request.user.id, product=observation.product.id)
-            new_observation.operation = False
-            new_observation.save()
+            returned_sequence = SequenceNumber.objects.latest('created_at')
+            try:
+                new_observation = NewObservedProduct.objects.get(user_id=request.user.id, product=observation.product.id,
+                                                                 sequence_number=returned_sequence.number)
+                new_observation.delete()
+            except ObjectDoesNotExist:
+                new_observation = {
+                    'user_id': request.user.id,
+                    'product': product.id,
+                    'sequence_number': returned_sequence.number,
+                    'operation': False
+                }
+                new_observation_serializer = NewObservedProductSerializer(data=new_observation)
+                if new_observation_serializer.is_valid():
+                    new_observation_serializer.save()
             observation.delete()
             return Response({'response':'Observation successfully deleted'}, status=status.HTTP_200_OK)
         else:
