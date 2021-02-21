@@ -110,7 +110,6 @@ namespace XamarinFrontEnd
                                 string message = "💰 Your observed product: " + observation.Product.Title + " is now available for: €" + observation.Product.Price + " 💰";
                                 notificationManager.SendNotification(title, message);
                             }
-                            //VEDERE SE VA BENE
                             else
                             {
                                 if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
@@ -126,8 +125,6 @@ namespace XamarinFrontEnd
                         }
                     }
                 }
-
-                //VEDERE SE VA BENE
                 else
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
@@ -140,8 +137,6 @@ namespace XamarinFrontEnd
                         await DisplayAlert("Try Again!", "Invalid request", "OK");
                     }
                 }
-
-
             }
             catch(Exception ex)
             {

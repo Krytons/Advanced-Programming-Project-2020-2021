@@ -33,7 +33,7 @@ namespace XamarinFrontEnd
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
-                List<Product> Products = JsonConvert.DeserializeObject<List<Product>>(response_content);
+                Products = JsonConvert.DeserializeObject<List<Product>>(response_content);
                 MyCollectionView.ItemsSource = Products;
             }
             else
