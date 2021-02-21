@@ -74,7 +74,8 @@ namespace XamarinFrontEnd
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
-                    await DisplayAlert("Try Again!", "Invalid request", "OK");
+                    List<Price> prices = new List<Price>();
+                    await Navigation.PushAsync(new ProductInfoPage(button_product, prices));
                 }
             }
             
