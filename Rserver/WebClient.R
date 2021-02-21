@@ -13,7 +13,8 @@ WebClient <- setClass(
     url = "character",
     credentials = "character",
     endpoints = "list",
-    token = "character"
+    token = "character",
+    attempts = "numeric"
   ),
   
   prototype=list(
@@ -25,7 +26,8 @@ WebClient <- setClass(
       "send_rec" = "communication/add_recommendation",
       "retrieve_obs" = "communication/send_all_new_observations"
     ),
-    token = character(0)
+    token = character(0),
+    attempts = 0
   )
 )
 
@@ -109,5 +111,102 @@ setMethod(
     )
     
     return(res_body)
+  }
+)
+
+
+setGeneric("getObs", function(wc) standardGeneric("getObs"))
+setMethod(
+  "getObs",
+  "WebClient",
+  function(wc, seq_num){
+    body <- list(
+      sequence_number=seq_num
+    )
+    full_url <- paste(wc@url,"/",wc@endpoints["retrieve_obs"], sep="")
+    
+    status <- FALSE
+    res_body <- NULL
+    tryCatch(
+      {
+        r <- POST(
+          full_url,
+          content_type_json(),
+          add_headers(Authorization=paste("Token", wc@token, seq = " ")),
+          body = body,
+          encode = "json"
+        )
+        status <- status_code(r)=="200"
+        res_body <- fromJSON(content(r, "text"))
+      },
+      error=function(cond){
+        print(cond)
+      },
+      warning=function(cond){
+        print(cond)
+      }
+    )
+    
+    return(list(status=status, res_body=res_body))
+  }
+)
+
+
+setGeneric("sendRecs", function(wc) standardGeneric("sendRecs"))
+setMethod(
+  "sendRecs",
+  "WebClient",
+  function(wc, seq_num, json){
+    body <- list(
+      sequence_number=seq_num,
+      recommendations=fromJSON(json)
+    )
+    full_url <- paste(wc@url,"/",wc@endpoints["send_rec"], sep="")
+    
+    status <- FALSE
+    res_body <- NULL
+    tryCatch(
+      {
+        r <- POST(
+          full_url,
+          content_type_json(),
+          add_headers(Authorization=paste("Token", wc@token, seq = " ")),
+          body = body,
+          encode = "json"
+        )
+        status <- status_code(r)=="200"
+        res_body <- fromJSON(content(r, "text"))
+      },
+      error=function(cond){
+        print(cond)
+      },
+      warning=function(cond){
+        print(cond)
+      }
+    )
+    
+    return(list(status=status, res_body=res_body))
+  }
+)
+
+
+setGeneric("addAttempts", function(wc) standardGeneric("addAttempts"))
+setMethod(
+  "addAttempts",
+  "WebClient",
+  function(wc){
+    wc@attempts <- wc@attempts + 1
+    return(wc)
+  }
+)
+
+
+setGeneric("resetAttempts", function(wc) standardGeneric("resetAttempts"))
+setMethod(
+  "resetAttempts",
+  "WebClient",
+  function(wc){
+    wc@attempts <- 0
+    return(wc)
   }
 )

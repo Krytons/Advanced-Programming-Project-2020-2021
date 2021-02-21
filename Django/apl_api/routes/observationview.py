@@ -16,7 +16,7 @@ from apl_api.serializers import ObservedProductSerializer, ProductSerializer, Ne
 def create_observation(request):
     serializer = ObservedProductSerializer(data=request.data)
     if serializer.is_valid():
-        if serializer.validated_data['creator'] != request.user:
+        if (serializer.validated_data['creator'] != request.user) and (not request.user.is_superuser):
             return Response({'response': 'You have no permissions to create an observed product for somebody '
                                          'else!'}, status=status.HTTP_401_UNAUTHORIZED)
         else:

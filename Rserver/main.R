@@ -13,6 +13,9 @@ source(paste(script.dir, "/RecDB.R", sep=""))
 #################################################
 # INIZIALIZATION
 
+from.anew <- TRUE
+if(from.anew) unlink("*.rds", recursive = TRUE, force = TRUE)
+
 wc <- new("WebClient", username="gabriele.costanzo@alice.it", password="banana")
 seq_num <- 0
 rs <- new("RecSys", wc, seq_num)
@@ -26,6 +29,10 @@ if(Sys.info()["sysname"]=="Windows"){
   source(paste(script.dir, "/UnixTaskScheduler.R", sep=""))
   ts <- new("UnixTaskScheduler", seconds=10, wc=wc, rs=rs, rdb=rdb)
 }
+
+saveRDS(rs, paste(script.dir, "/rs.rds", sep=""))
+saveRDS(rdb, paste(script.dir, "/rdb.rds", sep=""))
+saveRDS(ts, paste(script.dir, "/ts.rds", sep=""))
   
 schedule_tasks(ts)
 

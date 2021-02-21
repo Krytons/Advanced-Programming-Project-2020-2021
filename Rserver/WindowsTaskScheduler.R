@@ -1,10 +1,10 @@
-list.of.packages <- c("taskscheduleR")
+list.of.packages <- c("taskscheduleR", "here")
 noninst.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(noninst.packages)) install.packages(noninst.packages, repos = "http://cran.us.r-project.org")
 
 lapply(list.of.packages, require, character.only = TRUE)
 
-script.dir <- dirname(sys.frame(1)$ofile)
+if(!exists("script.dir")) script.dir <- here("Rserver")
 
 source(paste(script.dir, "/TaskScheduler.R", sep=""))
 #################################################
