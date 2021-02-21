@@ -27,9 +27,9 @@ setMethod(
   "initialize",
   "RecDB",
   function(.Object, rs, seq){
-    if(FALSE && file.exists(paste(script.dir,"/rdb.rds", sep=""))){
-      .Object <- readRDS(paste(script.dir,"/rs.rds", sep=""))
-      print("ResDB caricato da file.")
+    if(file.exists(paste(script.dir,"/rdb.rds", sep=""))){
+      .Object <- readRDS(paste(script.dir,"/rdb.rds", sep=""))
+      print("RecDB caricato da file.")
     }else{
       print("Genero RDB da zero...")
       .Object@seqNum <- seq
@@ -60,12 +60,13 @@ setMethod("updateRDB", "RecDB",
     
     combinedList <- c(removedList, newList, changedList)
 
+    remap <- lapply(names(combinedList), function(x){ return(list(user_id=x, products=combinedList[[x]]))})
+    
     reqs <- r@reqs
     index <- toString(r@seqNum)
-    reqs[index] <- toJSON(combinedList)
+    reqs[index] <- toJSON(remap)
     
     r@reqs <- reqs
-    r@seqNum <- (r@seqNum + 1)
     return(r)
   }
 )
@@ -76,5 +77,15 @@ setMethod("increaseCounter", "RecDB",
   function(rdb){
     rdb@seqNum <- (rdb@seqNum + 1)%%1000
     return(rdb)
+  }
+)
+
+
+setGeneric("getNewRecs", function(rdb) standardGeneric("getNewRecs"))
+setMethod("getNewRecs", "RecDB",
+  function(rdb){
+    newRecs <- rdb@reqs[[toString(rdb@seqNum)]]
+    if(is.null(newRecs)) newRecs <- "[]"
+    return(newRecs)
   }
 )

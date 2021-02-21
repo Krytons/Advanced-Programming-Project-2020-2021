@@ -27,7 +27,7 @@ setMethod(
   "initialize",
   "RecSys",
   function(.Object, wc, seq_num){
-    if(FALSE && file.exists(paste(script.dir,"/rs.rds", sep=""))){
+    if(file.exists(paste(script.dir,"/rs.rds", sep=""))){
       .Object <- readRDS(paste(script.dir,"/rs.rds", sep=""))
       print("RecSys caricato da file.")
     }else{
@@ -89,6 +89,7 @@ setGeneric("updateRS", function(r, l) standardGeneric("updateRS"))
 setMethod("updateRS", "RecSys",
   function(r, l){
     df <- r@m
+    l <- lapply(l, function(x){return(c(as.logical(x$operation), toString(x$id), toString(x$user_id)))})
     for(x in l){
       if(length(x)==3){
         add <- x[[1]]

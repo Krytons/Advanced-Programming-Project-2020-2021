@@ -1,10 +1,10 @@
-list.of.packages <- c("cronR")
+list.of.packages <- c("cronR", "here")
 noninst.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(noninst.packages)) install.packages(noninst.packages, repos = "http://cran.us.r-project.org")
 
 lapply(list.of.packages, require, character.only = TRUE)
 
-script.dir <- dirname(sys.frame(1)$ofile)
+if(!exists("script.dir")) script.dir <- here("Rserver")
 
 source(paste(script.dir, "/TaskScheduler.R", sep=""))
 #################################################
@@ -20,7 +20,7 @@ setMethod(
   "UnixTaskScheduler",
   function(ts){
     f <- paste(script.dir, "/task.R", sep="")
-    cmd <- cron_rscript(f)
+    cmd <- cron_rscript(f, rscript_args = c(script.dir))
     cmd
     
     cron_add(
