@@ -19,6 +19,25 @@ setMethod(
   "schedule_tasks",
   "WindowsTaskScheduler",
   function(ts){
-    print("Abstract method, no implementation")
+    f <- paste(script.dir, "/task.R", sep="")
+
+    
+    taskscheduler_create(
+      taskname = "recsys_cron",
+      rscript = f,
+      schedule = "MINUTE",
+      rscript_args = c(script.dir)
+    )
+  }
+)
+
+
+setMethod(
+  "terminate_tasks",
+  "WindowsTaskScheduler",
+  function(ts){
+    taskscheduler_delete(
+      taskname = "recsys_cron"
+    )
   }
 )
