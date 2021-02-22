@@ -12,8 +12,10 @@ source(paste(script.dir, "/RecDB.R", sep=""))
 #####################################################################################
 
 wc <- new("WebClient", username="gabriele.costanzo@alice.it", password="banana")
-seq_num <- 0
-rs <- new("RecSys", wc, seq_num)
+
+wc <- new("WebClient", username="gabriele.costanzo@alice.it", password="banana")
+rs <- new("RecSys", wc)
+seq_num <- rs@seq_num
 rdb <- new("RecDB", rs=rs, seq=seq_num)
 ts <- NULL
 
