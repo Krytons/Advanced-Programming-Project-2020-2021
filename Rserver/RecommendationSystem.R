@@ -12,13 +12,15 @@ RecSys <- setClass(
   slots=c(
     m = "data.frame",
     model = "ANY",
-    recs = "ANY"
+    recs = "ANY",
+    seq_num = "numeric"
     ),
   
   prototype=list(
     m = data.frame(),
     model = NULL,
-    recs = NULL
+    recs = NULL,
+    seq_num = 0
   )
 )
 
@@ -26,20 +28,21 @@ RecSys <- setClass(
 setMethod(
   "initialize",
   "RecSys",
-  function(.Object, wc, seq_num){
+  function(.Object, wc){
     if(file.exists(paste(script.dir,"/rs.rds", sep=""))){
       .Object <- readRDS(paste(script.dir,"/rs.rds", sep=""))
       print("RecSys caricato da file.")
     }else{
       print("Richiedo il dataframe dal backend...")
       res_body <- getDataframe(wc)
+      print(res_body)
       json <- res_body$dataframe
-      seq_num <- res_body$sequence_number
+      .Object@seq_num <- res_body$sequence_number
       
       if(length(json)>0){
         df = as.data.frame(json$data)
-        row.names(df) <- as.character(json$index)
-        colnames(df)<- as.character(json$columns)
+        row.names(df) <- as.character(json$columns)
+        colnames(df)<- as.character(json$index)
         
         .Object@m <- df
       }
