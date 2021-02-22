@@ -58,7 +58,7 @@
                 <oxy:PlotView WidthRequest="400" HeightRequest="300" Model="{Binding Model}"
                     VerticalOptions="Center" HorizontalOptions="Center"/>
                 <Label x:Name="chartErrors" Text=""/>
-                <Button Text="Observe product" TextColor="White"  
+                <Button Text="👌 Observe product 👌" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="InsertObservation"/>
             </StackLayout>

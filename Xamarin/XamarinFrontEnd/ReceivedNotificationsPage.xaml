@@ -34,7 +34,7 @@
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Button Grid.Row="3"  Grid.Column="0"
-                                Margin="0,0,0,0" Text="Delete Notification" TextColor="White"  
+                                Margin="0,0,0,0" Text="❌ Delete ❌" TextColor="White"  
                                 FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
                                 CommandParameter="{Binding Notification.Id}"
                                 BackgroundColor="#088da5" Clicked="Delete"/>
