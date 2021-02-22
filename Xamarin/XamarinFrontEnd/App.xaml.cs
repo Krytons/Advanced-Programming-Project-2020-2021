@@ -102,9 +102,9 @@ namespace XamarinFrontEnd
                         {
                             HttpResponseMessage responseOb = await ObservationRequest.GetObservationById(user_notification.Observation);
 
-                            if (response.IsSuccessStatusCode)
+                            if (responseOb.IsSuccessStatusCode)
                             {
-                                string response_contentOb = await response.Content.ReadAsStringAsync();
+                                string response_contentOb = await responseOb.Content.ReadAsStringAsync();
                                 RequestObservation observation = JsonConvert.DeserializeObject<RequestObservation>(response_contentOb);
                                 string title = "🚨 Good news! 🚨";
                                 string message = "💰 Your observed product: " + observation.Product.Title + " is now available for: €" + observation.Product.Price + " 💰";
@@ -112,12 +112,12 @@ namespace XamarinFrontEnd
                             }
                             else
                             {
-                                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                                if (responseOb.StatusCode == System.Net.HttpStatusCode.BadGateway)
                                 {
                                     await DisplayAlert("Try Again!", "No connection with the server", "OK");
 
                                 }
-                                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                                if (responseOb.StatusCode == System.Net.HttpStatusCode.BadRequest)
                                 {
                                     await DisplayAlert("Try Again!", "Invalid request", "OK");
                                 }

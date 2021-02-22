@@ -40,9 +40,9 @@ namespace XamarinFrontEnd
                 {
                     HttpResponseMessage responseOb  = await ObservationRequest.GetObservationById(notification.Observation);
 
-                    if (response.IsSuccessStatusCode)
+                    if (responseOb.IsSuccessStatusCode)
                     {
-                        string response_contentOb = await response.Content.ReadAsStringAsync();
+                        string response_contentOb = await responseOb.Content.ReadAsStringAsync();
                         RequestObservation observation = JsonConvert.DeserializeObject<RequestObservation>(response_contentOb);
 
                         if (observation != null)
