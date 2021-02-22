@@ -139,6 +139,32 @@ def update_observation(request, pk):
         return Response({'response':'This observation does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_observation_by_product_id(request, pk):
+    try:
+        observation = ObservedProduct.objects.get(product=pk, creator=request.user.id)
+        if observation.creator.email == request.user.email:
+            serializer = ObservedProductSerializer(instance=observation, data=request.data)
+            if serializer.is_valid():
+                if request.user == serializer.validated_data['creator']:
+                    try:
+                        serializer.save()
+                        return Response(serializer.data, status=status.HTTP_200_OK)
+                    except DatabaseError:
+                        return Response({'response':'Duplicate observation'}, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    return Response({'response':'You are not authorized to modify your request with somebody else '
+                                                'email'}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'response': 'You have no permissions to update this observation'},
+                            status=status.HTTP_401_UNAUTHORIZED)
+    except ObjectDoesNotExist:
+        return Response({'response':'This observation does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_observation(request, pk):

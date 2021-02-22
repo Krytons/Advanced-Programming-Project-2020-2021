@@ -71,7 +71,6 @@ namespace XamarinFrontEnd
                         string response_content = await response.Content.ReadAsStringAsync();
                         await DisplayAlert("Success!", "Observation successful", "OK");
                     }
-                    //VEDERE SE VA BENE O TOGLIERE TRY CATCH
                     else
                     {
                         if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
