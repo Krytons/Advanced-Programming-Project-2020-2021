@@ -16,12 +16,32 @@ from apl_api.serializers import ObservedProductSerializer, ProductSerializer, Ne
 def create_observation(request):
     serializer = ObservedProductSerializer(data=request.data)
     if serializer.is_valid():
-        if (serializer.validated_data['creator'] != request.user) and (not request.user.is_superuser):
+        if serializer.validated_data['creator'] != request.user:
             return Response({'response': 'You have no permissions to create an observed product for somebody '
                                          'else!'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             try:
                 serializer.save()
+                try:
+                    returned_sequence = SequenceNumber.objects.latest('created_at')
+                    try:
+                        new_observation = NewObservedProduct.objects.get(user_id=request.user.id,
+                                                                        product=serializer.validated_data["product"].id,
+                                                                        sequence_number=returned_sequence.number)
+                        new_observation.operation = True
+                        new_observation.save()
+                    except ObjectDoesNotExist:
+                        new_observation = {
+                            'user_id': request.user.id,
+                            'product': serializer.validated_data["product"].id,
+                            'sequence_number': returned_sequence.number,
+                            'operation': True
+                        }
+                        new_observation_serializer = NewObservedProductSerializer(data=new_observation)
+                        if new_observation_serializer.is_valid():
+                            new_observation_serializer.save()
+                except ObjectDoesNotExist:
+                    print("Couldn't get a valid Sequence Number")
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except DatabaseError:
                 return Response({'response': 'This element is already observed'}, status=status.HTTP_400_BAD_REQUEST)
@@ -125,6 +145,21 @@ def delete_observation(request, pk):
     try:
         observation = ObservedProduct.objects.get(id=pk)
         if observation.creator.email == request.user.email:
+            returned_sequence = SequenceNumber.objects.latest('created_at')
+            try:
+                new_observation = NewObservedProduct.objects.get(user_id=request.user.id, product=observation.product.id,
+                                                                 sequence_number=returned_sequence.number)
+                new_observation.delete()
+            except ObjectDoesNotExist:
+                new_observation = {
+                    'user_id': request.user.id,
+                    'product': observation.product.id,
+                    'sequence_number': returned_sequence.number,
+                    'operation': False
+                }
+                new_observation_serializer = NewObservedProductSerializer(data=new_observation)
+                if new_observation_serializer.is_valid():
+                    new_observation_serializer.save()
             observation.delete()
             return Response({'response':'Observation successfully deleted'}, status=status.HTTP_200_OK)
         else:

@@ -92,8 +92,7 @@ def add_recommendations(request):
                 old_products_set = actual_set.difference(received_set)
                 new_products_list = list(new_products_set)
                 old_products_list = list(old_products_set)
-                print(new_products_list)
-                print(old_products_list)
+
                 for new_product in new_products_list:
                     add_recommendation(uid, new_product)
                 for old_product in old_products_list:

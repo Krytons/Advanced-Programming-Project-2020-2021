@@ -34,19 +34,24 @@ setMethod(
       print("RecSys caricato da file.")
     }else{
       print("Richiedo il dataframe dal backend...")
-      res_body <- getDataframe(wc)
-      print(res_body)
-      json <- res_body$dataframe
-      .Object@seq_num <- res_body$sequence_number
-      
-      if(length(json)>0){
-        df = as.data.frame(json$data)
-        row.names(df) <- as.character(json$columns)
-        colnames(df)<- as.character(json$index)
+      tryCatch({
+        res_body <- getDataframe(wc)
         
-        .Object@m <- df
-      }
-      if(length(.Object@m)>0) .Object <- train(removeEmptyEntries(.Object))
+        json <- res_body$dataframe
+        .Object@seq_num <- res_body$sequence_number
+        
+        if(length(json)>0){
+          df = as.data.frame(json$data)
+          row.names(df) <- as.character(json$columns)
+          colnames(df)<- as.character(json$index)
+          
+          .Object@m <- df
+        }
+        if(length(.Object@m)>0) .Object <- train(removeEmptyEntries(.Object))
+      },
+      error=function(cond){
+        print(cond)
+      })
     }
 
     return(.Object)
