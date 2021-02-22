@@ -34,7 +34,8 @@ The scheduled task already includes a method to empty the job schedule if the Dj
   ```bash
     $ sudo cron
   ```
-  If on **macOS**, it may be necessary to add the **Terminal** app and/or the **cron** binary to the apps that can control the computer under *"Security & Privacy"*
+  If on **macOS**, it may be necessary to add the **Terminal** app and/or the **cron** binary to the apps that can control the computer under *"Security & Privacy"* 
+  
   ![Where to setup the cron/terminal permissions](./images/cron-macos.png)
   - **cron location:**
   ```bash
