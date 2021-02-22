@@ -2,7 +2,7 @@
 
 <p align="center" style="font-size: 24px">
   <span> English </span> |
-  <a href="https://github.com/Krytons/Progetto3ACarusoFallicaDSBD/blob/main/README.it.md">Italiano</a>
+  <a href="#">Italiano</a>
 </p>
 
 ## Advanced Programming Languages 2020/2021

@@ -52,6 +52,7 @@ setMethod("updateRDB", "RecDB",
     filtList <- Filter(function(x){return(length(x)>0)}, l)
     
     oldList <- r@currList
+    r@currList <- filtList
     
     removedList <- Map(function(x){return(character(0))}, oldList[!(oldList %in% filtList)])
     newList <- filtList[!(filtList %in% oldList)]

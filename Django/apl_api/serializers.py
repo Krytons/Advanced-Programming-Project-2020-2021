@@ -62,6 +62,28 @@ class ObservedProductSerializer(serializers.ModelSerializer):
         """Overriding method to disable unique together checks"""
         return []
 
+# For RecSys communication:
+class ObservedProductForRecommendationSerializer(serializers.ModelSerializer):
+    creator = serializers.PrimaryKeyRelatedField(
+        many=False,
+        read_only=False,
+        queryset = AppUser.objects.all()
+    )
+
+    product = serializers.PrimaryKeyRelatedField(
+        many=False,
+        read_only=False,
+        queryset=Product.objects.all()
+    )
+
+    class Meta:
+        model = ObservedProduct
+        fields = ['id','creator', 'product', 'threshold_price']
+        read_only_fields = ['id']
+
+    def get_unique_together_validators(self):
+        """Overriding method to disable unique together checks"""
+        return []
 
 class NewObservedProductSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(

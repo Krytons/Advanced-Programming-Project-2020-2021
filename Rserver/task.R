@@ -25,6 +25,9 @@ if(length(args)==0){
   
   if(file.exists(paste(script.dir,"/ts.rds", sep=""))){
     ts <- readRDS(paste(script.dir,"/ts.rds", sep=""))
+  }else{
+    print("TaskScheduler dump does not exist, please initialize the Rserver...")
+    source(paste(script.dir, "/terminate.R", sep=""))
   }
   
   if(!is.null(ts) && ts@loop){
@@ -53,7 +56,6 @@ if(length(args)==0){
     l <- sendRecs(wc, rdb@seqNum, getNewRecs(rdb))
     status <- l$status
     if(status){ 
-      rdb <- increaseCounter(rdb)
       wc <- resetAttempts(wc)
     }else wc <- addAttempts(wc)
     #

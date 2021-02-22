@@ -115,7 +115,7 @@ setMethod(
 )
 
 
-setGeneric("getObs", function(wc) standardGeneric("getObs"))
+setGeneric("getObs", function(wc, seq_num) standardGeneric("getObs"))
 setMethod(
   "getObs",
   "WebClient",
@@ -152,15 +152,22 @@ setMethod(
 )
 
 
-setGeneric("sendRecs", function(wc) standardGeneric("sendRecs"))
+setGeneric("sendRecs", function(wc, seq_num, json) standardGeneric("sendRecs"))
 setMethod(
   "sendRecs",
   "WebClient",
   function(wc, seq_num, json){
-    body <- list(
-      sequence_number=seq_num,
-      recommendations=fromJSON(json)
-    )
+    rec_list <- fromJSON(json)
+    if(length(rec_list)>0){
+      body <- list(
+        sequence_number=seq_num,
+        recommendations=rec_list
+      )
+    }else{
+      body <- list(
+        sequence_number=seq_num
+      )
+    }
     full_url <- paste(wc@url,"/",wc@endpoints["send_rec"], sep="")
     
     status <- FALSE
