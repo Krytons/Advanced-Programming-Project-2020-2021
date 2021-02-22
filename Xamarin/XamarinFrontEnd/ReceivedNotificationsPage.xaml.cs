@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinFrontEnd.Classi;
@@ -28,20 +29,57 @@ namespace XamarinFrontEnd
         {
 
             List<OutputNotification> output_list  = new List<OutputNotification>();
-            List<AppUserNotification> notifications_list = await NotificationRequest.GetAllNotifications();
+            HttpResponseMessage response = await NotificationRequest.GetAllNotifications();
 
-            foreach (AppUserNotification notification in notifications_list)
+            if (response.IsSuccessStatusCode)
             {
-                RequestObservation observation = await ObservationRequest.GetObservationById(notification.Observation);
-                if (observation != null)
+                string response_content = await response.Content.ReadAsStringAsync();
+                List<AppUserNotification> notifications_list = JsonConvert.DeserializeObject<List<AppUserNotification>>(response_content);
+
+                foreach (AppUserNotification notification in notifications_list)
                 {
-                    OutputNotification output_value = new OutputNotification(observation, notification);
-                    output_list.Add(output_value);
+                    HttpResponseMessage responseOb  = await ObservationRequest.GetObservationById(notification.Observation);
+
+                    if (responseOb.IsSuccessStatusCode)
+                    {
+                        string response_contentOb = await responseOb.Content.ReadAsStringAsync();
+                        RequestObservation observation = JsonConvert.DeserializeObject<RequestObservation>(response_contentOb);
+
+                        if (observation != null)
+                        {
+                            OutputNotification output_value = new OutputNotification(observation, notification);
+                            output_list.Add(output_value);
+                        }
+                    }
+                    else
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                        {
+                            await DisplayAlert("Attention!!!", "No connection with the server", "OK");
+
+                        }
+                        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                        {
+                            await DisplayAlert("Try Again!", "Invalid request", "OK");
+                        }
+                    }
+                }
+
+                Notifications = output_list;
+                MyCollectionView.ItemsSource = Notifications;
+            }
+            else
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                {
+                    await DisplayAlert("Attention!!!", "No connection with the server", "OK");
+
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    await DisplayAlert("Try Again!", "Invalid request", "OK");
                 }
             }
-
-            Notifications = output_list;
-            MyCollectionView.ItemsSource = Notifications;
         }
 
         private async void Delete(object sender, EventArgs e)
@@ -49,8 +87,9 @@ namespace XamarinFrontEnd
             Button button = (Button)sender;
             int notification_to_delete = (int)button.CommandParameter;
 
-            string response = await NotificationRequest.DeleteNotification(notification_to_delete);
-            if (response != null)
+            HttpResponseMessage response = await NotificationRequest.DeleteNotification(notification_to_delete);
+
+            if (response.IsSuccessStatusCode)
             {
                 try
                 {
@@ -63,6 +102,18 @@ namespace XamarinFrontEnd
                 catch (Exception ex)
                 {
                     await DisplayAlert("Error!", "Something went wrong", "OK");
+                }
+            }
+            else
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                {
+                    await DisplayAlert("Attention!!!", "No connection with the server", "OK");
+
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    await DisplayAlert("Try Again!", "Invalid request", "OK");
                 }
             }
         }

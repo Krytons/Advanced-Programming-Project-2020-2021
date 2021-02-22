@@ -16,7 +16,7 @@ namespace XamarinFrontEnd.HttpRequest
     public class GetProduct
     {
 
-        public static async Task<Product> GetProductById(string id)
+        public static async Task<HttpResponseMessage> GetProductById(string id)
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -38,6 +38,8 @@ namespace XamarinFrontEnd.HttpRequest
 
             HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/api/products/");
 
+            return await Task.FromResult(response);
+            /*
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
@@ -45,9 +47,13 @@ namespace XamarinFrontEnd.HttpRequest
                 return await Task.FromResult(receivedProduct);
             }
             else return null;
+            */
         }
 
-        public static async Task<List<Product>> GetProducts(string json)
+
+
+
+        public static async Task<HttpResponseMessage> GetProducts(string json)
         {
 
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
@@ -71,16 +77,13 @@ namespace XamarinFrontEnd.HttpRequest
 
             HttpResponseMessage response = await client.PostAsync(json_des.Ngrok + "/ebay_search", content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<Product> receivedProduct = JsonConvert.DeserializeObject<List<Product>>(response_content);
-                return await Task.FromResult(receivedProduct);
-            }
-            else return null;
+            return await Task.FromResult(response);
         }
 
-        public static async Task<List<Product>> GetProductsByRecommendations()
+
+
+
+        public static async Task<HttpResponseMessage> GetProductsByRecommendations()
         {
 
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
@@ -103,17 +106,13 @@ namespace XamarinFrontEnd.HttpRequest
 
             HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/communication/complete_recommendations_info");
 
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<Product> receivedProduct = JsonConvert.DeserializeObject<List<Product>>(response_content);
-                return await Task.FromResult(receivedProduct);
-            }
-            else return null;
+            return await Task.FromResult(response);
         }
 
 
-        public static async Task<List<Price>> GetProductPriceHistory(string product_ebay_id)
+
+
+        public static async Task<HttpResponseMessage> GetProductPriceHistory(string product_ebay_id)
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -135,17 +134,9 @@ namespace XamarinFrontEnd.HttpRequest
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
 
             HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/price/history_by_ebay/" + product_ebay_id );
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<Price> receivedProduct = JsonConvert.DeserializeObject<List<Price>>(response_content);
-                return await Task.FromResult(receivedProduct);
-            }
-            else
-            {
-                List<Price> receivedProduct = new List<Price>() { };
-                return await Task.FromResult(receivedProduct);
-            }
+
+            return await Task.FromResult(response);
+
         }
 
 

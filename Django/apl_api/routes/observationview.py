@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-from apl_api.models import ObservedProduct, Product
-from apl_api.serializers import ObservedProductSerializer, ProductSerializer
+from apl_api.models import ObservedProduct, Product, NewObservedProduct, SequenceNumber
+from apl_api.serializers import ObservedProductSerializer, ProductSerializer, NewObservedProductSerializer
 
 
 @api_view(['POST'])
@@ -16,7 +16,7 @@ from apl_api.serializers import ObservedProductSerializer, ProductSerializer
 def create_observation(request):
     serializer = ObservedProductSerializer(data=request.data)
     if serializer.is_valid():
-        if serializer.validated_data['creator'] != request.user:
+        if (serializer.validated_data['creator'] != request.user) and (not request.user.is_superuser):
             return Response({'response': 'You have no permissions to create an observed product for somebody '
                                          'else!'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
@@ -142,6 +142,21 @@ def delete_observation_by_product_id(request, pk):
         print (product)
         observation = ObservedProduct.objects.get(product=product)
         if observation.creator.email == request.user.email:
+            returned_sequence = SequenceNumber.objects.latest('created_at')
+            try:
+                new_observation = NewObservedProduct.objects.get(user_id=request.user.id, product=observation.product.id,
+                                                                 sequence_number=returned_sequence.number)
+                new_observation.delete()
+            except ObjectDoesNotExist:
+                new_observation = {
+                    'user_id': request.user.id,
+                    'product': product.id,
+                    'sequence_number': returned_sequence.number,
+                    'operation': False
+                }
+                new_observation_serializer = NewObservedProductSerializer(data=new_observation)
+                if new_observation_serializer.is_valid():
+                    new_observation_serializer.save()
             observation.delete()
             return Response({'response':'Observation successfully deleted'}, status=status.HTTP_200_OK)
         else:

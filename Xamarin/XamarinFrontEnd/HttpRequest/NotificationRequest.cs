@@ -14,7 +14,7 @@ namespace XamarinFrontEnd.HttpRequest
 {
     public class NotificationRequest
     {
-        public static async Task<List<AppUserNotification>> GetNotPulledNotifications()
+        public static async Task<HttpResponseMessage> GetNotPulledNotifications()
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -34,6 +34,10 @@ namespace XamarinFrontEnd.HttpRequest
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
             HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/notifications/user/not_pulled");
 
+            return await Task.FromResult(response);
+
+            /*
+
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
@@ -41,9 +45,10 @@ namespace XamarinFrontEnd.HttpRequest
                 return await Task.FromResult(receivedList);
             }
             else return null;
+            */
         }
 
-        public static async Task<List<AppUserNotification>> GetAllNotifications()
+        public static async Task<HttpResponseMessage> GetAllNotifications()
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -63,6 +68,10 @@ namespace XamarinFrontEnd.HttpRequest
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
             HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/notifications/user");
 
+            return await Task.FromResult(response);
+
+            /*
+
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
@@ -70,9 +79,11 @@ namespace XamarinFrontEnd.HttpRequest
                 return await Task.FromResult(receivedList);
             }
             else return null;
+
+            */
         }
 
-        public static async Task<string> DeleteNotification(int number)
+        public static async Task<HttpResponseMessage> DeleteNotification(int number)
         {
             var app = Assembly.GetAssembly(typeof(SecretClass)).GetManifestResourceStream("XamarinFrontEnd.Configuration.secrets.json");
             var stream = new StreamReader(app);
@@ -92,11 +103,15 @@ namespace XamarinFrontEnd.HttpRequest
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", token);
             HttpResponseMessage response = await client.DeleteAsync(json_des.Ngrok + "/notifications/delete/" + number);
 
+            return await Task.FromResult(response);
+
+            /*
             if (response.IsSuccessStatusCode)
             {
                 return await Task.FromResult("Notification deleted!");
             }
             else return null;
+            */
         }
     }
 }

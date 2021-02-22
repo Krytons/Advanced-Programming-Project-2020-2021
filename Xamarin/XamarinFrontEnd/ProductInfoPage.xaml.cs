@@ -4,6 +4,7 @@ using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -63,8 +64,26 @@ namespace XamarinFrontEnd
                     email = await SecureStorage.GetAsync("email");
                     RequestObservation observation = new RequestObservation(Page_product, result, email);
                     string json = JsonConvert.SerializeObject(observation);
-                    string response = await ObservationRequest.InsertObservation(json);
-                    await DisplayAlert("Success!", response, "OK");
+                    HttpResponseMessage response = await ObservationRequest.InsertObservation(json);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string response_content = await response.Content.ReadAsStringAsync();
+                        await DisplayAlert("Success!", "Observation successful", "OK");
+                    }
+                    //VEDERE SE VA BENE O TOGLIERE TRY CATCH
+                    else
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                        {
+                            await DisplayAlert("Try Again!", "No connection with the server", "OK");
+
+                        }
+                        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                        {
+                            await DisplayAlert("Try Again!", "Invalid request", "OK");
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
