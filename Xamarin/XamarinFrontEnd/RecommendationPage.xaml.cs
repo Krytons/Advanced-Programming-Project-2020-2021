@@ -18,8 +18,6 @@ namespace XamarinFrontEnd
 
         public List<Product> Products { get; set; }
 
-        private HttpResponseMessage response;
-
         public RecommendationPage()
         {
             Products = new List<Product>();
@@ -34,7 +32,7 @@ namespace XamarinFrontEnd
             if (response.IsSuccessStatusCode)
             {
                 string response_content = await response.Content.ReadAsStringAsync();
-                List<Product> Products = JsonConvert.DeserializeObject<List<Product>>(response_content);
+                Products = JsonConvert.DeserializeObject<List<Product>>(response_content);
                 MyCollectionView.ItemsSource = Products;
             }
             else
@@ -49,8 +47,33 @@ namespace XamarinFrontEnd
                     await DisplayAlert("Try Again!", "Invalid request", "OK");
                 }
             }
+        }
 
+        private async void GetMoreInfo(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string product_to_search = (string)button.CommandParameter;
+            Product button_product = Products.Find(Products => Products.Item_id == product_to_search);
+            HttpResponseMessage response = await GetProduct.GetProductPriceHistory(button_product.Item_id);
+            if (response.IsSuccessStatusCode)
+            {
+                string response_content = await response.Content.ReadAsStringAsync();
+                List<Price> prices = JsonConvert.DeserializeObject<List<Price>>(response_content);
+                await Navigation.PushAsync(new ProductInfoPage(button_product, prices));
+            }
+            else
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.BadGateway)
+                {
+                    await DisplayAlert("Try Again!", "No connection with the server", "OK");
 
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    List<Price> prices = new List<Price>();
+                    await Navigation.PushAsync(new ProductInfoPage(button_product, prices));
+                }
+            }
         }
 
 
