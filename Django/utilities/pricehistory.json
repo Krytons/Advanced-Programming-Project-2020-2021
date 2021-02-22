@@ -1,0 +1,441 @@
+[{
+  "_id": {
+    "$oid": "6029b5c6620ed1d172ad981c"
+  },
+  "id": 1,
+  "product_id": 1,
+  "old_price": "5.20",
+  "price_time": {
+    "$date": "2021-02-14T23:43:14.635Z"
+  }
+},{
+  "_id": {
+    "$oid": "6029b5c8620ed1d172ad981f"
+  },
+  "id": 2,
+  "product_id": 1,
+  "old_price": "2.00",
+  "price_time": {
+    "$date": "2021-02-14T23:44:06.269Z"
+  }
+},{
+  "_id": {
+    "$oid": "6029b88141805853ac4865ea"
+  },
+  "id": 3,
+  "product_id": 2,
+  "old_price": "789.90",
+  "price_time": {
+    "$date": "2021-02-14T23:52:20.895Z"
+  }
+},{
+  "_id": {
+    "$oid": "6029b8b841805853ac4865ee"
+  },
+  "id": 4,
+  "product_id": 2,
+  "old_price": "799.90",
+  "price_time": {
+    "$date": "2021-02-14T23:55:45.783Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329f992fabe7aa85efb9c9"
+  },
+  "id": 5,
+  "product_id": 6,
+  "old_price": "349.90",
+  "price_time": {
+    "$date": "2021-02-19T16:03:31.102Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329f992fabe7aa85efb9ca"
+  },
+  "id": 6,
+  "product_id": 7,
+  "old_price": "29.50",
+  "price_time": {
+    "$date": "2021-02-19T15:20:18.737Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329f9e2fabe7aa85efb9cb"
+  },
+  "id": 7,
+  "product_id": 13,
+  "old_price": "26.30",
+  "price_time": {
+    "$date": "2021-02-20T00:24:33.127Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329f9f2fabe7aa85efb9cc"
+  },
+  "id": 8,
+  "product_id": 15,
+  "old_price": "28.99",
+  "price_time": {
+    "$date": "2021-02-20T00:24:45.842Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fa32fabe7aa85efb9cd"
+  },
+  "id": 9,
+  "product_id": 20,
+  "old_price": "144.99",
+  "price_time": {
+    "$date": "2021-02-20T00:25:10.318Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fb02fabe7aa85efb9ce"
+  },
+  "id": 10,
+  "product_id": 37,
+  "old_price": "59.99",
+  "price_time": {
+    "$date": "2021-02-20T00:26:41.835Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fb22fabe7aa85efb9d0"
+  },
+  "id": 11,
+  "product_id": 40,
+  "old_price": "88.80",
+  "price_time": {
+    "$date": "2021-02-20T00:26:56.969Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fbb2fabe7aa85efb9d1"
+  },
+  "id": 12,
+  "product_id": 52,
+  "old_price": "92.99",
+  "price_time": {
+    "$date": "2021-02-20T00:28:10.590Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fc02fabe7aa85efb9d2"
+  },
+  "id": 13,
+  "product_id": 58,
+  "old_price": "239.99",
+  "price_time": {
+    "$date": "2021-02-20T00:28:40.421Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fc72fabe7aa85efb9d3"
+  },
+  "id": 14,
+  "product_id": 68,
+  "old_price": "29.96",
+  "price_time": {
+    "$date": "2021-02-20T00:29:30.151Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fcc2fabe7aa85efb9d4"
+  },
+  "id": 15,
+  "product_id": 74,
+  "old_price": "418.00",
+  "price_time": {
+    "$date": "2021-02-20T00:30:01.193Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fe22fabe7aa85efb9d6"
+  },
+  "id": 16,
+  "product_id": 105,
+  "old_price": "49.99",
+  "price_time": {
+    "$date": "2021-02-20T00:32:48.812Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fe52fabe7aa85efb9d7"
+  },
+  "id": 17,
+  "product_id": 109,
+  "old_price": "72.42",
+  "price_time": {
+    "$date": "2021-02-20T00:33:08.626Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fe72fabe7aa85efb9d8"
+  },
+  "id": 18,
+  "product_id": 111,
+  "old_price": "30.64",
+  "price_time": {
+    "$date": "2021-02-20T00:33:18.482Z"
+  }
+},{
+  "_id": {
+    "$oid": "60329fec2fabe7aa85efb9d9"
+  },
+  "id": 19,
+  "product_id": 119,
+  "old_price": "18.40",
+  "price_time": {
+    "$date": "2021-02-20T00:33:57.887Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a0052fabe7aa85efb9db"
+  },
+  "id": 20,
+  "product_id": 151,
+  "old_price": "28.50",
+  "price_time": {
+    "$date": "2021-02-20T00:37:07.891Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a0082fabe7aa85efb9dc"
+  },
+  "id": 21,
+  "product_id": 155,
+  "old_price": "1319.00",
+  "price_time": {
+    "$date": "2021-02-20T00:37:32.845Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a00b2fabe7aa85efb9dd"
+  },
+  "id": 22,
+  "product_id": 159,
+  "old_price": "605.00",
+  "price_time": {
+    "$date": "2021-02-20T00:37:53.521Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a00f2fabe7aa85efb9df"
+  },
+  "id": 23,
+  "product_id": 166,
+  "old_price": "929.00",
+  "price_time": {
+    "$date": "2021-02-20T00:38:28.721Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a0102fabe7aa85efb9e0"
+  },
+  "id": 24,
+  "product_id": 167,
+  "old_price": "500.00",
+  "price_time": {
+    "$date": "2021-02-20T00:38:33.706Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a0122fabe7aa85efb9e1"
+  },
+  "id": 25,
+  "product_id": 170,
+  "old_price": "153.01",
+  "price_time": {
+    "$date": "2021-02-20T00:38:48.688Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a0132fabe7aa85efb9e2"
+  },
+  "id": 26,
+  "product_id": 172,
+  "old_price": "267.00",
+  "price_time": {
+    "$date": "2021-02-20T00:38:58.625Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a0e02fabe7aa85efb9ea"
+  },
+  "id": 27,
+  "product_id": 44,
+  "old_price": "306.91",
+  "price_time": {
+    "$date": "2021-02-20T00:27:24.900Z"
+  }
+},{
+  "_id": {
+    "$oid": "6032a1122fabe7aa85efb9ec"
+  },
+  "id": 28,
+  "product_id": 111,
+  "old_price": "28.71",
+  "price_time": {
+    "$date": "2021-02-21T18:01:11.088Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033748ab2339f726c49feea"
+  },
+  "id": 29,
+  "product_id": 8,
+  "old_price": "45.00",
+  "price_time": {
+    "$date": "2021-02-19T15:47:00.486Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383c536c268879f6b01f2"
+  },
+  "id": 30,
+  "product_id": 44,
+  "old_price": "309.98",
+  "price_time": {
+    "$date": "2021-02-21T18:05:20.331Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383e136c268879f6b01f3"
+  },
+  "id": 31,
+  "product_id": 78,
+  "old_price": "1099.99",
+  "price_time": {
+    "$date": "2021-02-20T00:30:21.331Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383e136c268879f6b01f4"
+  },
+  "id": 32,
+  "product_id": 79,
+  "old_price": "379.99",
+  "price_time": {
+    "$date": "2021-02-20T00:30:26.318Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383f336c268879f6b01f5"
+  },
+  "id": 33,
+  "product_id": 101,
+  "old_price": "25.99",
+  "price_time": {
+    "$date": "2021-02-20T00:32:29.175Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383f436c268879f6b01f6"
+  },
+  "id": 34,
+  "product_id": 102,
+  "old_price": "35.99",
+  "price_time": {
+    "$date": "2021-02-20T00:32:34.057Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383f936c268879f6b01f7"
+  },
+  "id": 35,
+  "product_id": 108,
+  "old_price": "57.90",
+  "price_time": {
+    "$date": "2021-02-20T00:33:03.671Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383fa36c268879f6b01f8"
+  },
+  "id": 36,
+  "product_id": 109,
+  "old_price": "69.59",
+  "price_time": {
+    "$date": "2021-02-21T18:01:09.639Z"
+  }
+},{
+  "_id": {
+    "$oid": "603383fc36c268879f6b01fc"
+  },
+  "id": 37,
+  "product_id": 111,
+  "old_price": "28.42",
+  "price_time": {
+    "$date": "2021-02-21T18:06:10.505Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033840d36c268879f6b01fd"
+  },
+  "id": 38,
+  "product_id": 133,
+  "old_price": "19.99",
+  "price_time": {
+    "$date": "2021-02-20T00:35:30.537Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033843436c268879f6b01fe"
+  },
+  "id": 39,
+  "product_id": 184,
+  "old_price": "19.99",
+  "price_time": {
+    "$date": "2021-02-20T00:39:58.584Z"
+  }
+},{
+  "_id": {
+    "$oid": "60339fe405013afdf4a9f10d"
+  },
+  "id": 40,
+  "product_id": 44,
+  "old_price": "305.35",
+  "price_time": {
+    "$date": "2021-02-22T10:13:25.467Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033ca000ab947f84b8caf20"
+  },
+  "id": 41,
+  "product_id": 25,
+  "old_price": "24.07",
+  "price_time": {
+    "$date": "2021-02-20T00:25:42.078Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033ca0c0ab947f84b8caf21"
+  },
+  "id": 42,
+  "product_id": 44,
+  "old_price": "302.30",
+  "price_time": {
+    "$date": "2021-02-22T12:13:24.658Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033ca0e0ab947f84b8caf22"
+  },
+  "id": 43,
+  "product_id": 47,
+  "old_price": "50.00",
+  "price_time": {
+    "$date": "2021-02-20T00:27:40.200Z"
+  }
+},{
+  "_id": {
+    "$oid": "6033ca390ab947f84b8caf25"
+  },
+  "id": 44,
+  "product_id": 109,
+  "old_price": "72.38",
+  "price_time": {
+    "$date": "2021-02-22T10:14:18.427Z"
+  }
+}]
