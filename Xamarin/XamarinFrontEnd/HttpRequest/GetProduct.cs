@@ -39,15 +39,7 @@ namespace XamarinFrontEnd.HttpRequest
             HttpResponseMessage response = await client.GetAsync(json_des.Ngrok + "/api/products/");
 
             return await Task.FromResult(response);
-            /*
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                Product receivedProduct = JsonConvert.DeserializeObject<Product>(response_content);
-                return await Task.FromResult(receivedProduct);
-            }
-            else return null;
-            */
+
         }
 
 

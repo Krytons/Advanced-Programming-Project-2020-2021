@@ -36,16 +36,6 @@ namespace XamarinFrontEnd.HttpRequest
 
             return await Task.FromResult(response);
 
-            /*
-
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<AppUserNotification> receivedList = JsonConvert.DeserializeObject<List<AppUserNotification>>(response_content);
-                return await Task.FromResult(receivedList);
-            }
-            else return null;
-            */
         }
 
         public static async Task<HttpResponseMessage> GetAllNotifications()
@@ -70,17 +60,6 @@ namespace XamarinFrontEnd.HttpRequest
 
             return await Task.FromResult(response);
 
-            /*
-
-            if (response.IsSuccessStatusCode)
-            {
-                string response_content = await response.Content.ReadAsStringAsync();
-                List<AppUserNotification> receivedList = JsonConvert.DeserializeObject<List<AppUserNotification>>(response_content);
-                return await Task.FromResult(receivedList);
-            }
-            else return null;
-
-            */
         }
 
         public static async Task<HttpResponseMessage> DeleteNotification(int number)
@@ -105,13 +84,6 @@ namespace XamarinFrontEnd.HttpRequest
 
             return await Task.FromResult(response);
 
-            /*
-            if (response.IsSuccessStatusCode)
-            {
-                return await Task.FromResult("Notification deleted!");
-            }
-            else return null;
-            */
         }
     }
 }

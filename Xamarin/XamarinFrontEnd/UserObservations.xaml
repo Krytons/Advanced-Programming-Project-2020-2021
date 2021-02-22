@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinFrontEnd.UserObservations">
+             x:Class="XamarinFrontEnd.UserObservations"
+             Title="Your observations">
     <ContentPage.Content>
         <StackLayout Margin="20">
             <CollectionView x:Name="MyCollectionView" ItemsSource="{Binding RequestObservation}">
@@ -9,6 +10,7 @@
                     <DataTemplate>
                         <Grid Padding="10">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -33,10 +35,10 @@
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Button Grid.Row="2"  Grid.Column="1"
-                                Margin="0,0,0,0" Text="Delete" TextColor="White"  
+                                Margin="0,0,0,0" Text="✏️ Modify ✏️" TextColor="White"  
                                 FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
                                 CommandParameter="{Binding Product.Id}"
-                                BackgroundColor="#088da5" Clicked="Delete"/>
+                                BackgroundColor="#088da5" Clicked="UpdateOrDelete"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

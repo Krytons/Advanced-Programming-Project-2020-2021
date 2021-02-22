@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinFrontEnd.ReceivedNotificationsPage">
+             x:Class="XamarinFrontEnd.ReceivedNotificationsPage"
+             Title="Your notifications">
     <ContentPage.Content>
         <StackLayout>
             <CollectionView x:Name="MyCollectionView" ItemsSource="{Binding Notifications}">
@@ -34,7 +35,7 @@
                                FontAttributes="Italic"
                                VerticalOptions="End" />
                             <Button Grid.Row="3"  Grid.Column="0"
-                                Margin="0,0,0,0" Text="Delete Notification" TextColor="White"  
+                                Margin="0,0,0,0" Text="❌ Delete ❌" TextColor="White"  
                                 FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
                                 CommandParameter="{Binding Notification.Id}"
                                 BackgroundColor="#088da5" Clicked="Delete"/>

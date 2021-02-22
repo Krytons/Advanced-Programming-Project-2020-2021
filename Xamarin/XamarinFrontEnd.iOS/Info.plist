@@ -22,8 +22,6 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
-	<key>CFBundleDisplayName</key>
-	<string>XamarinFrontEnd</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.XamarinFrontEnd</string>
 	<key>CFBundleVersion</key>
@@ -39,5 +37,7 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>CFBundleDisplayName</key>
+	<string>Ebay Price Tracker</string>
 </dict>
 </plist>

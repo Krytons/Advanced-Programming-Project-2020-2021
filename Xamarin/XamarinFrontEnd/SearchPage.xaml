@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.SearchPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinFrontEnd.SearchPage" Title="Search products">
     <ContentPage.Content>
         <StackLayout Margin="20">
             <SearchBar Placeholder="Search items..."
@@ -40,7 +40,7 @@
                                Text="{Binding Price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
-                            <Button  Grid.Row="2"  Grid.Column="1" Margin="0,0,0,0" Text="More info" TextColor="White"  
+                            <Button  Grid.Row="2"  Grid.Column="1" Margin="0,0,0,0" Text="ℹ️ More info" TextColor="White"  
                                 FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
                                 CommandParameter="{Binding Item_id}"
                                 BackgroundColor="#088da5" Clicked="GetMoreInfo"/>
