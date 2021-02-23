@@ -52,12 +52,22 @@ Allora, sono richiesti i seguenti step:
 
 - **2: Start dei lavori:**
 
-    In un terminale:
+    Nel caso di `macOS` o `Ubuntu`, è necessario assicurarsi che il processo `cron` sia avviato e coi permessi superuser.
+
+    ```
+    sudo cron
+    ```
+
+    Su Windows non è necessario nessun passo iniziale per gli scheduled task.
+
+    Poi, a seguire:
+
+    - In un terminale:
     ```
     start.cmd/sh
     ```
 
-    In un secondo terminale:
+    - In un secondo terminale:
     ```
     startR.sh/cmd
     ```
