@@ -346,6 +346,9 @@ Our backend exposes different types of endpoints:
          ```
         
         If an AppUser tries to update an ObservedProduct that belongs to another AppUser, an error message will be returned.
+    - `PUT /update_observation_by_product_id/{product_id}`: this endpoint is used to update an ObservedProduct of
+     certain product_id and user_id (this one obtained using AppUser token).
+     The body required for this endpoint is the same as the previous one.
     - `DEL /delete_observation/{observation_id}`: this endpoint is used to delete an ObservedProduct of certain id. If an
      AppUser tries to delete an ObservedProduct that belongs to another AppUser, an error message will be returned.
     - `DEL /delete_observation_by_product_id/{product_id}`: this endpoint acts like the previous one, but it
@@ -516,9 +519,9 @@ To do that, we exposed a bunch of "communication" endpoints:
     - All ObservedProducts are retrieved, serialized and added to a dictionary (D1).
     - Another empty dictionary (D2) is created
     - For each observation inside D1:
-        -Check if the key `observation["product_id"]` already exists inside D2: if the key does not exists it will be
+        -Check if the key `observation["creator"]` already exists inside D2: if the key does not exists it will be
          added inside the new dictionary.
-        -A new entry with key `(observation["product_id"])(observation["id"])` and value `1` is inserted inside D2 
+        -A new entry with key `(observation["creator"])(observation["product"])` and value `1` is inserted inside D2 
     - D2 is processed by Pandas library, transforming it into a DataFrame.
     - All null values inside D2 are changed with `0` using `fillna(0)` function.
     - The dataframe is formatted in JSON format and returned     
