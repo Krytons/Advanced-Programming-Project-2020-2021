@@ -1,4 +1,4 @@
-# Django Frontend 
+# Xamarin Frontend
 
 <p align="center" style="font-size: 24px">
   <span> English </span> |
@@ -118,10 +118,37 @@ Every recommended product is inserted inside the page as a grid element as shown
   If a valid price is inserted inside the input box, and if the current user hasn't already observed the product, a new observation will be created.
   
 
-  
 ---
 
 ## 4. Http Requests
+Our frontend communicates with our Django backend using four kind of http requests:
+
+- `Products requests`: this requests are used to retrieve products info.
+  There are four different products requests:
+    - `GetProductById`: this request is used to obtain product info by using product id value.
+    - `GetProducts`: this request is used to obtain products using a search keyword.
+    - `GetProductsByRecommendations`: this request is used to obtain product info of a specific recommendation.
+    - `GetProductPriceHistory`: this request is used to get the price history of a specific product, using an ebay product id.
+
+- `Auth requests`: this requests are used to retrieve an auth token for the current user.
+  There are two different auth requests:
+    - `TryLogin`: this request is used to attempt login, using user's login data as body.
+    - `SignIn`: this request is used to attempt sign in, using user's sign in data as body.
+
+- `Observation requests`: this requests are used to handle observations info.
+  There are five different observation requests:
+    - `Insert Observation`: this request is used to add an observation for the current user.
+    - `GetObservationById`: this request is used to obtain all observation info using it's id.
+    - `GetAllUserObservation`: this request is used to obtain all observations of the current user.
+    - `DeleteObservation`: this request is used to delete the current user's observation.
+    - `UpdateObservation`: this request is used to update the threshold price for the current user's observation.
+
+- `Notification requests`: this requests are used to handle user's notifications.
+  There three different notification requests:
+    - `GetNotPulledNotifications`: this request is used to obtain all the not pulled notifications for the current user. 
+    - `GetAllNotifications`: this request is used to obtain all notifications for the current user. 
+    - `DeleteNotification`: this request is used to delete an already pulled notification for the current user.
+
 
 ---
 
