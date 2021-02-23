@@ -1,6 +1,6 @@
 SET /p my_python=Enter your python executable name (default "py -3"): || SET my_python=py -3
 ECHO SET my_python=%my_python% > .env.cmd
-SET /p my_mongo=Enter your preferred way to call "mongod" (default "mongod"): || SET my_mongo=mongo
+SET /p my_mongo=Enter your preferred way to call "mongod" (default "mongod"): || SET my_mongo=mongod
 ECHO SET my_mongo=%my_mongo% >> .env.cmd
 
 CD Django
