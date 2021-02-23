@@ -11,7 +11,7 @@ SET /p ebayitalycode=Enter your EBAY_ITALY_CODE: || SET ebayitalycode=101
 SET /p periodicupdate=Enter your PERIODIC_UPDATE (default: 300): || SET periodicupdate=300
 SET /p mongohost=Enter your MONGO_HOST (default: localhost): || SET mongohost=localhost
 SET /p mongoport=Enter your MONGO_PORT (default: 27017): || SET mongoport=27017
-SET /p mongodb_name=Enter your MONGO_DB_NAME (default: apl-db): || SET mongodb_name=apl-db
+SET /p mongodb_name=Enter your MONGO_DB_NAME (default: apl-db): || SET mongodb_name=apl_db
 
 
 (
