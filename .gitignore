@@ -2,3 +2,4 @@
 *.log
 *.log.*
 .env.cmd
+.env.sh

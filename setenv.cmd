@@ -1,4 +1,4 @@
-SET /p my_python=Enter your python executable name (i.e. "py -3"):
+SET /p my_python=Enter your python executable name (i.e. "py -3"): || SET my_python=py -3
 ECHO SET my_python=%my_python% > .env.cmd
 CD Django
 ECHO Setting up the Django .env, press ENTER on non-required fields to auto-fill
