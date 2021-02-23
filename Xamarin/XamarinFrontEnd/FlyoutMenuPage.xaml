@@ -14,6 +14,7 @@
            WidthRequest="300"
            HorizontalOptions="Center"
            Padding="0"
+           BackgroundColor="{OnPlatform Android=#393e46}"
            IsClippedToBounds="True">
         <Image Source="ImageLogo"
                HeightRequest="{OnPlatform iOS=150, Android=180}"
