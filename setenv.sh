@@ -27,4 +27,9 @@ MONGO_HOST=$mongohost
 MONGO_PORT=$mongoport
 MONGO_DB_NAME=$mongodb_name" > .env
 cd ..
+cd Xamarin/XamarinFrontEnd/Configuration
+read -p "URL Ngrok:" ngrokUrl
+ngrokUrl=${ngrokUrl:-localhost}
+echo "{ \"ngrok\": \"$ngrokUrl\" }" > secrets.json
+cd ../../..
 echo "db_name='$mongodb_name'" >> .env.sh
