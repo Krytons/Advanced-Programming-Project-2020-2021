@@ -1,4 +1,4 @@
-# Django Backend 
+# Django Frontend 
 
 <p align="center" style="font-size: 24px">
   <span> English </span> |
@@ -14,64 +14,34 @@
 ---
 
 ## 1. What we used
-In order to develop this backend we have used the following elements:
-- **Django web framework:** A high-level Python web framework that makes development clean, fast and scalable.
-- **Django REST framework:** Powerful and flexible Django toolkit for building web APIs.
-- **MongoDB:** General purpose, distributed, document-based database built for modern applications.
-- **Djongo database mapper:** Extension of Django ORM, used to construct queries using an extremely friendly syntax.
-- **Django-environ:** Package used to handle .env variables.
-- **Django-apscheduler:** Django package that enables storing persistent jobs in the database.
+In order to develop this frontend we have used the following elements:
+- **Xamarin.Forms:** is an open source cross-platform framework from Microsoft for building iOS, Android, & Windows apps with .NET from a single shared codebase.
+- **Xamarin.Essentials:** A kit of essential API's for Xamarin.Forms.
+- **Newtonsoft.Json:** is a popular high-performance JSON framework for .NET.
+- **OxyPlot.Xamarin.Forms:** is a plotting library for .NET. This package includes a portable library for Xamarin.Forms apps and platform-specific libraries for IOS and Android.
+- **System.Net.Http:** provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP componenets that can be used by both clients and servers for parsing HTTP headers.
+- **NETStandard.Library:** a set of standard .NET API's that are prescribed to be used and supported together.
+- **Microsoft.Net.Http:Headers:** HTTP header parser implementations.
 
 ---
 
-## 2. Backend setup
-To correctly setup and use this backend you must create a new Python virtual environment, then follow the steps below:
-- **Start MongoDB:**
-  ```bash
-    $ sudo systemctl start mongod
+## 2. Frontend setup
+Our application uses ngrok to allow communication between our backend and the frontend, it constitutes a service that allows to create a local tunnel between a local port and a public URLs and inspect traffic. For this reason it is necessary to modify the secrets.json file in the Configuration folder of our project by setting the URL provided by ngrok as in the following example.  
+- **Configuration/secrets.json:**
+  ```JSON
+    {
+      "ngrok": "http://65160599d543.ngrok.io"
+    }
   ```
-- **Inside "Django" create a .env file with the following arguments:**
-  ```dotenv
-    EBAY_APP_ID=#Your ebay app id
-    EBAY_GLOBAL_ID=#Ebay store id such as "EBAY-IT"
-    EBAY_ITALY_CODE=101
-    PERIODIC_UPDATE=#Period of "ebay price update" job, expressed in seconds 
-    MONGO_HOST=#Your MongoDB host
-    MONGO_PORT=#Your MongoDB port
-    MONGO_DB_NAME=#Your MongoDB name
-  ```
-- **Open a terminal into "Django" project folder, and execute the following commands:**
-  ```bash
-    $ python3 manage.py makemigrations
-    $ python3 manage.py migrate
-  ```
-- **Create a superuser using the terminal:**
-  ```bash
-    $ python3 manage.py createsuperuser
-  ```
-  
-If your database is empty you can use "Django/utilities/insertscript" to insert all the products contained inside
- "Django/utilities/products.txt".
-In order to use correctly our insert script, open a terminal inside "Django/utilities" and write the following command: 
-```bash
-$ python3 insertscript.py
-```
-
 ---
 
-## 3. Models
+## 3. Pages
 
-To store and manage all the useful information inside our MongoDB database we created some custom models
-extending Django Model class.
-By extending Django Model class, MongoDB tables will be generated using the commands "makemigration" and "migrate" as
-described in "Django Setup" chapter.
+Xamarin generates two files when creating a new page:
+File .xaml: the actual aesthetics of the page are implemented in it.
+File .xaml.cs: all the operating logic behind the page it is associated with is implemented in it.
 
-For each model we have generated a proper serializer class, by extending Django Rest Framework ModelSerializer.
-Serializers are used to provide a way of serializing and deserializing the model instances into representations such
-as json.
-
-We've declared the following models:
-- **Products:** this model is used to store ebay's products info, such us title and price.
+- **LoginPage:** This page allows a registered user to request access to the services provided by the application by correctly providing the email and password chosen at the time of registration.
 
     Using ProductSerializer we are able to serialize a Product instance as shown down below: 
     ```JSON
@@ -346,9 +316,6 @@ Our backend exposes different types of endpoints:
          ```
         
         If an AppUser tries to update an ObservedProduct that belongs to another AppUser, an error message will be returned.
-    - `PUT /update_observation_by_product_id/{product_id}`: this endpoint is used to update an ObservedProduct of
-     certain product_id and user_id (this one obtained using AppUser token).
-     The body required for this endpoint is the same as the previous one.
     - `DEL /delete_observation/{observation_id}`: this endpoint is used to delete an ObservedProduct of certain id. If an
      AppUser tries to delete an ObservedProduct that belongs to another AppUser, an error message will be returned.
     - `DEL /delete_observation_by_product_id/{product_id}`: this endpoint acts like the previous one, but it
@@ -519,9 +486,9 @@ To do that, we exposed a bunch of "communication" endpoints:
     - All ObservedProducts are retrieved, serialized and added to a dictionary (D1).
     - Another empty dictionary (D2) is created
     - For each observation inside D1:
-        -Check if the key `observation["creator"]` already exists inside D2: if the key does not exists it will be
+        -Check if the key `observation["product_id"]` already exists inside D2: if the key does not exists it will be
          added inside the new dictionary.
-        -A new entry with key `(observation["creator"])(observation["product"])` and value `1` is inserted inside D2 
+        -A new entry with key `(observation["product_id"])(observation["id"])` and value `1` is inserted inside D2 
     - D2 is processed by Pandas library, transforming it into a DataFrame.
     - All null values inside D2 are changed with `0` using `fillna(0)` function.
     - The dataframe is formatted in JSON format and returned     

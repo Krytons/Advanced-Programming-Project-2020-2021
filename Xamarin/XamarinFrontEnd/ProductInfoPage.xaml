@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
-             x:Class="XamarinFrontEnd.ProductInfoPage">
+             x:Class="XamarinFrontEnd.ProductInfoPage"
+             Title="Product info">
     <ContentPage.Content>
         <StackLayout Margin="20">
 
@@ -21,7 +22,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="5"
+                            <Image Grid.RowSpan="4"
                                Source="{Binding Gallery_url}"
                                Aspect="AspectFill"
                                HeightRequest="130"
@@ -58,7 +59,7 @@
                 <oxy:PlotView WidthRequest="400" HeightRequest="300" Model="{Binding Model}"
                     VerticalOptions="Center" HorizontalOptions="Center"/>
                 <Label x:Name="chartErrors" Text=""/>
-                <Button Text="Observe product" TextColor="White"  
+                <Button Text="👌 Observe product 👌" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="InsertObservation"/>
             </StackLayout>

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinFrontEnd.RecommendationPage">
+             x:Class="XamarinFrontEnd.RecommendationPage"
+             Title="Recommended products">
     <ContentPage.Content>
         <StackLayout>
             <Label Margin="0,10,0,0" Text="💖 Just for you! 💖"
@@ -22,7 +23,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="4"
+                            <Image Grid.RowSpan="3"
                                Source="{Binding Gallery_url}"
                                Aspect="AspectFill"
                                HeightRequest="125"
@@ -37,6 +38,10 @@
                                Text="{Binding Price, StringFormat='Price: €{0:F0}'}"
                                FontAttributes="Italic"
                                VerticalOptions="End" />
+                            <Button  Grid.Row="2"  Grid.Column="1" Margin="0,0,0,0" Text="ℹ️ More info" TextColor="White"  
+                                FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"
+                                CommandParameter="{Binding Item_id}"
+                                BackgroundColor="#088da5" Clicked="GetMoreInfo"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

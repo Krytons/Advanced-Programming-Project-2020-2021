@@ -19,6 +19,7 @@ urlpatterns = [
     path('get_user_observation_data_by_id/<int:pk>', get_user_observation_data_by_id,
          name='get_user_observation_by_id'),
     path('update_observation/<int:pk>', update_observation, name='update_observation'),
+    path('update_observation_by_product_id/<int:pk>', update_observation_by_product_id, name='update_observation_by_product_id'),
     path('delete_observation/<int:pk>', delete_observation, name='delete_observation'),
     path('delete_observation_by_product_id/<int:pk>', delete_observation_by_product_id, name='delete_observation_by_product_id'),
     path('get_complete_user_observation_data', get_complete_user_observation_data, name='get_complete_user_observation_data'),
