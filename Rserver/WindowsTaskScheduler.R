@@ -32,12 +32,9 @@ setMethod(
 )
 
 
-setMethod(
-  "terminate_tasks",
-  "WindowsTaskScheduler",
-  function(ts){
+windows_terminate_tasks <- function()
+  {
     taskscheduler_delete(
       taskname = "recsys_cron"
     )
   }
-)
