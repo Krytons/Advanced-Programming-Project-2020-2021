@@ -18,10 +18,10 @@ if NOT EXIST "apl_api\migrations\" (
     mongoimport --db %db_name% --collection apl_api_product --drop --jsonArray --file productsdatabase.json
     mongoimport --db %db_name% --collection apl_api_observedproduct --drop --jsonArray --file observationsdatabase.json
     mongoimport --db %db_name% --collection apl_api_pricehistory --drop --jsonArray --file pricehistory.json
-    mongo --eval 'db.getCollection("__schema__"^).update({name:"apl_api_appuser"},{$set:{"auto":{"field_names":["id"],"seq":130}}}^)' %db_name%
-    mongo --eval 'db.getCollection("__schema__"^).update({name:"apl_api_product"},{$set:{"auto":{"field_names":["id"],"seq":193}}}^)' %db_name%
-    mongo --eval 'db.getCollection("__schema__"^).update({name:"apl_api_observedproduct"},{$set:{"auto":{"field_names":["id"],"seq":486}}}^)' %db_name%
-    mongo --eval 'db.getCollection("__schema__"^).update({name:"apl_api_pricehistory"},{$set:{"auto":{"field_names":["id"],"seq":45}}}^)' %db_name%
+    mongo --eval "db.getCollection('__schema__').update({name:'apl_api_appuser'},{$set:{'auto':{'field_names':['id'],'seq':130}}})" %db_name%
+    mongo --eval "db.getCollection('__schema__').update({name:'apl_api_product'},{$set:{'auto':{'field_names':['id'],'seq':193}}})" %db_name%
+    mongo --eval "db.getCollection('__schema__').update({name:'apl_api_observedproduct'},{$set:{'auto':{'field_names':['id'],'seq':486}}})" %db_name%
+    mongo --eval "db.getCollection('__schema__').update({name:'apl_api_pricehistory'},{$set:{'auto':{'field_names':['id'],'seq':45}}})" %db_name%
     CD ..
 )
 CD ..

@@ -1,1 +1,1 @@
-R ^< Rserver/main.R --no-save
+Rscript Rserver/main.R
