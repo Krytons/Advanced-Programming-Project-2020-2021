@@ -22,7 +22,7 @@
             <Button Margin="0,0,0,-30" Text="Login" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="GetToken"/>
-            <Button Text="Registrati" TextColor="White"  
+            <Button Text="Sign in" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="Gray" Clicked="Register"/>
         </StackLayout>  
