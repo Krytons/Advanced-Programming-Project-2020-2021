@@ -42,27 +42,25 @@ Xamarin generates two files when creating a new page:
 File .xaml: the actual aesthetics of the page are implemented in it.
 File .xaml.cs: all the operating logic behind the page it is associated with is implemented in it.
 
-- **LoginPage:** This page allows a registered user to request access to the services provided by the application by correctly providing the email and password chosen at the time of registration.
+- **Login Page:** This page allows a registered user to request access to the services provided by the application by correctly providing the email and password chosen at registration time.
 
-    Using ProductSerializer we are able to serialize a Product instance as shown down below: 
-    ```JSON
-      {
-        "id": 1,
-        "item_id": "402697978785",
-        "title": "Nintendo DS Lite Nero con R4 + 40 Giochi Preinstallati ",
-        "subtitle": "Leggero e portabile",
-        "category_id": "139971",
-        "category_name": "Console",
-        "gallery_url": "https://thumbs2.ebaystatic.com/m/mQSTsb3LhaQHqyNC3jBuLJg/140.jpg",
-        "view_url": "https://www.ebay.it/itm/Nintendo-DS-Lite-Nero-con-R4-40-Giochi-Preinstallati-/402697978785",
-        "shipping_cost": "8.00",
-        "price": "38.90",
-        "condition_id": "3000",
-        "condition_name": "Usato",
-        "created_at": "2021-02-20T00:24:50.765+00:00",
-        "updated_at": "2021-02-20T00:24:50.765+00:00"
-      }
-    ```
+  ![Controller](./Images/Login/Login.jpg)
+
+  At the bottom of this page there are two buttons, as shown in the previous image:
+  - `Login`: used to confirm the data inserted inside the form, and attempt login.
+  - `Sign in`: used to navigate to registration page.
+
+  If login procedure is successful, a login token is returned and saved inside a secure storage.
+
+- **Registration Page:** This page allows a user to sign in our application by providing informations such as email and password.
+
+  ![Controller](./Images/Login/Registration.jpg)
+
+  At the bottom of this page there are two buttons, as shown in the previous image:
+    - `Sign in`: used to confirm the data inserted inside the form, and attempt sign in.
+    - `Login`: used to navigate to login page.
+
+  If registration procedure is successful, a login token is returned and saved inside a secure storage.
 
 - **Observations Page:** This page is used to show every product observed by the logged user.
     Every observed product is inserted inside the page as a grid element as shown below:
