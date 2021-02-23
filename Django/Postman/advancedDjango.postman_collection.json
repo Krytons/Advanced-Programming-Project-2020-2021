@@ -15,7 +15,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token dde3e6747e6dfca7e1e859d9ae93c6c60ca90e8b",
 								"type": "text"
 							},
 							{
@@ -84,7 +84,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
+								"value": "Token dde3e6747e6dfca7e1e859d9ae93c6c60ca90e8b",
 								"type": "text"
 							}
 						],
@@ -116,7 +116,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
+								"value": "Token a661f47e5337189dbdb3af7116cf608f820d372b",
 								"type": "text"
 							}
 						],
@@ -134,6 +134,13 @@
 							"path": [
 								"get_user_observation_data_by_id",
 								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -149,7 +156,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
 								"type": "text"
 							}
 						],
@@ -178,7 +185,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token dde3e6747e6dfca7e1e859d9ae93c6c60ca90e8b",
 								"type": "text"
 							},
 							{
@@ -189,10 +196,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"creator\":\"giuseppe.fallica@gmail.com\",\r\n    \"product\":\"1\",\r\n    \"threshold_price\":\"1000\"\r\n}"
+							"raw": "{\r\n    \"creator\":\"caruso.bartolomeo@virgilio.it\",\r\n    \"product\":\"1\",\r\n    \"threshold_price\":\"1000\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8000/update_observation/1",
+							"raw": "http://localhost:8000/update_observation/503",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -200,7 +207,7 @@
 							"port": "8000",
 							"path": [
 								"update_observation",
-								"1"
+								"503"
 							]
 						}
 					},
@@ -292,7 +299,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"search\": \"iphone 12\",\r\n    \"n_items\": 100\r\n}"
+							"raw": "{\r\n    \"search\": \"nintendo ds\",\r\n    \"n_items\": 100\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8000/ebay_search",
@@ -344,7 +351,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"keywords\":\"iphone 12\",\r\n    \"outputSelector\":{\r\n        \"@type\":\"AspectHistogram\"\r\n    }\r\n}"
+							"raw": "{\r\n    \"keywords\":\"adsfsdgerh54\",\r\n    \"outputSelector\":{\r\n        \"@type\":\"AspectHistogram\"\r\n    }\r\n}"
 						},
 						"url": {
 							"raw": "https://svcs.ebay.com/services/search/FindingService/v1",
@@ -377,12 +384,12 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685"
+								"value": "Token dde3e6747e6dfca7e1e859d9ae93c6c60ca90e8b"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product\": {\r\n        \"item_id\": \"133571359505\",\r\n        \"title\": \"Apple iPhone 12 5G 64GB NUOVO Originale Smartphone iOS Black \",\r\n        \"subtitle\": \"PROMO-DISPONIBILITA' LIMITATA-PAGA ANCHE ALLA CONSEGNA\",\r\n        \"category_id\": \"9355\",\r\n        \"category_name\": \"Cellulari e smartphone\",\r\n        \"gallery_url\": \"https://thumbs2.ebaystatic.com/m/mdHO0w-IinTVtloOXrtOFNg/140.jpg\",\r\n        \"view_url\": \"https://www.ebay.it/itm/Apple-iPhone-12-5G-64GB-NUOVO-Originale-Smartphone-iOS-Black-/133571359505\",\r\n        \"shipping_cost\": \"0.00\",\r\n        \"price\": 789.90,\r\n        \"condition_id\": \"1000\",\r\n        \"condition_name\": \"Nuovo\"\r\n    },\r\n    \"threshold_price\": \"2000.00\",\r\n    \"email\": \"giuseppe.fallica@gmail.com\"\r\n}"
+							"raw": "{\r\n    \"product\": {\r\n        \"item_id\": \"133571359505\",\r\n        \"title\": \"Apple iPhone 12 5G 64GB NUOVO Originale Smartphone iOS Black \",\r\n        \"subtitle\": \"PROMO-DISPONIBILITA' LIMITATA-PAGA ANCHE ALLA CONSEGNA\",\r\n        \"category_id\": \"9355\",\r\n        \"category_name\": \"Cellulari e smartphone\",\r\n        \"gallery_url\": \"https://thumbs2.ebaystatic.com/m/mdHO0w-IinTVtloOXrtOFNg/140.jpg\",\r\n        \"view_url\": \"https://www.ebay.it/itm/Apple-iPhone-12-5G-64GB-NUOVO-Originale-Smartphone-iOS-Black-/133571359505\",\r\n        \"shipping_cost\": \"0.00\",\r\n        \"price\": 799.90,\r\n        \"condition_id\": \"1000\",\r\n        \"condition_name\": \"Nuovo\"\r\n    },\r\n    \"threshold_price\": \"2000.00\",\r\n    \"email\": \"giuseppe.fallica@gmail.com\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8000/ebay_select",
@@ -561,6 +568,41 @@
 					"response": []
 				},
 				{
+					"name": "Notification: add Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token dde3e6747e6dfca7e1e859d9ae93c6c60ca90e8b",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observation\": 505,\r\n    \"notified_price\": \"644.99\",\r\n    \"status\": \"NOT-PULLED\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/notifications/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Notification: get user notifications",
 					"request": {
 						"method": "GET",
@@ -656,7 +698,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc68",
 								"type": "text"
 							}
 						],
@@ -749,12 +791,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/price/history/1",
+							"raw": "http://localhost:8000/price/history/100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -763,7 +805,7 @@
 							"path": [
 								"price",
 								"history",
-								"1"
+								"100"
 							],
 							"query": [
 								{
@@ -846,12 +888,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/price/history_by_ebay/223669087554",
+							"raw": "http://localhost:8000/price/history_by_ebay/293946808835",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -860,7 +902,7 @@
 							"path": [
 								"price",
 								"history_by_ebay",
-								"223669087554"
+								"293946808835"
 							]
 						}
 					},
@@ -878,7 +920,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token eeb54785c32eded2a8369a04227d31bb46a92141",
+								"value": "Token ec92ef3302591ad471a603a71976baacd8ab213c",
 								"type": "text"
 							},
 							{
@@ -918,7 +960,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Token eeb54785c32eded2a8369a04227d31bb46a92141",
+								"value": "Token dde3e6747e6dfca7e1e859d9ae93c6c60ca90e8b",
 								"type": "text"
 							}
 						],
@@ -940,49 +982,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Communications: send recommendations Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Token ded963d5b60369f5aaa02bd02cbb2ea4a17cc685",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/communication/complete_recommendations_info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"communication",
+								"complete_recommendations_info"
+							]
+						}
+					},
+					"response": []
 				}
 			]
-		},
-		{
-			"name": "add Product",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Token b8afa8bb6f9ad4c74482f6575b9c0a3e5e7a9f5e",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Xiaomi Mi 10\",\r\n    \"barcode\" : \"412413510\",\r\n    \"description\" : \"Phone with 12Gb RAM and 248 Gb of storage\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8000/api/products/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"products",
-						""
-					]
-				}
-			},
-			"response": []
 		},
 		{
 			"name": "registerUser",
@@ -997,7 +1037,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"giuseppe.fallica@gmail.com\",\r\n    \"name\" : \"Giuseppe\",\r\n    \"surname\" : \"Fallica\",\r\n    \"nickname\" : \"Peppe\",\r\n    \"password\" : \"password\",\r\n    \"password_confirm\" : \"password\"\r\n}"
+					"raw": "{\r\n    \"email\" : \"giuseppe.fallica@gmail.comz\",\r\n    \"name\" : \"Giuseppe\",\r\n    \"surname\" : \"Fallica\",\r\n    \"nickname\" : \"Peppez\",\r\n    \"password\" : \"passwordz\",\r\n    \"password_confirm\" : \"passwordz\"\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8000/register",
@@ -1071,10 +1111,46 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token c551c8e2e4403231ded68be17536955e3705328b",
+						"value": "Token bcde851599d53b87837f01ba2fa64fd995c2e3f7",
 						"type": "text"
 					}
 				],
+				"url": {
+					"raw": "http://localhost:8000/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producs: insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token be85fa8cda47903114f7651309f3f8611184efcc",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\" : \"1000\",\r\n        \"item_id\": \"203281052116\",\r\n        \"title\": \"Nintendo ds lite Blu Con Cartuccia N5 E Micro Sd Da 2gb\",\r\n        \"subtitle\": \"\",\r\n        \"category_id\": \"139971\",\r\n        \"category_name\": \"Console\",\r\n        \"gallery_url\": \"https://thumbs1.ebaystatic.com/m/mkt6ZaCRqH02xEiPWEEOqrg/140.jpg\",\r\n        \"view_url\": \"https://www.ebay.it/itm/Nintendo-ds-lite-Blu-Con-Cartuccia-N5-E-Micro-Sd-Da-2gb-/203281052116\",\r\n        \"shipping_cost\": \"0.00\",\r\n        \"price\": \"29.50\",\r\n        \"condition_id\": \"3000\",\r\n        \"condition_name\": \"Usato\"\r\n}"
+				},
 				"url": {
 					"raw": "http://localhost:8000/api/products/",
 					"protocol": "http",

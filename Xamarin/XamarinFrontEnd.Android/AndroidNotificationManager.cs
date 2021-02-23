@@ -98,9 +98,9 @@ namespace XamarinFrontEnd.Droid
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
-                .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.ImageLogo))
+                .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.NotificationLogo))
                 .SetStyle(textStyle)
-                .SetSmallIcon(Resource.Drawable.ImageLogo)
+                .SetSmallIcon(Resource.Drawable.NotificationLogo)
                 .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
 
             Notification notification = builder.Build();
