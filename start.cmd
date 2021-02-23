@@ -1,7 +1,7 @@
 CALL .env.cmd
 REM #########################################################
 REM # 1. start MongoDB + Django
-START /b mongod --logpath mongod.log
+START /b %my_mongo% --logpath mongod.log
 CD Django
 if NOT EXIST "apl_api\migrations\" (
     %my_python% -m pip install -r requirements.txt

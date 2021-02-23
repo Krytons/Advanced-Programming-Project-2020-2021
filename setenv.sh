@@ -1,8 +1,11 @@
 #!/bin/bash
-read -p "Enter your python executable name (i.e. 'python3'):" my_python
-my_python=${my_python:-python3}
 echo "#!/bin/bash" > .env.sh
+read -p "Enter your python executable name (default 'python3'):" my_python
+my_python=${my_python:-python3}
 echo "alias my_python='$my_python'" >> .env.sh
+read -p "Enter your preferred way to call 'mongod' (default 'mongod'):" my_mongo
+my_mongo=${my_mongo:-mongod}
+echo "alias my_mongo='$my_mongo'" >> .env.sh
 cd Django
 echo "Setting up the Django .env, press ENTER on non-required fields to auto-fill"
 read -p "Enter your EBAY_APP_ID (REQUIRED!):" ebayappid
@@ -28,7 +31,7 @@ MONGO_PORT=$mongoport
 MONGO_DB_NAME=$mongodb_name" > .env
 cd ..
 cd Xamarin/XamarinFrontEnd/Configuration
-read -p "URL Ngrok:" ngrokUrl
+read -p "Enter your Ngrok URL:" ngrokUrl
 ngrokUrl=${ngrokUrl:-localhost}
 echo "{ \"ngrok\": \"$ngrokUrl\" }" > secrets.json
 cd ../../..

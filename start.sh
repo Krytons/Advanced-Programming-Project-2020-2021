@@ -2,7 +2,7 @@
 source .env.sh
 #########################################################
 # 1. start MongoDB + Django
-mongod --fork --logpath mongod.log
+my_mongo --fork --logpath mongod.log
 cd Django
 if [ ! -d "apl_api/migrations" ]; then
     my_python -m pip install -r requirements.txt
