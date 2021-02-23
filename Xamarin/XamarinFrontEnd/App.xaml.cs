@@ -27,6 +27,7 @@ namespace XamarinFrontEnd
             InitializeComponent();
 
             notificationManager = DependencyService.Get<INotificationManager>();
+            notificationManager.Initialize();
             notificationManager.NotificationReceived += (sender, eventArgs) =>
             {
                 var evtData = (NotificationEventArgs)eventArgs;
