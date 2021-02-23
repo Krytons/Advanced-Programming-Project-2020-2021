@@ -1,2 +1,2 @@
-mongo --eval 'db.shutdownServer()' admin
-R ^< Rserver/terminate.R --no-save
+mongo --eval "db.shutdownServer()" admin
+Rscript Rserver/terminate.R
