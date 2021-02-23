@@ -33,12 +33,9 @@ setMethod(
 )
 
 
-setMethod(
-  "terminate_tasks",
-  "UnixTaskScheduler",
-  function(ts){
+unix_terminate_tasks <- function()
+  {
     cron_rm(
       id = "recsys_cron"
     )
   }
-)

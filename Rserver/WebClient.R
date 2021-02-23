@@ -18,7 +18,7 @@ WebClient <- setClass(
   ),
   
   prototype=list(
-    url = "0.0.0.0:8000",
+    url = "http://localhost:8000",
     credentials = c("gabriele.costanzo@alice.it", "banana"),
     endpoints = list(
       "login" = "login",

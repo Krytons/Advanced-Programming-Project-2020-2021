@@ -1,4 +1,4 @@
-# Django Backend 
+# R : Recommendation System Backend
 
 <p align="center" style="font-size: 24px">
   <span> English </span> |

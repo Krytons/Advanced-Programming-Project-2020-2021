@@ -1,4 +1,5 @@
 .DS_Store
 *.log
 *.log.*
-.env
+.env.cmd
+.env.sh

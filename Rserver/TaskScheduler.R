@@ -1,4 +1,10 @@
-script.dir <- dirname(sys.frame(1)$ofile)
+list.of.packages <- c("here")
+noninst.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(noninst.packages)) install.packages(noninst.packages, repos = "http://cran.us.r-project.org")
+
+lapply(list.of.packages, require, character.only = TRUE)
+
+script.dir <- here("Rserver")
 
 source(paste(script.dir, "/WebClient.R", sep=""))
 source(paste(script.dir, "/RecommendationSystem.R", sep=""))
@@ -31,7 +37,7 @@ setMethod(
   "initialize",
   "TaskScheduler",
   function(.Object, seconds, wc, rs, rdb){
-    if(FALSE && file.exists(paste(script.dir,"/ts.rds", sep=""))){
+    if(file.exists(paste(script.dir,"/ts.rds", sep=""))){
       .Object <- readRDS(paste(script.dir,"/ts.rds", sep=""))
       print("TaskScheduler caricato da file.")
     }else{
@@ -49,16 +55,6 @@ setMethod(
 setGeneric("schedule_tasks", function(ts) standardGeneric("schedule_tasks"))
 setMethod(
   "schedule_tasks",
-  "TaskScheduler",
-  function(ts){
-    print("Abstract method, no implementation")
-  }
-)
-
-
-setGeneric("terminate_tasks", function(ts) standardGeneric("terminate_tasks"))
-setMethod(
-  "terminate_tasks",
   "TaskScheduler",
   function(ts){
     print("Abstract method, no implementation")
