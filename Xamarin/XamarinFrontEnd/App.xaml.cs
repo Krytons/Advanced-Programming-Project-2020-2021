@@ -108,7 +108,7 @@ namespace XamarinFrontEnd
                                 string response_contentOb = await responseOb.Content.ReadAsStringAsync();
                                 RequestObservation observation = JsonConvert.DeserializeObject<RequestObservation>(response_contentOb);
                                 string title = "🚨 Good news! 🚨";
-                                string message = "💰 Your observed product: " + observation.Product.Title + " is now available for: €" + observation.Product.Price + " 💰";
+                                string message = "💰 Your observed product: " + observation.Product.Title + " is now available for: €" + user_notification.Notified_price + " 💰";
                                 notificationManager.SendNotification(title, message);
                             }
                             else
