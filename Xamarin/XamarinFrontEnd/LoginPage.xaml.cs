@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -15,6 +16,8 @@ namespace XamarinFrontEnd
         public LoginPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
+            SecureStorage.Remove("token");
+            SecureStorage.Remove("email");
             InitializeComponent();
 
         }
