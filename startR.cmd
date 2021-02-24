@@ -1,1 +1,3 @@
-Rscript Rserver/main.R
+CD Rserver
+Rscript main.R %cd%
+CD ..

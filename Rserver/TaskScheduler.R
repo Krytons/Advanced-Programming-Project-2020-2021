@@ -4,7 +4,7 @@ if(length(noninst.packages)) install.packages(noninst.packages, repos = "http://
 
 lapply(list.of.packages, require, character.only = TRUE)
 
-script.dir <- here("Rserver")
+if(!exists("script.dir")) script.dir <- here("Rserver")
 
 source(paste(script.dir, "/WebClient.R", sep=""))
 source(paste(script.dir, "/RecommendationSystem.R", sep=""))

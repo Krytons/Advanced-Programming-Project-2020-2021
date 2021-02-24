@@ -1,3 +1,5 @@
 #!/bin/bash
 mongo --eval 'db.shutdownServer()' admin
-sudo R < Rserver/terminate.R --no-save
+cd Rserver
+sudo Rscript terminate.R $PWD
+cd ..

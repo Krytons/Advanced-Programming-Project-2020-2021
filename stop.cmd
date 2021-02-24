@@ -1,2 +1,4 @@
 mongo --eval "db.shutdownServer()" admin
-Rscript Rserver/terminate.R
+CD Rserver
+Rscript terminate.R %cd%
+CD ..

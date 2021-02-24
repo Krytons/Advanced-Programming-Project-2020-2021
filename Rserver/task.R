@@ -1,15 +1,9 @@
+args = commandArgs(trailingOnly=TRUE)
 if(length(args)==0){
   print("Error! Needs to be manually stopped...")
 }else{
   tryCatch(
     {
-      list.of.packages <- c("rjson")
-      noninst.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-      if(length(noninst.packages)) install.packages(noninst.packages, repos = "http://cran.us.r-project.org")
-      
-      lapply(list.of.packages, require, character.only = TRUE)
-      
-      args = commandArgs(trailingOnly=TRUE)
       script.dir <- args[1]
       
       source(paste(script.dir, "/WebClient.R", sep=""))

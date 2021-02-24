@@ -67,7 +67,10 @@ setMethod("updateRDB", "RecDB",
     index <- toString(r@seqNum)
     reqs[index] <- toJSON(remap)
     
-    r@reqs <- reqs
+    indexes <- c(toString( (r@seqNum - 2) %% 1000 )), toString( (r@seqNum - 1) %% 1000 )), toString( r@seqNum %% 1000 )))
+    indexes <- Filter(function(x) x %in% names(reqs), indexes))
+    
+    r@reqs <- reqs[indexes]
     return(r)
   }
 )
