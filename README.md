@@ -156,6 +156,29 @@ Allora, sono richiesti i seguenti step:
 ---
 
 ## 1. Ebay Price Tracker
+Ebay Price Tracker è un'applicazione che consente ad un utente di cercare prodotti della piattaforma Ebay e di inserirli all'interno di una propria lista personale di prodotti osservati, indicando per ciascun prodotto desidato un prezzo di soglia.
+
+Periodicamente la nostra applicazione utilizzerà le API di Ebay per aggiornare tutti i prezzi dei prodotti contenuti nel nostro database, e farà in modo da notificare un utente nel caso in cui il prezzo di uno specifico prodotto desidato si sia abbassato al di sotto della soglia stabilita in precedenza dell'utente stesso.
+
+Un'ulteriore obiettivo di tale progetto è di mettere l'utilizzatore al corrente dell'andamento dei prezzi del prodotto ricercato, in modo tale da non farsi ingannare da finti sconti che solitamente vengono proposti durante periodi come il black friday: sempre mediante l'uso delle API di ebay la nostra applicazione salverà la variazione dei prezzi di ciascun prodotto, in modo da restituirla sotto forma grafica all'utente durante la sua ricerca.
+
+Infine il nostro applicativo prevede la presenza di una sezione apposita di prodotti consigliati all'utente: sulla base dei prodotti desiderati dagli utilizzatori il nostro sistema di raccomandazione elaborerà per ciascuno di essi una lista (aggiornata periodicamente) di prodotti consigliati, permettendo agli utenti di inserirli nella loro lista dei desideri.
+
+Per raggiungere tali obiettivi il nostro progetto prevede tre elementi fondamentali:
+- **Backend Django**: un backend scritto in Python i cui compiti sono i seguenti:
+    - Comunicare periodicamente o su richiesta con i servizi di Ebay, in modo tale da recuperare tutte le informazioni necessarie dei prodotti.
+    - Comunicare con il sistema di raccomandazioni per fornire a quest'ultimo tutte le informazioni sui prodotti desiderati dagli utenti e per ricecere la lista di prodotti consigliati per ciascun utente.
+- **Frontend Xamarin**: un client basato sull'utilizzo di Xamarin.Forms, che consente all'utente di accedere con piattaforme differenti (Android o IoS) ai servizi offerti dalla nostra applicazione.
+- **Recommendation System**: un servizio a supporto del backend Django secondo principio di distribuzione delle responsabilità, scritto in R, che si prende carico della generazione dei prodotti da consigliare agli utenti.
+
+A seguire un grafico riassuntivo della logica di comunicazione degli elementi esposti in precedenza:
+
+![Controller](./Images/Schema.png)
+
+Per maggiori informazioni riguardo ad ogni singolo elemento si faccia riferimento alle seguenti documentazioni:
+- **Backend Django**: https://github.com/Krytons/Advanced-Programming-Project-2020-2021/blob/master/Django/README.md
+- **Frontend Xamarin**: https://github.com/Krytons/Advanced-Programming-Project-2020-2021/blob/master/Xamarin/README.md
+- **Recommendation System**: https://github.com/Krytons/Advanced-Programming-Project-2020-2021/blob/master/Rserver/README.md
 
 ---
 
