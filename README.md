@@ -1,8 +1,22 @@
-# Advanced Programming Languages : Name TBD Project
+# Advanced Programming Languages : 
+## Ebay Price Tracker
+
+---
+
 ### Un progetto di:
 - Bartolomeo Caruso (1000008726)
 - Gabriele Costanzo (1000014221)
 - Giuseppe Fallica (1000013477)
+
+---
+
+## Indice
+- ### TL;DR: Come avviare il progetto
+    - Istruzioni rapide per l'esecuzione del progetto sul proprio computer
+- ### 1. Ebay Price Tracker
+    - Considerazioni generali sul progetto: descrizione, scopi, funzionamento, sviluppi futuri
+- ### 2. Considerazioni Preliminari al Progetto
+    - Backlog pre-lavori dei progetti individuati e motivazioni per la scelta di Ebay Price Tracker
 
 ---
 
@@ -22,8 +36,13 @@ Prima di poter avviare il progetto, ci si assicuri di avere le seguenti dependen
 - **MongoDB 4.0+**, con `mongod` e `mongo`
 - **MongoDB Database Tools**, con `mongoimport`
 - **R 3.6+**, con `R` e `Rscript`
+- **ngrok**, con `ngrok`
 
-Il pieno rispetto di queste dependencies e di questi nomi permette l'utilizzo di un set di script per `bash` su UNIX (`.sh`) e `command prompt` su Windows (`.cmd`), prodotto nel tentativo di fornire uno strumento semplice per l'inizializzazione, start e stop del progetto nel suo complesso.
+- Inoltre, è richiesta l'installazione di **`Xamarin`** per il test del client con simulatore **Android/iOS**.
+    - Questo package è distribuito, sia su Windows che su macOS, tramite `Visual Studio`.
+    - Poiché il simulatore potrebbe richiedere un **tunneling HTTP** per funzionare, anziché adottare il semplice `localhost`, si richiede anche di installare `ngrok` e creare un account (https://ngrok.com/)
+
+Il pieno rispetto di queste dependencies e di questi nomi permette inoltre l'utilizzo di un set di script per `bash` su UNIX (`.sh`) e `command prompt` su Windows (`.cmd`), prodotto nel tentativo di fornire uno strumento semplice per l'inizializzazione, start e stop del progetto nel suo complesso.
 
 Ogni file discusso qui di seguito è stato testato con le seguenti call da terminale:
 
@@ -42,13 +61,31 @@ Allora, sono richiesti i seguenti step:
 
 - **1: Setup dell'environment:**
 
+    Per effettuare il tunneling richiesto dal simulatore di Xamarin:
+    ```
+    ngrok http 8000
+    ```
+    per ottenere un indirizzo del tipo:
+    ```
+    http://675db8cd4c17.ngrok.io
+    ```
+    che effettui il tunneling a `http://localhost:8000`.
+
+
+    Tenendo a "portata di mano" sia l'url di `ngrok`, sia il `EBAY_APP_ID` fornito dagli sviluppatori, si può adesso eseguire:
+
     ```
     setenv.cmd/sh
     ```
     Questo script si occupa di adattare le call di `python`, `mongod` e `R` all'ambiente dell'utente, richiedendo il termine preferito (i.e. alcuni utenti avranno settato l'eseguibile di Python 3.9 come `python3`, altri come `py -3`, e altri ancora vorranno passare dei parametri dopo `mongod`).
 
     Inoltre, si chiede all'utente l'input dei parametri per il file `.env` di Django, dei quali solo l' `EBAY_APP_ID` (fornito separatamente dalla repository) è obbligatorio, mentre gli altri parametri verranno settati automaticamente coi valori di default premendo INVIO.
-    Facoltativamente, si può inserire un url di `ngrok` fornito separatamente per testare in remoto il client.
+
+    Si richiede anche l'url di `ngrok` che verrà inserito su `Xamarin/XamarinFrontEnd/Configuration/secrets.json`.
+    
+    Il processo di `ngrok` dovrà rimanere aperto per tutto il tempo del testing del progetto.
+
+    In questa fase si può già aprire un process in background di `MongoDB` con `mongod`, ma in alternativa verrà aperto in fase di `start`.
 
 - **2: Start dei lavori:**
 
@@ -89,6 +126,12 @@ Allora, sono richiesti i seguenti step:
 
     I log di MongoDB e del task schedulato possono essere visionati inoltre, rispettivamente, sui file di testo `mongod.log` e `Rserver/task.log`.
 
+    - **Start del client:**
+    
+        Lo start del client può essere avviato in diversi modi:
+        - se si apre il progetto da `Visual Studio`, assicurandosi di aver installato `Xamarin` e i rispettivi SDK `Android` e/o `iOS`, è possibile usare una delle configurazioni di `build` per avviare il simulatore del dispositivo smartphone, e interagire con l'app.
+        - se si dispone di dispositivo `Android`, collegandolo via USB al PC e aggiungendo il permesso di `deploy` nel `Configuration Manager`, Visual Studio proverà ad individuare automaticamente il dispositivo, ed effettuando il `Run` con la configurazione che ha lo stesso nome del dispositivo, sarà possibile testarlo Live su hardware senza simulatore.
+
 - **3: Stop dei lavori:**
 
     Per fermare Django, sarà sufficiente premere CTRL+C nel terminale rimasto aperto, o - su Windows - chiuderne la finestra.
@@ -112,7 +155,11 @@ Allora, sono richiesti i seguenti step:
 
 ---
 
-## 0. Prefazione
+## 1. Ebay Price Tracker
+
+---
+
+## 2. Considerazioni Preliminari al Progetto
 I tre membri del team, con l'intento di dimostrare ai professori del corso di aver acquisito le conoscenze richieste dei singoli PL e di aver sviluppato capacità decisionali relative alla scelta di un dato PL rispetto ad un altro sulla base di punti di forza e debolezze, domini applicativi, paradigmi supportati, etc.
 
 Concordano sulla seguente struttura come la più ottimale per raggiungere il suddetto obiettivo:
@@ -139,6 +186,8 @@ Una volta concordata la suddetta struttura a tre macro-componenti, le seguenti p
 ---
 
 1. **Sistema di tracciamento dei prezzi di Amazon**
+
+        Questo è il progetto che è stato scelto in ultima sede.
 
     Un software il cui scopo è quello di permettere ad un utente utilizzatore di cercare un prodotto dalla piattaforma Amazon.com e ottenere informazioni relative all'andamento dei prezzi di tale prodotto: tali informazioni verranno restituite all'utente mediante l'utilizzo di grafici con precisione al singolo giorno.
     
@@ -234,11 +283,17 @@ Una volta concordata la suddetta struttura a tre macro-componenti, le seguenti p
 
 ---
 
-Infine, il progetto #? è stato scelto per i seguenti motivi:
-- motivo 1
-- motivo 2
-- motivo 3
+Infine, il progetto **#1** è stato scelto per i seguenti motivi:
+- Durante il periodo di lockdown si è visto un notevole incremento del fenomeno dello shopping online, e la conseguente fioritura di tool su tool per l'assistenza agli acquisti
+- La profilazione degli utenti e i vari altri strumenti adottati dai big delle e-commerce creano l'illusione di un "falso guadagno", mostrando sconti allettanti che di fatto però nascondono il vero prezzo del prodotto. Un tool di **tracciamento dei prezzi** è ideale allo scopo di fornire un'idea chiara ed onesta all'utente.
+- Ai fini della materia:
+    - Il progetto rispetta la struttura articolata proposta ad inizio di Prefazione, con **1 web server backend**, **1 recommendation system** con call asincrone e scheduled jobs, **1 client app** per smartphone.
+    - È richiesto di concordare un modello univoco per gli oggetti/le classi e sfruttare i diversi strumenti e paradigmi dei tre linguaggi (C#, Python, R) per rappresentarli in ogni parte del progetto
+    - Si coprono a tal proposito, sia diversi modelli software (client-server, scripting, task scheduling), sia diversi paradigmi di programmazione (strutturata, ad oggetti, funzionale).
+    - Vi sono parecchi spunti per sfruttare diversi costrutti specifici dei tre linguaggi scelti:
+        - Xamarin lavora a `componenti`, partendo da file testuali (`.json`, config file `.xaml`), ideale per mostrare le potenzialità di `reflection` di C#.
+        Inoltre, il supporto built-in agli `eventi` rende semplice un plug-in fra funzioni ed eventi su GUI (click di bottoni, swipe, etc.).
+        - Django usa Python, e perciò può sfruttare la versatilità fra strutture dati - quali `liste`, `dizionari` e `set` - e funzionalità quali la `list comprehension` per rapide operazioni di subsetting, filtering, mapping sulle collezioni raccolte da MongoDB
+        - R può essere utilizzato per calcoli più pesanti su `data.frame` e `list`, nell'ottica di un vero Recommendation System con enormi matrici utente-prodotto.
+        Supporta tramite `saveRDS` e `loadRDS` il salvataggio di una "immagine" di un oggetto, per evitare di doversi re-interfacciare costantemente con il backend e mantenendo un suo backup locale.
 
----
-
-## 1. Introduzione
