@@ -38,6 +38,12 @@ namespace XamarinFrontEnd
                 Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
                 flyoutPage.listView.SelectedItem = null;
                 IsPresented = false;
+                if (item.Title == "✖️ Logout ")
+                {
+                    IsGestureEnabled = false;
+                }
+                else IsGestureEnabled = true;
+                
             }
         }
 
