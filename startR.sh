@@ -1,2 +1,4 @@
 #!/bin/bash
-sudo R < Rserver/main.R --no-save
+cd Rserver
+sudo Rscript main.R $PWD
+cd ..

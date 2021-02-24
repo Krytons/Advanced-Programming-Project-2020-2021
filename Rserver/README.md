@@ -58,14 +58,14 @@ The scheduled task already includes a method to empty the job schedule if the Dj
   -  **Start main.R:**
     ```bash
       $ cd Rserver
-      $ sudo R < main.R --no-save
+      $ sudo Rscript main.R $PWD
     ```
 
   ### 3. (Optional) Manually stop the R server:
   -  **Start terminate.R:**
     ```bash
       $ cd Rserver
-      $ sudo R < terminate.R --no-save
+      $ sudo Rscript terminate.R $PWD
     ```
 
   For steps 2. and 3. on Windows it is advisable to use `Rscript`:
