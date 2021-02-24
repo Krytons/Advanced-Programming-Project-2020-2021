@@ -30,6 +30,7 @@
                         <local:FlyoutPageItem Title="📜 Observations " TargetType="{x:Type pages:UserObservations}" />
                         <local:FlyoutPageItem Title="🚨 Notifications " TargetType="{x:Type pages:ReceivedNotificationsPage}" />
                         <local:FlyoutPageItem Title="✨ For you " TargetType="{x:Type pages:RecommendationPage}" />
+                        <local:FlyoutPageItem Title="✖️ Logout " TargetType="{x:Type pages:LoginPage}" />
                     </x:Array>
                 </ListView.ItemsSource>
             <ListView.ItemTemplate>
