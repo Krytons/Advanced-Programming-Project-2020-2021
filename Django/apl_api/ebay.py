@@ -147,37 +147,40 @@ def ebay_update_observed_product_price():
             print("Ebay call OK")
             json_data = json.loads(response.text)
             #At this point we have a refined product: we can use this one to update our product
-            ebay_price = format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f')
-            if product.price != ebay_price:
-                print("Different Price")
-                print(product.price)
-                print(ebay_price)
-                # Different price: it's time to register old price
-                price = {
-                    "product": product.id,
-                    "old_price": product.price,
-                    "price_time": product.updated_at
-                }
-                price_serializer = PriceHistorySerializer(data=price)
-                if price_serializer.is_valid():
-                    price_serializer.save()
-                product.price = ebay_price
-                product.save()
-                #Different price means that there may be an user with a proper observation: analysis needed
-                try:
-                    observations = ObservedProduct.objects.filter(product=product.id)
-                    for observation in observations:
-                        print("An observation has been found")
-                        if (float(ebay_price)) <= (float(observation.threshold_price)):
-                            #Create a notification
-                            print("Notification time")
-                            notification = {
-                                "observation" : observation.id,
-                                "notified_price" : format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f'),
-                                "status" : "NOT-PULLED"
-                            }
-                            notification_serializer = NotificationSerializer(data=notification)
-                            if notification_serializer.is_valid():
-                                notification_serializer.save()
-                except ObjectDoesNotExist:
-                    print("No observations")
+            try:
+                ebay_price = format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f')
+                if product.price != ebay_price:
+                    print("Different Price")
+                    print(product.price)
+                    print(ebay_price)
+                    # Different price: it's time to register old price
+                    price = {
+                        "product": product.id,
+                        "old_price": product.price,
+                        "price_time": product.updated_at
+                    }
+                    price_serializer = PriceHistorySerializer(data=price)
+                    if price_serializer.is_valid():
+                        price_serializer.save()
+                    product.price = ebay_price
+                    product.save()
+                    #Different price means that there may be an user with a proper observation: analysis needed
+                    try:
+                        observations = ObservedProduct.objects.filter(product=product.id)
+                        for observation in observations:
+                            print("An observation has been found")
+                            if (float(ebay_price)) <= (float(observation.threshold_price)):
+                                #Create a notification
+                                print("Notification time")
+                                notification = {
+                                    "observation" : observation.id,
+                                    "notified_price" : format(json_data["Item"][0]["ConvertedCurrentPrice"]["Value"], '.2f'),
+                                    "status" : "NOT-PULLED"
+                                }
+                                notification_serializer = NotificationSerializer(data=notification)
+                                if notification_serializer.is_valid():
+                                    notification_serializer.save()
+                    except ObjectDoesNotExist:
+                        print("No observations")
+            except KeyError:
+                print("Invalid ebay response")
